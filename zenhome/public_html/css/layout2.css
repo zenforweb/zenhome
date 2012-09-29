@@ -1,0 +1,96 @@
+.navbar{
+    margin-bottom:0px;
+}
+
+.navbar .navbar-inner .site-nav{
+    margin-top:10px;
+}
+
+.navbar .navbar-inner .site-nav li{
+    margin-right:7px;
+    padding-right:7px;
+    border-right:1px #E6DDDD solid;
+}
+
+.navbar .navbar-inner .site-nav li a{
+    padding:0px;
+}
+
+.navbar .navbar-inner .site-nav li a.active{
+    color:#665D5D;
+    padding:0px;
+    font-weight:bold;
+}
+
+.navbar .navbar-inner .site-nav li a:hover{
+    border-bottom:1px #E6DDDD solid;
+}
+
+.navbar .navbar-inner .site-nav li:last-child{
+    border-right:none;
+}
+
+#login_form{
+    margin-top:5px;
+}
+
+#login_button{
+    margin-top:0px;
+}
+
+.welcome_wrapper .top_message{
+    height:375px;
+    margin-bottom:5px;
+    background:#000;
+    border-top-left-radius:0px 0px;
+    border-top-right-radius:0px 0px;
+    border-bottom-left-radius:15px 15px;
+    border-bottom-right-radius:15px 15px;
+}
+
+.welcome_wrapper .top_message .top_content{
+    color: #fff;
+    width:365px;
+    padding-left:10px;
+}
+
+.welcome_wrapper .top_message .top_content h1{
+
+}
+
+.welcome_wrapper .top_message .top_content h2{
+
+}
+
+.welcome_wrapper .top_message .top_content p{
+    font-size:11px;
+    line-height:11px;
+}
+
+.welcome_wrapper .widget_window{
+    margin-top:25px;
+    border: 1px solid #fff;
+    padding:10px 10px 10px 10px;
+    border-top-left-radius:15px 15px;
+    border-top-right-radius:0px 0px;
+    border-bottom-left-radius:15px 15px;
+    border-bottom-right-radius:0px 0px;    
+    background:url(/zenhome/public_html/img/honeycomb_grate_resized.jpg) repeat rgba(0,0,0,.75);
+}
+
+.welcome_wrapper .widget_window .widget{
+    height:280px;
+    border: 1px solid #000;
+    padding:10px;
+    margin:0px;
+    margin-right:20px;
+    background:#666;
+    border-top-left-radius:10px 10px;
+    border-top-right-radius:10px 10px;
+    border-bottom-left-radius:10px 10px;
+    border-bottom-right-radius:10px 10px;
+}
+
+.welcome_wrapper .widget_window .last-widget{ 
+    margin-right:0px;
+}
