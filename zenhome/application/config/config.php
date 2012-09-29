@@ -31,11 +31,20 @@ define( 'ALLOW_GUESTS', FALSE ) ;
 |
 */
 
-if( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) && strstr( $_SERVER['HTTP_X_FORWARDED_HOST'], 'blackbox' ) ){
-  $config['base_url']  = 'http://' .  $_SERVER['HTTP_X_FORWARDED_HOST'] . '/dev/';
+require_once('debug.php');
+
+if( DEVELOPMENT ){
+	$config['base_url'] = DEVELOPMENT_PATH;
 } else {
-  $config['base_url']  = 'http://10.1.10.52/';
+	$config['base_url']  = 'http://10.1.10.52';
 }
+
+
+// if( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) && strstr( $_SERVER['HTTP_X_FORWARDED_HOST'], 'blackbox' ) ){
+//   $config['base_url']  = 'http://' .  $_SERVER['HTTP_X_FORWARDED_HOST'] . '/dev/';
+// } else {
+//   $config['base_url']  = 'http://10.1.10.52/';
+// }
 
 /*
 |--------------------------------------------------------------------------
