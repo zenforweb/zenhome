@@ -46,6 +46,7 @@ if (defined('ENVIRONMENT'))
 	}
 }
 
+
 /*
  *---------------------------------------------------------------
  * SYSTEM FOLDER NAME
@@ -56,7 +57,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = 'zenhome/system';
+	$system_path = 'zenhome/system/';
 
 /*
  *---------------------------------------------------------------
@@ -72,7 +73,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'zenhome/application';
+	$application_folder = 'zenhome/application/';
 
 /*
  * --------------------------------------------------------------------
