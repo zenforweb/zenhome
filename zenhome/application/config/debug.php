@@ -2,4 +2,5 @@
 	// DEVELOPMENT CONFIG
 
 	define( 'DEVELOPMENT', TRUE ) ;
-	define( 'DEVELOPMENT_PATH', 'http://10.1.10.52/~chris/zenhome' );
+
+	define( 'DEVELOPMENT_PATH', 'http://10.1.10.52/~chris/' );

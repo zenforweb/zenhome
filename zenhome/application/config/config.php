@@ -34,10 +34,13 @@ define( 'ALLOW_GUESTS', FALSE ) ;
 require_once('debug.php');
 
 if( DEVELOPMENT ){
-	$config['base_url'] = DEVELOPMENT_PATH;
+	$config['base_url'] = DEVELOPMENT_USER_PATH . 'zenhome/';
+	define('FRONT_END', 'public_html/');
 } else {
+	define('FRONT_END', 'production/public_html/');
 	$config['base_url']  = 'http://10.1.10.52';
 }
+
 
 
 // if( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) && strstr( $_SERVER['HTTP_X_FORWARDED_HOST'], 'blackbox' ) ){
@@ -56,7 +59,7 @@ if( DEVELOPMENT ){
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
