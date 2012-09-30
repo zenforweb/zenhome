@@ -48,6 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
+define('DB_NAME', 'zenhome');
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'dbadmin';
 $db['default']['password'] = 'Z3n4W38';

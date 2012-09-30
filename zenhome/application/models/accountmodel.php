@@ -8,7 +8,7 @@ class AccountModel extends CI_Model {
 
 	public function userInfo( $user_id ){
 		$this->load->database();
-		$result  = $this->db->query( "SELECT * FROM `zenhome`.`user_information` WHERE `user_id` = '$user_id'" );
+		$result  = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`user_information` WHERE `user_id` = '$user_id'" );
 		$user = $result->row();
 		return array(
 			'user_id' 	 => $user->user_id,
