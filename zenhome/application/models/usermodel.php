@@ -7,7 +7,7 @@ class UserModel extends CI_Model {
 
 	public function verify_user( $user_name, $password, $log = True ){
 		$this->load->database();
-		$result  = $this->db->query( "SELECT * FROM `zenhome`.`user_secure` WHERE `user_name`='$user_name' AND `user_pass`='$password'" );
+		$result  = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`user_secure` WHERE `user_name`='$user_name' AND `user_pass`='$password'" );
 		$success = $result->row();
 		if( $success ){
 			if ( $log )
@@ -21,28 +21,28 @@ class UserModel extends CI_Model {
 
 	public function logAccess( $user_id ){
 		$ip_info = getIP();
-		$this->db->query( "INSERT INTO `zenhome`.`user_access` ( `user_id`, `ip` ) VALUES( '$user_id', '$ip_info[0]' )" );
+		$this->db->query( "INSERT INTO `". DB_NAME ."`.`user_access` ( `user_id`, `ip` ) VALUES( '$user_id', '$ip_info[0]' )" );
 	}
 	
 	public function addUser( $user_name, $user_pass ){
 		$this->load->database();
-	    $this->db->query( "INSERT INTO `zenhome`.`user_secure` ( `user_name`, `user_pass` ) VALUES( '$user_name', '$user_pass' )" );
-	    $query = $this->db->query( "SELECT `user_id` FROM `zenhome`.`user_secure` ORDER BY `user_id` DESC LIMIT 1" );
+	    $this->db->query( "INSERT INTO `". DB_NAME ."`.`user_secure` ( `user_name`, `user_pass` ) VALUES( '$user_name', '$user_pass' )" );
+	    $query = $this->db->query( "SELECT `user_id` FROM `". DB_NAME ."`.`user_secure` ORDER BY `user_id` DESC LIMIT 1" );
 	    $user = $query->row();
 	    $user_id = $user->user_id;
-		$this->db->query( "INSERT INTO `zenhome`.`user_information` ( `user_id`, `user_name` ) VALUES( '$user_id', '$user_name' )" );
+		$this->db->query( "INSERT INTO `". DB_NAME ."`.`user_information` ( `user_id`, `user_name` ) VALUES( '$user_id', '$user_name' )" );
 	}
 
 	public function getUsers(){
 		$this->load->database();
-		$query = $this->db->query( "SELECT * FROM `zenhome`.`user_information`" );
+		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`user_information`" );
 		$users = array();
 		$i = 0;
 		foreach ($query->result() as $row){
 			if( ! ALLOW_GUESTS && $row->user_id == 1)
 				continue;
 			$users[$i]['info'] = $row;
-			$query = $this->db->query( "SELECT * FROM `zenhome`.`user_access` WHERE `user_id` = '$row->user_id' ORDER BY `row_id` DESC LIMIT 1");			
+			$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`user_access` WHERE `user_id` = '$row->user_id' ORDER BY `row_id` DESC LIMIT 1");			
 			$access = $query->result();
 			if( count($access) > 0 )
 				$users[$i]['access'] =  $access[0];
@@ -56,7 +56,7 @@ class UserModel extends CI_Model {
 
 	public function change_password( $user_id, $new_password ){
 		$this->load->database();
-		$this->db->query( "UPDATE `zenhome`.`user_secure` SET `user_pass` = '$new_password' WHERE `user_id` = '$user_id' " );
+		$this->db->query( "UPDATE `". DB_NAME ."`.`user_secure` SET `user_pass` = '$new_password' WHERE `user_id` = '$user_id' " );
 	}
 
 	public function get_logs(){
