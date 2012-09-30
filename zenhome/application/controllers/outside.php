@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Outside extends MY_Controller {
+class Outside extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.

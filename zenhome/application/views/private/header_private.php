@@ -20,7 +20,9 @@
 					if( isset( $menu ) ){
 						foreach ( $menu as $item ) {
 							?>
-							<li><a href="<?php echo base_url() . $item[1]; ?>"><? echo $item[0]; ?></a></li>
+							<li class="<? if( $item[2] ) { echo 'active'; } ?>">
+								<a href="<?php echo base_url() . $item[1]; ?>"><? echo $item[0]; ?></a>
+							</li>
 							<?
 						}
 					}
