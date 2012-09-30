@@ -17,32 +17,33 @@
 						<th></th>
 					</tr>
 				</thead>
-				<?
-				foreach ($users as $user) {
-					?>
-					<tr>
-						<td><? echo $user['info']->user_id; ?></td>
-						<td><? echo $user['info']->user_name; ?></td>
-						<?
-						if( isset($user['access']) ){
-							?>
-							<td><? echo $user['access']->ip; ?></td>
-							<td><? echo $user['access']->login_ts; ?></td>
-							<?
-						} else {
-							?>
-							<td colspan="2">never logged in</td>
-							<?
-						}
-						?>
-						<td>
-							edit
-						</td>
-
-					</tr>
+				<tbody>
 					<?
-				}
-				?>
+					foreach ($users as $user) {
+						?>
+						<tr>
+							<td><? echo $user['info']->user_id; ?></td>
+							<td><? echo $user['info']->user_name; ?></td>
+							<?
+							if( isset($user['access']) ){
+								?>
+								<td><? echo $user['access']->ip; ?></td>
+								<td><? echo $user['access']->login_ts; ?></td>
+								<?
+							} else {
+								?>
+								<td colspan="2">never logged in</td>
+								<?
+							}
+							?>
+							<td class="table-hover">
+								<!-- <button class="btn btn-small btn-primary">edit</button> -->
+							</td>
+						</tr>
+						<?
+					}
+					?>
+				</tbody>
 			</table>
 		</div>
 		<div class="span4">
