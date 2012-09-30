@@ -1,0 +1,45 @@
+import pika
+from modules.wunderground import wunderground
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='10.1.10.52'))
+channel = connection.channel()
+channel.exchange_declare(
+    exchange='apps',
+    type='topic'
+)
+
+result = channel.queue_declare(exclusive=True)
+queue_name = result.method.queue
+
+channel.queue_bind(
+    exchange='apps',
+    queue=queue_name,
+    routing_key='run.wunderground'
+)
+print " [*] Waiting for logs. To exit press CTRL+C"
+
+def callback(ch, method, properties, body):
+    wunder = wunderground.WUnderground('ca98e472d4f8d395')
+    print body
+    ch.basic_ack(delivery_tag = method.delivery_tag)
+#    channel.exchange_declare(
+#        exchange='session_traffic',
+#        type='topic'
+#    )
+#    routing_key = 'session.123'
+#    message = 'Hello World! x2'
+#
+#    channel.basic_publish(
+#        exchange='session_traffic',
+#        routing_key=routing_key,
+#        body=message
+#    )
+#    print " [x] Received %r:%r" % (method.routing_key, body,)
+#    print " [x] Sent %r:%r" % (routing_key, message)
+ 
+
+channel.basic_consume(
+    callback, 
+    queue=queue_name, 
+    no_ack=False
+)
+channel.start_consuming()
