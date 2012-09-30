@@ -20,6 +20,7 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
+						<th></th>
 						<th>ID</th>
 						<th>Device Name</th>
 						<th>Last IP</th>
@@ -31,6 +32,9 @@
 					foreach( $devices as $device ) {
 						?>
 						<tr>
+							<td>
+								<img width="50" src="<? echo base_url() . FRONT_END; ?>img/network_icons/<? echo $device->device_type; ?>.png"
+							</td>
 							<td><? echo $device->device_id; ?></td>
 							<td><? echo $device->device_name; ?></td>
 							<td></td>
