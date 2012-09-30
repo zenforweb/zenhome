@@ -7,13 +7,14 @@
 	<h3>Admin</h3>
 	<div class="row-fluid">
 		<div class="span8">
-			<table class="table table-striped">
+			<table class="table table-striped table-edit">
 				<thead>
 					<tr>
 						<th>ID</th>
 						<th>User Name</th>
 						<th>Last IP</th>
 						<th>Last Login</th>
+						<th></th>
 					</tr>
 				</thead>
 				<?
@@ -34,8 +35,10 @@
 							<?
 						}
 						?>
+						<td>
+							edit
+						</td>
 
-						
 					</tr>
 					<?
 				}
