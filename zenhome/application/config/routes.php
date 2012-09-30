@@ -39,6 +39,7 @@
 */
 
 $route['default_controller'] = 'outside';
+$route['apps'] = 'apps/apps';
 $route['404_override'] = '';
 
 
