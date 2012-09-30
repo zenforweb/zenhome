@@ -35,7 +35,7 @@ require_once('debug.php');
 
 if( DEVELOPMENT ){
 	$config['base_url'] = DEVELOPMENT_USER_PATH . 'zenhome/';
-	define('FRONT_END', 'public_html/');
+	define('FRONT_END', 'zenhome/public_html/');
 } else {
 	define('FRONT_END', 'production/public_html/');
 	$config['base_url']  = 'http://10.1.10.52';
