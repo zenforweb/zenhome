@@ -38,9 +38,7 @@ def callback(ch, method, properties, body):
     except KeyError, e:
         wunder_city = 'Golden'
     wunder = wunderground.WUnderground(wunder_api)
-    print wunder
     current_weather = wunder.get_current_weather(wunder_state,wunder_city)
-    print current_weather
     if return_method == 'return':
         try:
             return_route = message_obj['return_route']
@@ -50,24 +48,10 @@ def callback(ch, method, properties, body):
     elif return_method == 'save':
         dbcont = db_controller.DBController()
         dbconn, dbcurs = dbcont.getLocal()
-        save_sql = "INSERT INTO zenhome.apps_wunderground_data (temp_f,temp_c,wind_direction,wind_mph,condition_summary,pressure_trend,rel_humidity,pressure_in,obs_lat,obs_lon) VALUES (%(temp_f)s,%(temp_c)s,%(wind_direction)s,%(wind_mph)s,%(condition_summary)s,%(pressure_trend)s,%(rel_humidity)s,%(pressure_in)s,%(obs_lat)s,%(obs_lon)s)"
-        save_sql = save_sql % {'temp_f':current_weather['temp_f'],
-                               'temp_c':current_weather['temp_c'],
-                               'wind_direction':current_weather['wind_direction'],
-                               'wind_mph':current_weather['wind_mph'],
-                               'condition_summary':current_weather['weather'],
-                               'pressure_trend':current_weather['pressure_trend'],
-                               'rel_humidity':current_weather['rel_humidity'],
-                               'pressure_in':current_weather['pressure_in'],
-                               'obs_lat':current_weather['obs_latitude'],
-                               'obs_lon':current_weather['obs_longitude']
-                               }
-        print save_sql
-#        print current_weather
-#        print save_sql
-        
-
-        
+        insert_sql = """INSERT INTO zenhome.apps_wunderground_data (local_timezone,heat_index_c,heat_index_f,weather,wind_direction,windchill_c,windchill_f, obs_city,obs_elevation,obs_latitude,obs_longitude,dewpoint_f,dewpoint_c,feelslike_c,feelslike_f,temp_f,temp_c,uv,wind_mph,solar_radiation,station_id,pressure_trend,visibility_mi,pressure_in,wind_degrees,rel_humidity,wind_desc) VALUES ('%(local_timezone)s','%(heat_index_c)s','%(heat_index_f)s','%(weather)s','%(wind_direction)s','%(windchill_c)s','%(windchill_f)s','%(obs_city)s','%(obs_elevation)s','%(obs_latitude)s','%(obs_longitude)s','%(dewpoint_f)s','%(dewpoint_c)s','%(feelslike_c)s','%(feelslike_f)s','%(temp_f)s','%(temp_c)s','%(uv)s','%(wind_mph)s','%(solar_radiation)s','%(station_id)s','%(pressure_trend)s','%(visibility_mi)s','%(pressure_in)s','%(wind_degrees)s','%(rel_humidity)s','%(wind_desc)s')"""
+        dbcurs.execute(insert_sql%current_weather)
+        dbconn.commit()
+        dbconn.close()
     ch.basic_ack(delivery_tag = method.delivery_tag)
 #    channel.exchange_declare(
 #        exchange='session_traffic',
