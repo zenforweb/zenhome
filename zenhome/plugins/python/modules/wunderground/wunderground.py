@@ -4,6 +4,11 @@ import json
 class WUnderground(object):
     def __init__(self,api_key):
         self.api_key = api_key
+        self.xlate_wind_dir = {'east':'E',
+                               'west':'W',
+                               'north':'N',
+                               'south':'S'
+                               }
     def get_current_weather(self,state,city):
         res = urllib2.urlopen('http://api.wunderground.com/api/%(api_key)s/conditions/q/%(state)s/%(city)s.json'%{'api_key':self.api_key,'state':state,'city':city}).read()
         w_xml = json.loads(res)
@@ -22,7 +27,7 @@ class WUnderground(object):
             'windchill_f':w_xml['windchill_f'],
             'windchill_c':w_xml['windchill_c'],
             'rel_humidity':w_xml['relative_humidity'],
-            'wind_direction':w_xml['wind_dir'],
+            'wind_direction':self.xlate_wind_dir.get(w_xml['wind_dir'].lower(),w_xml['wind_dir'].upper()),
             'wind_desc':w_xml['wind_string'],
             'wind_mph':w_xml['wind_mph'],
             'wind_degrees':w_xml['wind_degrees'],
