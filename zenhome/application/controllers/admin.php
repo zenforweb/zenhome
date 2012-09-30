@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Admin extends MY_Controller {
 
 	/**
 	 * Admin controller.
@@ -23,24 +23,6 @@ class Admin extends CI_Controller {
 		$this->load->model('AccountModel');
 		$this->user = $this->AccountModel->userInfo( $_SESSION['user_id'] );
 		$this->ip = getIP();
-	}
-
-	private function view( $view, $data = Null ){
-		if( isset( $_SESSION['guest'] ) ){
-			$this->load->view('private/header_guest');
-		} else {
-			$menu = array( 
-				array( 'Dashboard', 'dashboard'), 
-				array('Admin', 'admin'), 
-				array( 'Profile', 'profile' ),
-				array( 'Devices', 'devices' ),
-				array( 'Apps', 'apps' ),
-				array( 'Logout', 'outside/logout' ),
-			);
-			$header = array( 'menu' => $menu );
-			$this->load->view('private/header_private', $header );
-		}
-		$this->load->view( $view, $data );
 	}
 
 	public function index(){
