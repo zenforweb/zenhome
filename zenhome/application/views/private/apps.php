@@ -32,9 +32,9 @@
 						<td></td>
 					</tr>
 					<tr>
-						<td>Weather</td>
+						<td><a href="<? echo base_url(); ?>apps/app_weather">Weather</a></td>
 						<td></td>
-						<td></td>
+						<td><a href="<? echo base_url(); ?>apps/app_weather/settings" class="btn btn-primary btn-small"><i class="icon-cog icon-white"></i></a></td>
 					</tr>
 					<tr>
 						<td>Remote</td>
