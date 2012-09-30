@@ -45,6 +45,9 @@ class MY_Controller extends CI_Controller{
 		$this->load->view( $view, $data );
 	}
 
+	public function view_portlet( $view, $data = Null ){
+		$this->load->view( $view, $data );
+	}
 
 }
 // END Controller class
