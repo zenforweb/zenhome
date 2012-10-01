@@ -43,6 +43,7 @@ class MY_Controller extends CI_Controller{
 			$this->load->view('private/header_private', $header );
 		}
 		$this->load->view( $view, $data );
+		$this->load->view( 'private/footer.php' );
 	}
 
 	public function view_portlet( $view, $data = Null ){

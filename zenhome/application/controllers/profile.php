@@ -22,11 +22,11 @@ class Profile extends MY_Controller {
 	}
 
 	public function index(){
-		if( isset($_SESSION['guest']) && $_SESSION['guest'] ){
-			$this->guest();
-		}
-
-		$this->view('private/profile');
+	$this->load->model('AppsModel');
+		$data = array(
+			'apps' => $this->AppsModel->getEnabledApps(),
+		);
+		$this->view( 'private/profile', $data );
 	}
 
 	public function change_pass(){
@@ -36,20 +36,14 @@ class Profile extends MY_Controller {
 		}
 		$this->load->model('UserModel');
 		if ( $this->UserModel->verify_user( $this->user['user_name'] , md5( $_REQUEST['current_password'] ) ) ){
-
 			$this->UserModel->change_password( $this->user['user_id'], md5( $_REQUEST['password_1'] ) );
-
-
-			die('heya');
+			redirect( 'profile' );
 		} else {           
 			//@todo set message saying old password was wrong
-			die('you suck');
+			redirect( 'profile');
 		}
-		//$this->UserModel->change_password( $this->user['user_id'], md5( $_REQUEST['password_1'] ) ); 
-
 	}
-
-
+	
 }
 
 /* End of file profile.php */

@@ -8,10 +8,11 @@ class App_weather extends MY_Controller {
 	 * Fetches weather, from weather underground
 	 *
 	 *	WEB INTERFACE
-	 *		/application/controllers/app_weather.php 					CONTROLLER
-	 *		/application/views/apps/app_weather_index.php  		VIEW
-	 *		/application/views/apps/app_weather_settings.php	VIEW
-	 *		/application/views/apps/app_weather_portlet.php	 	VIEW
+	 *		/application/controllers/app_weather.php 								CONTROLLER
+	 *		/application/views/apps/app_weather_index.php  					VIEW
+	 *		/application/views/apps/app_weather_settings.php				VIEW
+	 *		/application/views/apps/app_weather_user_settings.php		VIEW	 
+	 *		/application/views/apps/app_weather_portlet.php	 				VIEW
 	 *
 	 *
 	 */
@@ -42,6 +43,14 @@ class App_weather extends MY_Controller {
 	}
 
 	/**
+	* Method which will render the user settings for an App, displayed in profile
+	*
+	*/
+	public function user_settings(){
+		$this->view_portlet( 'apps/app_weather_user_settings' );
+	}
+
+	/**
 	* Method which will render the dashboard portlet
 	*
 	*/
@@ -59,7 +68,6 @@ class App_weather extends MY_Controller {
 
 		return $query->row();
 	}
-
 
 }
 

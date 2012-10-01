@@ -1,6 +1,6 @@
 <?php
 /*
-*	NETWORKSCAN :: GENERIC INDEX TEMPLATE
+*	REMOTE :: GENERIC SETTINGS TEMPLATE
 *
 */
 ?>
@@ -9,7 +9,7 @@
 	<!-- Page Title -->
 	<div class="row-fluid">
 		<div class="span4">
-			<h3>Network Scan</h3>
+			<h3>Remote Scans</h3>
 		</div>
 	</div>
 
@@ -20,7 +20,7 @@
 	</div>
 	<div class="row-fluid">
 		<div class="span8">
-			heres would be the body of the index of the apps
+			heres would be the body of the settings for the app
 		</div>
 	</div>
 </div>
