@@ -26,21 +26,36 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Network Monitor</td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td><a href="<? echo base_url(); ?>apps/app_weather">Weather</a></td>
-						<td></td>
-						<td><a href="<? echo base_url(); ?>apps/app_weather/settings" class="btn btn-primary btn-small"><i class="icon-cog icon-white"></i></a></td>
-					</tr>
-					<tr>
-						<td>Remote</td>
-						<td></td>
-						<td></td>
-					</tr>										
+					<?
+					foreach( $apps as $app ){
+						?>
+						<tr>
+							<td>
+								<a href="<? echo base_url( 'apps/' . $app->slug_name ); ?>">
+								<? echo $app->pretty_name; ?>
+							</td>
+							<td></td>
+							<td>
+								<? 
+								if( !$app->enabled ){
+									?>
+									<a class="btn btn-success btn-small" href="<? echo base_url() . 'apps/apps/enable/' . $app->row_id; ?>">
+										Enable
+									</a>
+									<?
+								} else {
+									?>
+									<a class="btn btn-danger btn-small" href="<? echo base_url() . 'apps/apps/disable/' . $app->row_id; ?>">
+										Disable
+									</a>
+									<?
+								}
+								?>
+							</td>
+						</tr>
+						<?
+					}
+					?>								
 				<tbody>
 			</table>
 		</div>
@@ -48,12 +63,6 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
 
 </body>
 </html>

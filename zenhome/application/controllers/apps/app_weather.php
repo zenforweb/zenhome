@@ -7,6 +7,13 @@ class App_weather extends MY_Controller {
 	 *
 	 * Fetches weather, from weather underground
 	 *
+	 *	WEB INTERFACE
+	 *		/application/controllers/app_weather.php 					CONTROLLER
+	 *		/application/views/apps/app_weather_index.php  		VIEW
+	 *		/application/views/apps/app_weather_settings.php	VIEW
+	 *		/application/views/apps/app_weather_portlet.php	 	VIEW
+	 *
+	 *
 	 */
 
 	public function __construct(){
@@ -14,7 +21,8 @@ class App_weather extends MY_Controller {
 		session_start();
 		if( ! isset( $_SESSION['user_id'] ) ){
 			redirect('outside/failed');
-		}		
+		}
+		$this->app = 'app_weather';
 	}
 
 	/**
@@ -22,7 +30,7 @@ class App_weather extends MY_Controller {
 	*
 	*/
 	public function index(){
-		$this->view( 'apps/app_weather_index');
+		$this->view( 'apps/app_weather_index' );
 	}
 
 	/**
@@ -30,7 +38,7 @@ class App_weather extends MY_Controller {
 	*
 	*/
 	public function settings(){
-		$this->view( 'apps/app_weather_settings');
+		$this->view( 'apps/app_weather_settings' );
 	}
 
 	/**
@@ -38,9 +46,22 @@ class App_weather extends MY_Controller {
 	*
 	*/
 	public function portlet(){
-		$this->view_portlet('apps/app_weather_portlet');
+		$data = array(
+			'current' => $this->getLastPoll(),
+		);
+
+		$this->view_portlet( 'apps/app_weather_portlet', $data );
 	}
+
+	private function getLastPoll(){
+		$this->load->database();
+		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`apps_wunderground_data` ORDER BY `stat_ts` DESC LIMIT 1" );
+
+		return $query->row();
+	}
+
+
 }
 
-/* End of file plugins.php */
-/* Location: ./application/controllers/plugins.php */
+/* End of file app_weather.php */
+/* Location: ./application/controllers/apps/app_weather.php */

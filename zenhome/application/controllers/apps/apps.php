@@ -3,12 +3,10 @@
 class Apps extends MY_Controller {
 
 	/**
-	 * Index Page for this controller.
+	 * Main App interface
 	 *
-	 * Maps to the following URL
-	 *              http://example.com/plugins
-	 *      - or -
-	 *              http://example.com/index.php/plugins/index
+	 * Shows and allows managment of all installed apps.
+	 *
 	 *
 	 */
 
@@ -17,16 +15,35 @@ class Apps extends MY_Controller {
 		session_start();
 		if( ! isset( $_SESSION['user_id'] ) ){
 			redirect('outside/failed');
-		}
-		$this->load->model('AccountModel');
-		$this->user = $this->AccountModel->userInfo( $_SESSION['user_id'] );			
+		}		
 	}
 	
 	public function index(){
-		 // show all devices, and management
-			$this->view('private/apps');
+		$this->load->model( 'AppsModel' );
+		$data = array(
+			'apps' => $this->AppsModel->getAllApps(),
+		);
+		$this->view( 'private/apps', $data );
 	}
+
+	public function enable( $app_id ){
+		if( !isset( $app_id ) )
+			//@todo report error
+			redirect( 'apps/' );
+		$this->load->model( 'AppsModel' );
+		$this->AppsModel->enableApp( $app_id );
+		redirect( 'apps/' );
+	}
+
+	public function disable( $app_id ){
+		if( !isset( $app_id ) )
+			//@todo report error
+			redirect( 'apps/' );
+		$this->load->model( 'AppsModel' );
+		$this->AppsModel->disableApp( $app_id );
+		redirect( 'apps/' );
+	}	
 }
 
-/* End of file plugins.php */
-/* Location: ./application/controllers/plugins.php */
+/* End of file apps.php */
+/* Location: ./application/controllers/apps.php */
