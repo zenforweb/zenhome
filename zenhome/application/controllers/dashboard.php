@@ -18,7 +18,6 @@ class Dashboard extends MY_Controller {
 		if( ! isset( $_SESSION['user_id'] ) ){
 			redirect('outside/failed');
 		}
-
 	}
 
 	public function index(){
@@ -26,11 +25,19 @@ class Dashboard extends MY_Controller {
 			$this->guest();
 		}
 
-		$this->view('private/dashboard');
+		$this->load->model( 'AppsModel' );
+		$data = array(
+			'enabled' => $this->AppsModel->getEnabledApps(),
+		);
+
+			// Alix {debug}
+		// echo "<pre>"; print_r( $data ); die();
+
+		$this->view( 'private/dashboard', $data );
 	}
 
 	private function guest(){
-		$this->view('private/dashboard_guest');	
+		$this->view( 'private/dashboard_guest' );	
 		exit();
 	}
 
