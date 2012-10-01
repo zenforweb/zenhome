@@ -8,13 +8,20 @@
 		<div class="span4">
 				<h3>Devices</h3>
 		</div>
-	</div>
-
-	<div class="row-fluid">
-		<div class="span12">
-			All Devices, Your Devices, <a href="#add_device" class="btn btn-success" data-toggle="modal">Add</a>
+		<div class="span3 pull-right">
+			<div class="dropdown">
+	  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+	  			<i class="icon-white icon-chevron-down"></i> Options
+	  		</a>
+	  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	    		<li><a href="#">All Devices</a></li>
+	    		<li><a href="#">Your Devices</a></li>
+	    		<li><a href="#add_device" data-toggle="modal">Add Device</a></li>
+	  		</ul>
+			</div>
 		</div>
 	</div>
+
 	<div class="row-fluid">
 		<div class="span8">
 			<table class="table table-striped">
@@ -56,8 +63,6 @@
 		</div>
 	</div>
 </div>
-
-
 
 
 <!-- MODEL: ADD DEVICE -->
@@ -112,11 +117,3 @@
 	  </div>
   </form>
 </div>
-
-
-
-
-
-
-</body>
-</html>

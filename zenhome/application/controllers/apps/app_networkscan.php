@@ -42,6 +42,14 @@ class App_networkscan extends MY_Controller {
 	}
 
 	/**
+	* Method which will render the user settings for an App, displayed in profile
+	*
+	*/
+	public function user_settings(){
+		$this->view_portlet( 'apps/app_networkscan_user_settings' );
+	}
+
+	/**
 	* Method which will render the dashboard portlet
 	*
 	*/

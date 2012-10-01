@@ -3,8 +3,23 @@
 ?>
 
 <div id="wrap" class="container-fluid">
-	<!-- Example row of columns -->
-	<h3>Admin</h3>
+	<div class="row-fluid">
+		<div class="span4">
+			Admin
+		</div>
+
+		<div class="span3 pull-right">
+			<div class="dropdown">
+	  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+	  			<i class="icon-white icon-chevron-down"></i> Options
+	  		</a>
+	  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	    		<li><a href="#change_password" data-toggle="modal">Add User</a></li>
+	  		</ul>
+			</div>
+		</div>
+	</div>
+
 	<div class="row-fluid">
 		<div class="span8">
 			<table class="table table-striped table-edit">
@@ -46,24 +61,33 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="span4">
-			<form action="<? echo base_url(); ?>admin/add_user"/ method="POST">
-			  <legend>Add User</legend>
-			  <label>User</label>
-			  <input type="text" name="user_name" placeholder="user name">
-			  <span class="help-block">The ID you'll be using to login to the site</span>
-
-			  <label>Password</label>
-			  <input type="text" type="password" name="password_1" placeholder="password">
-			  <br />
-			  <input type="text" type="password" name="password_2" placeholder="password">
-			  <span class="help-block">Your password, twice please</span>			  
-
-			  <button type="submit" class="btn btn-primary">Add New User</button>
-			</form>
-		</div>
 	</div>
 </div>
 
-</body>
-</html>
+<!-- MODEL: Add User -->
+<div class="modal fade" id="change_password">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">x</button>
+    <h3>Change Password</h3>
+  </div>
+	<form action="<? echo base_url(); ?>admin/add_user"/ method="POST">
+		<div class="modal-body">
+			<legend>Add User</legend>
+			<label>User</label>
+			<input type="text" name="user_name" placeholder="user name">
+			<span class="help-block">The ID you'll be using to login to the site</span>
+
+			<label>Password</label>
+			<input type="text" type="password" name="password_1" placeholder="password">
+			<br />
+			<input type="text" type="password" name="password_2" placeholder="password">
+			<span class="help-block">Your password, twice please</span>			  
+
+			<button type="submit" class="btn btn-primary">Add New User</button>
+		</div>
+		<div class="modal-footer">
+			<a data-dismiss="modal" href="#" class="btn">Close</a>
+	  	<button type="submit" class="btn btn-primary">Save</button>
+		</div>
+  </form>
+</div>

@@ -1,6 +1,6 @@
 <?php
 /*
-*	NETWORKSCAN :: GENERIC INDEX TEMPLATE
+*	REMOTE :: GENERIC INDEX TEMPLATE
 *
 */
 ?>
@@ -9,7 +9,7 @@
 	<!-- Page Title -->
 	<div class="row-fluid">
 		<div class="span4">
-			<h3>Network Scan</h3>
+				<h3>Weather</h3>
 		</div>
 	</div>
 

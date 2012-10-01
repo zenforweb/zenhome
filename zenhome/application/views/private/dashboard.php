@@ -3,9 +3,6 @@
 	// app_weather
 	// app_networkscan
 
-
-
-
 ?>
 
 <script type="text/javascript">
@@ -25,6 +22,3 @@
 	<div id="row_1" class="row-fluid">
 	</div>
 </div>
-
-</body>
-</html>
