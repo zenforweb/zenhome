@@ -15,9 +15,8 @@ class Dashboard extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		session_start();
-		if( ! isset( $_SESSION['user_id'] ) ){
+		if( ! isset( $_SESSION['user_id'] ) )
 			redirect('outside/failed');
-		}
 	}
 
 	public function index(){
@@ -29,9 +28,6 @@ class Dashboard extends MY_Controller {
 		$data = array(
 			'enabled' => $this->AppsModel->getEnabledApps(),
 		);
-
-			// Alix {debug}
-		// echo "<pre>"; print_r( $data ); die();
 
 		$this->view( 'private/dashboard', $data );
 	}

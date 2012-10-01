@@ -8,13 +8,19 @@
 		<div class="span4">
 				<h3>Apps</h3>
 		</div>
+		<div class="span3 pull-right">
+			<div class="dropdown">
+	  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+	  			<i class="icon-white icon-chevron-down"></i> Options
+	  		</a>
+	  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	    		<li><a href="#">Enabled Apps</a></li>
+	    		<li><a href="#">All Apps</a></li>
+	  		</ul>
+			</div>
+		</div>		
 	</div>
 
-	<div class="row-fluid">
-		<div class="span12">
-			Enabled Apps, All Apps,
-		</div>
-	</div>
 	<div class="row-fluid">
 		<div class="span8">
 			<table class="table table-striped">
@@ -63,6 +69,3 @@
 		</div>
 	</div>
 </div>
-
-</body>
-</html>

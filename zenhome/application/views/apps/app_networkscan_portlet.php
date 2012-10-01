@@ -5,7 +5,7 @@
 */
 ?>
 
-<div id="app_weather_portlet" class="portlet span4">
+<div id="app_networkscan_portlet" class="portlet span4">
 	<h2>Network Scans</h2>
 	<p>
 		Network Scan Information will be here shortly!
