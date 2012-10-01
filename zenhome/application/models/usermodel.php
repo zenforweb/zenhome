@@ -48,9 +48,6 @@ class UserModel extends CI_Model {
 				$users[$i]['access'] =  $access[0];
 			$i++;
 		}
-
-			// Alix {debug}
-		//echo "<pre>"; print_r( $users ); die();
 		return $users;
 	}
 
