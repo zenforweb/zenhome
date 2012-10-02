@@ -31,7 +31,11 @@ class App_weather extends MY_Controller {
 	*
 	*/
 	public function index(){
-		$this->view( 'apps/app_weather_index' );
+		$data = array(
+			'stats' => $this->getTempLastMonth(),
+		);
+
+		$this->view( 'apps/app_weather_index', $data );
 	}
 
 	/**
@@ -67,6 +71,41 @@ class App_weather extends MY_Controller {
 		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`apps_wunderground_data` ORDER BY `stat_ts` DESC LIMIT 1" );
 
 		return $query->row();
+	}
+
+	private function getTempLastMonth(){
+		$this->load->database();
+
+		$stat_query = mysql_query( "SELECT left(`stat_ts`,10),AVG(`temp_f`),count(*) FROM `". DB_NAME ."`.`apps_wunderground_data` WHERE `stat_ts` between DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY) AND NOW() GROUP BY 1 " );
+		$stats_avg = array();
+		while ( $row = mysql_fetch_array( $stat_query ) ){
+			$stats_avg[] = $row;
+		}
+
+		$stat_query = mysql_query( "SELECT left(`stat_ts`,10),MIN(`temp_f`),count(*) FROM `". DB_NAME ."`.`apps_wunderground_data` WHERE `stat_ts` between DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY) AND NOW() GROUP BY 1" );
+		$stats_min = array();
+		while ( $row = mysql_fetch_array( $stat_query ) ){
+			$stats_min[] = $row;
+		}
+
+		$stat_query = mysql_query( "SELECT left(`stat_ts`,10),MAX(`temp_f`),count(*) FROM `". DB_NAME ."`.`apps_wunderground_data` WHERE `stat_ts` between DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY) AND NOW() GROUP BY 1" );
+		$stats_max = array();
+		while ( $row = mysql_fetch_array( $stat_query ) ){
+			$stats_max[] = $row;
+		}
+
+		$stats = array();
+		$i = 0;
+		foreach( $stats_avg as $avg ){
+			$stats[$avg[0]] = array(
+				'high' => $stats_max[$i][1],
+				'low'  => $stats_min[$i][1],
+				'avg'	 => $avg[1],
+			);
+			$i++;
+		}
+
+		return $stats;
 	}
 
 }

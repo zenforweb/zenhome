@@ -1,9 +1,33 @@
 <?php
 /*
-*	REMOTE :: GENERIC INDEX TEMPLATE
+*	Weather :: GENERIC INDEX TEMPLATE
 *
 */
 ?>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart"]});
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Day', 'Avg', 'High', 'Low'],
+      <?
+      foreach ($stats as $day => $stat) {
+      	echo "['" . $day . "', " . $stat['avg'] . ", " . $stat['high'] . ", " . $stat['low'] . "],";
+      }
+      ?>
+    ]);
+
+    var options = {
+      title: 'Weather'
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+</script>
 
 <div id="wrap" class="container-fluid">
 	<!-- Page Title -->
@@ -26,7 +50,8 @@
 
 	<div class="row-fluid">
 		<div class="span8">
-			heres would be the body of the index of the apps
+			Let's do some stats!
+			<div id="chart_div" style="width: 600px; height: 300px;"></div>
 		</div>
 	</div>
 </div>
