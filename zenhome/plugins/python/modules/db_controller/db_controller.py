@@ -1,13 +1,17 @@
 import MySQLdb
 import sys
 import string
+import json
 class DBController(object):
     def __init__(self):
-        self.status=''
-        self.local_db_ip = 'localhost'
-        self.local_db_user = 'dbadmin'
-        self.local_db_pass = 'Z3n4W38'
-        self.local_db_port = 3306
+        self.default_db = 'production'
+        self.config = self.load_json_config()
+    def load_json_config(self):
+        config_data = open('../../../../db_config.json','r')
+        config=json.load(config_data)
+        print config
+        config_data.close()
+        return config
     def getdb(self,**kwargs):
         conn = None
         retry = 0
