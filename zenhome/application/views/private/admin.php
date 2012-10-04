@@ -5,7 +5,7 @@
 <div id="wrap" class="container-fluid">
 	<div class="row-fluid">
 		<div class="span4">
-			Admin
+			<h3>Admin</h3>
 		</div>
 
 		<div class="span3 pull-right">
@@ -65,7 +65,7 @@
 </div>
 
 <!-- MODEL: Add User -->
-<div class="modal fade" id="change_password">
+<div class="modal fade" id="change_password" style="display:none;">
   <div class="modal-header">
     <button class="close" data-dismiss="modal">x</button>
     <h3>Change Password</h3>

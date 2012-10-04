@@ -44,10 +44,20 @@ class MY_Controller extends CI_Controller{
 		}
 		$this->load->view( $view, $data );
 		$this->load->view( 'private/footer.php' );
+		if( isset( $_SESSION['message'] ) )
+			$this->unsetMessage();
 	}
 
 	public function view_portlet( $view, $data = Null ){
 		$this->load->view( $view, $data );
+	}
+
+	public function setMessage( $type, $message){
+		$_SESSION['message'] = array( 'type' => $type, 'msg' => $message );
+	}
+
+	private function unsetMessage(){
+		unset($_SESSION['message']);
 	}
 
 }
