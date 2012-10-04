@@ -9,13 +9,7 @@
 	<!-- Page Title -->
 	<div class="row-fluid">
 		<div class="span4">
-				<h3>Weather</h3>
-		</div>
-	</div>
-
-	<div class="row-fluid">
-		<div class="span12">
-			Internal App links here *optional*
+		     <h3>Remote</h3>
 		</div>
 	</div>
 	<div class="row-fluid">

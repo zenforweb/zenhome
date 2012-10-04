@@ -16,7 +16,7 @@ class Devices extends MY_Controller {
 		parent::__construct();
 		session_start();
 		if( ! isset( $_SESSION['user_id'] ) ){
-			 redirect('outside/failed');
+			redirect('outside/failed');
 		}
 		$this->load->model('AccountModel');
 		$this->user = $this->AccountModel->userInfo( $_SESSION['user_id'] );		
@@ -26,7 +26,7 @@ class Devices extends MY_Controller {
 		$this->load->Model('DeviceModel');
 		$data = array(
 			'devices' => $this->DeviceModel->getDevices(),
-			);
+		);
 
 		$this->view('private/devices', $data);
 	}
@@ -34,6 +34,7 @@ class Devices extends MY_Controller {
 	public function add_device(){
 		$this->load->Model('DeviceModel');
 		$this->DeviceModel->addDevice( $_REQUEST['device_name'], $_REQUEST['device_type'], $_REQUEST['device_user'] );
+		$this->setMessage( 'success', 'Device added');
 		redirect('devices');
 	}
 
