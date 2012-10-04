@@ -26,7 +26,7 @@ class WUnderground(object):
             'temp_c':w_xml['temp_c'],
             'windchill_f':w_xml['windchill_f'],
             'windchill_c':w_xml['windchill_c'],
-            'rel_humidity':w_xml['relative_humidity'],
+            'rel_humidity':str(w_xml['relative_humidity']).replace('%',''),
             'wind_direction':self.xlate_wind_dir.get(w_xml['wind_dir'].lower(),w_xml['wind_dir'].upper()),
             'wind_desc':w_xml['wind_string'],
             'wind_mph':w_xml['wind_mph'],
