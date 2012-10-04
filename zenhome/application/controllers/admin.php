@@ -40,14 +40,13 @@ class Admin extends MY_Controller {
 			|| !isset( $_REQUEST['password_1'] ) 
 			|| empty( $_REQUEST['user_name'] ) 
 			|| empty( $_REQUEST['password_1'] ) ){
-			
-			//@todo: set an error message
+			$this->setMessage( 'error', 'You are missing a field which is required to add a user.');
 			redirect( 'admin/' );
 		}
 		$this->load->model('UserModel');
 		//@todo: santize username
 		$this->UserModel->addUser( $_REQUEST['user_name'], md5( $_REQUEST['password_1'] ) );
-
+		$this->setMessage( 'success', 'User added');
 		redirect('admin/');
 	}
 

@@ -57,6 +57,15 @@ class App_networkscan extends MY_Controller {
 		$this->view_portlet( 'apps/app_networkscan_portlet' );
 	}
 
+        /**
+        * Method which will render the dashboard portlet
+        *
+        */
+        private function app_nav(){
+       		return array( '<a href="#">Outdoor Weather</a>', '<a href="#">Settings</a>' );
+        }
+
+
 }
 
 /* End of file app_networkscan.php */
