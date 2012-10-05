@@ -37,8 +37,9 @@ if( DEVELOPMENT ){
 	$config['base_url'] = DEVELOPMENT_USER_PATH . 'zenhome/';
 	define('FRONT_END', 'zenhome/public_html/');
 } else {
-	define('FRONT_END', 'production/public_html/');
-	$config['base_url']  = 'http://10.1.10.52';
+	define('FRONT_END', 'production/zenhome/public_html/');
+	$config['base_url'] = 'http://blackbox.dyn-o-saur.com/dev/';
+	//$config['base_url']  = 'http://10.1.10.52/';
 }
 
 
