@@ -20,10 +20,6 @@ class App_weather extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		session_start();
-		if( ! isset( $_SESSION['user_id'] ) ){
-			redirect('outside/failed');
-		}
 		$this->app = 'app_weather';
 	}
 
@@ -36,10 +32,8 @@ class App_weather extends MY_Controller {
 		$data = array(
 			'current' 			 => $this->WeatherModel->getLastPoll(),			
 			'stats_overtime' => $this->WeatherModel->getTempLastMonth(),
-			'stats_today' 	 => $this->WeatherModel->getToday(),
+			'stats_recent' 	 => $this->WeatherModel->getRecentStats(),
 		);
-
-
 		$this->view( 'apps/app_weather_index', $data );
 	}
 

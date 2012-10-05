@@ -14,12 +14,6 @@ class Devices extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		session_start();
-		if( ! isset( $_SESSION['user_id'] ) ){
-			redirect('outside/failed');
-		}
-		$this->load->model('AccountModel');
-		$this->user = $this->AccountModel->userInfo( $_SESSION['user_id'] );		
 	}
 
 	public function index(){

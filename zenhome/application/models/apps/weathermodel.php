@@ -12,20 +12,12 @@ class WeatherModel extends CI_Model {
 		return $query->row();
 	}
 
-	public function getToday(){
-		$yesterday = date( 'Y-m-d G:i', strtotime( '-1 days') );
-		
-		//$date = strtotime( '-1 days', time() );		
-		//$this->query()
-		//select * from apps_wunderground_data where `stat_ts` > '2012-10-01 8:17:00';
-
-
-		$sql = "SELECT * FROM `zenhome`.`apps_wunderground_data` WHERE `stat_ts` > '". $yesterday ."' ";
-		//$this->query();
-		// while ( $row = mysql_fetch_array( $stat_query ) ){
-		//         $stat[] = $row;
-		// }
-		//die($query);
+	public function getRecentStats(){
+		$last_24_gmt = date( 'Y-m-d G:i', strtotime( '-1 days') );
+		$package =  array(
+			'last_24' => $this->fetchRecords( $last_24_gmt ),
+		);
+		return $package;
 	}
 
 	public function getTempLastMonth(){
@@ -42,17 +34,14 @@ class WeatherModel extends CI_Model {
 				'avg'  				=> round( $avg[1], 1),
 			);
 		
-			switch ($i) {
-				case 0:
-					$stats[$avg[0]]['date_format'] = 'Today';
-					break;
-				case 1:
-					$stats[$avg[0]]['date_format'] = 'Yesterday';
-				case 1:
-					$stats[$avg[0]]['date_format'] = 'Yesterday!';					
-				default:
-					$stats[$avg[0]]['date_format'] =  $avg[0];
-					break;
+			if( $i == 0 ){
+				$stats[$avg[0]]['date_format'] = 'Today';
+			} elseif( $i == 1 ){
+				$stats[$avg[0]]['date_format'] = 'Yesterday';
+			} elseif( $i < 7 ){
+				$stats[$avg[0]]['date_format'] = date( 'l', strtotime( $avg[0] ) );
+			} else {
+				$stats[$avg[0]]['date_format'] = substr( $avg[0], 5);
 			}
 			$i++;
 		}
@@ -72,4 +61,22 @@ class WeatherModel extends CI_Model {
 		}
 		return $stat;
 	}
+
+	private function fetchRecords( $from, $to = Null){
+		if( $to == Null ){
+			$sql = "SELECT * FROM `". DB_NAME ."`.`apps_wunderground_data` WHERE `stat_ts` > '". $from ."' ORDER BY `stat_ts` DESC";
+			$query = $this->db->query( $sql );
+			$today = array();
+			$i = 0;
+			foreach( $query->result() as $row ){
+				$today[$i]['temp'] 				= $row->temp_f;
+				$today[$i]['humidity'] 		= $row->rel_humidity;
+				$today[$i]['stat_ts']			= $row->stat_ts;
+				$today[$i]['date_format']	= date( 'g:i a', strtotime( $row->stat_ts ) );
+				$i++;
+			}
+			return array_reverse( $today );
+		}
+	}	
+
 }
