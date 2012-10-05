@@ -14,9 +14,6 @@ class Dashboard extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		session_start();
-		if( ! isset( $_SESSION['user_id'] ) )
-			redirect('outside/failed');
 	}
 
 	public function index(){
