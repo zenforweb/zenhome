@@ -19,9 +19,6 @@ class App_remote extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		session_start();
-		if( ! isset( $_SESSION['user_id'] ) )
-			redirect('outside/failed');
 		$this->app = 'app_remote';
 	}
 

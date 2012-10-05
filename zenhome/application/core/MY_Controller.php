@@ -6,7 +6,10 @@
 class MY_Controller extends CI_Controller{
 
   function __construct(){
-      parent::__construct();
+  	parent::__construct();
+  	session_start();
+  	if( ! isset( $_SESSION['user_id'] ) )
+			redirect('outside/failed');
   }
 
   private function load_user(){
@@ -17,11 +20,8 @@ class MY_Controller extends CI_Controller{
 	private function main_menu(){
 		$menu = array( 
 			array( 'Dashboard', 'dashboard',  		0 ), 
-			array( 'Admin', 		'admin',					0 ), 
-			array( 'Profile', 	'profile', 				0 ),
 			array( 'Devices', 	'devices', 				0 ),
-			array( 'Apps', 			'apps', 					0 ),
-			array( 'Logout', 		'outside/logout', 0 ),
+			array( 'Apps', 			'apps', 					0,  $this->make_app_menu() ),
 		);
 		foreach ($menu as $key => $item) {
 			if ( strstr( $_SERVER['REQUEST_URI'], $item[1] ) ){
@@ -44,10 +44,30 @@ class MY_Controller extends CI_Controller{
 		}
 		$this->load->view( $view, $data );
 		$this->load->view( 'private/footer.php' );
+		if( isset( $_SESSION['message'] ) )
+			$this->unsetMessage();
 	}
 
 	public function view_portlet( $view, $data = Null ){
 		$this->load->view( $view, $data );
+	}
+
+	public function setMessage( $type, $message){
+		$_SESSION['message'] = array( 'type' => $type, 'msg' => $message );
+	}
+
+	private function unsetMessage(){
+		unset($_SESSION['message']);
+	}
+
+	private function make_app_menu(){
+		$this->load->model('AppsModel');
+		$enabled_apps = $this->AppsModel->getEnabledApps();
+		$app_menu = array();
+		foreach ($enabled_apps as $app) {
+			$app_menu[] = array( $app->pretty_name, $app->slug_name, 0 );
+		}
+		return $app_menu;
 	}
 
 }

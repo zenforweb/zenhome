@@ -34,7 +34,8 @@ define( 'ALLOW_GUESTS', FALSE ) ;
 require_once('debug.php');
 
 if( DEVELOPMENT ){
-	$config['base_url'] = DEVELOPMENT_USER_PATH . 'zenhome/';
+	//$config['base_url'] = DEVELOPMENT_USER_PATH . 'zenhome/';
+	$config['base_url'] = 'http://blackbox.dyn-o-saur.com/dev/~alix/zenhome/';
 	define('FRONT_END', 'zenhome/public_html/');
 } else {
 	define('FRONT_END', 'production/zenhome/public_html/');

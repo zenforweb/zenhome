@@ -9,31 +9,50 @@
 
 <script type="text/javascript">
   google.load("visualization", "1", {packages:["corechart"]});
-  google.setOnLoadCallback(drawChart);
-  function drawChart() {
+  google.setOnLoadCallback(drawChart_1);
+  google.setOnLoadCallback(drawChart_2);
+  function drawChart_1() {
     var data = google.visualization.arrayToDataTable([
-      ['Day', 'Avg', 'High', 'Low'],
+      ['Day', 'Low', 'High', 'Avg'],
       <?
-      foreach ($stats as $day => $stat) {
-      	echo "['" . $day . "', " . $stat['avg'] . ", " . $stat['high'] . ", " . $stat['low'] . "],";
+      foreach ($stats_overtime['data'] as $day => $stat) {
+      	echo "['" . $stat['date_format'] . "', " . $stat['low'] . ", " . $stat['high'] . ", " . $stat['avg'] . "],";
       }
       ?>
     ]);
 
     var options = {
-      title: 'Weather'
+      title: 'Weather temps for the last <? echo $stats_overtime['count']; ?> days'
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div_1'));
     chart.draw(data, options);
   }
+
+  function drawChart_2() {
+    var data = google.visualization.arrayToDataTable([
+      ['Day', 'Today'],
+      <?
+      foreach ($stats_recent['last_24'] as $day => $stat) {
+      	echo "['" . $stat['date_format'] . "', " . $stat['temp'] . " ],";
+      }
+      ?>
+    ]);
+
+    var options = {
+      title: 'Weather temps for the last 24 hours'
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div_2'));
+    chart.draw(data, options);
+  }  
 </script>
 
 <div id="wrap" class="container-fluid">
 	<!-- Page Title -->
 	<div class="row-fluid">
 		<div class="span4">
-				<h3>Outdoor Weather</h3>
+			<h3>Weather</h3>
 		</div>
 		<div class="span3 pull-right">
 			<div class="dropdown">
@@ -49,9 +68,33 @@
 	</div>
 
 	<div class="row-fluid">
-		<div class="span8">
-			Let's do some stats!
-			<div id="chart_div" style="width: 600px; height: 300px;"></div>
+		
+		<div class="span3">
+			<span class="app_weather_temp"><? echo $current->temp_f; ?>&deg;</span>
+			@
+			<span class="app_weather_humidity"><? echo $current->rel_humidity; ?></span> humidity
+			<br />
+			<? echo $current->weather; ?>
+			<br />
+			Feels like <b><? echo $current->feelslike_f; ?></b>
+			<br />
+			Wind at <b><? echo $current->wind_mph; ?></b> MPH to the <? echo $current->wind_direction; ?>
 		</div>
 	</div>
+	
+	<div class="row-fluid">
+		<div class="offset1 span4">
+			<div id="chart_div_1" style="width: 600px; height: 300px;"></div>
+		</div>
+
+		<div class="span4">
+			<div id="chart_div_2" style="width: 600px; height: 300px;"></div>
+		</div>
+
+	</div>
+	<div class="row-fluid">
+
+	</div>
+
+
 </div>

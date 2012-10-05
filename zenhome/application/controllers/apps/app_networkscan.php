@@ -18,11 +18,6 @@ class App_networkscan extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		session_start();
-		if( ! isset( $_SESSION['user_id'] ) ){
-			redirect('outside/failed');
-		}
-		$this->app = 'app_weather';
 	}
 
 	/**
@@ -56,6 +51,15 @@ class App_networkscan extends MY_Controller {
 	public function portlet(){
 		$this->view_portlet( 'apps/app_networkscan_portlet' );
 	}
+
+        /**
+        * Method which will render the dashboard portlet
+        *
+        */
+        private function app_nav(){
+       		return array( '<a href="#">Outdoor Weather</a>', '<a href="#">Settings</a>' );
+        }
+
 
 }
 

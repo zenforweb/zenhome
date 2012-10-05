@@ -17,7 +17,7 @@
 </style>
 
 <div id="app_weather_portlet" class="portlet span4">
-	<h2>Outdoor Weather</h2>
+	<h2>Weather</h2>
 	<span class="app_weather_temp"><? echo $current->temp_f; ?>&deg;</span>
 	@
 	<span class="app_weather_humidity"><? echo $current->rel_humidity; ?></span> humidity

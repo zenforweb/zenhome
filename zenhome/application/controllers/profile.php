@@ -14,15 +14,11 @@ class Profile extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		session_start();
-		if( ! isset( $_SESSION['user_id'] ) ){
-			redirect('outside/failed');
-		}
 		$this->ip = getIP();
 	}
 
 	public function index(){
-	$this->load->model('AppsModel');
+		$this->load->model('AppsModel');
 		$data = array(
 			'apps' => $this->AppsModel->getEnabledApps(),
 		);
@@ -30,17 +26,16 @@ class Profile extends MY_Controller {
 	}
 
 	public function change_pass(){
-		if( ! isset( $_REQUEST['current_password'] ) || ! isset( $_REQUEST['password_1'] ) ){
-			//@todo: set error message
+		if( ! isset( $_REQUEST['current_password'] ) || ! isset( $_REQUEST['password_1'] ) )
 			redirect( 'profile');
-		}
 		$this->load->model('UserModel');
 		if ( $this->UserModel->verify_user( $this->user['user_name'] , md5( $_REQUEST['current_password'] ) ) ){
 			$this->UserModel->change_password( $this->user['user_id'], md5( $_REQUEST['password_1'] ) );
+			$this->setMessage( 'success', 'Password updated' );
 			redirect( 'profile' );
 		} else {           
-			//@todo set message saying old password was wrong
-			redirect( 'profile');
+			$this->setMessage( 'error', 'Passwords didn\'t match' );
+			redirect( 'profile' );
 		}
 	}
 	

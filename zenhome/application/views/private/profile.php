@@ -62,7 +62,7 @@
     <button class="close" data-dismiss="modal">x</button>
     <h3>Change Password</h3>
   </div>
-	<form action="<? echo base_url(); ?>profile/change_pass"/ method="POST">
+	<form action="<? echo base_url(); ?>profile/change_pass" method="POST">
 		<div class="modal-body">
 	    <fieldset>
 	      <div class="control-group">

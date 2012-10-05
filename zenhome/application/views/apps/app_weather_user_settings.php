@@ -11,7 +11,7 @@
 			<h4>Outdoor Weather</h4>
 		</div>
 		<div class="span4 pull-right">
-			<a href="" class="btn btn-danger">disable</a>
+			<a href="" class="btn btn-danger">Disable</a>
 		</div>
 	</div>
 	<div class="row-fluid">
