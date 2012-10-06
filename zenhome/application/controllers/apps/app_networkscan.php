@@ -25,7 +25,7 @@ class App_networkscan extends MY_Controller {
 	*
 	*/
 	public function index(){
-		$this->view( 'apps/app_networkscan_index' );
+		$this->view( 'apps/networkscan/app_networkscan_index' );
 	}
 
 	/**
@@ -33,7 +33,7 @@ class App_networkscan extends MY_Controller {
 	*
 	*/
 	public function settings(){
-		$this->view( 'apps/app_networkscan_settings' );
+		$this->view( 'apps/networkscan/app_networkscan_settings' );
 	}
 
 	/**
@@ -41,7 +41,7 @@ class App_networkscan extends MY_Controller {
 	*
 	*/
 	public function user_settings(){
-		$this->view_portlet( 'apps/app_networkscan_user_settings' );
+		$this->view_portlet( 'apps/networkscan/app_networkscan_user_settings' );
 	}
 
 	/**
@@ -49,16 +49,8 @@ class App_networkscan extends MY_Controller {
 	*
 	*/
 	public function portlet(){
-		$this->view_portlet( 'apps/app_networkscan_portlet' );
+		$this->view_portlet( 'apps/networkscan/app_networkscan_portlet' );
 	}
-
-        /**
-        * Method which will render the dashboard portlet
-        *
-        */
-        private function app_nav(){
-       		return array( '<a href="#">Outdoor Weather</a>', '<a href="#">Settings</a>' );
-        }
 
 
 }
