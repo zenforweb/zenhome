@@ -83,11 +83,11 @@
 	</div>
 	
 	<div class="row-fluid">
-		<div class="offset1 span4">
+		<div class="span6">
 			<div id="chart_div_1" style="width: 600px; height: 300px;"></div>
 		</div>
 
-		<div class="span4">
+		<div class="span6">
 			<div id="chart_div_2" style="width: 600px; height: 300px;"></div>
 		</div>
 

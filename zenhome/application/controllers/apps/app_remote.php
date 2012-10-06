@@ -27,7 +27,7 @@ class App_remote extends MY_Controller {
 	*
 	*/
 	public function index(){
-		$this->view( 'apps/app_remote_index' );
+		$this->view( 'apps/remote/app_remote_index' );
 	}
 
 	/**
@@ -35,7 +35,7 @@ class App_remote extends MY_Controller {
 	*
 	*/
 	public function settings(){
-		$this->view( 'apps/app_remote_settings' );
+		$this->view( 'apps/remote/app_remote_settings' );
 	}
 
 	/**
@@ -43,7 +43,7 @@ class App_remote extends MY_Controller {
 	*
 	*/
 	public function user_settings(){
-		$this->view_portlet( 'apps/app_remote_user_settings' );
+		$this->view_portlet( 'apps/remote/app_remote_user_settings' );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class App_remote extends MY_Controller {
 	public function portlet(){
 		$data = array( );
 
-		$this->view_portlet( 'apps/app_remote_portlet', $data );
+		$this->view_portlet( 'apps/remote/app_remote_portlet', $data );
 	}
 
 	public function command( $device, $command ) {
