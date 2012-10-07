@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class App_networkscan extends MY_Controller {
+class Networkscan extends MY_Controller {
 
 	/**
 	 * Network Scan App
