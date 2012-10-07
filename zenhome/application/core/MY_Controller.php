@@ -8,8 +8,10 @@ class MY_Controller extends CI_Controller{
   function __construct(){
   	parent::__construct();
   	session_start();
-  	if( ! isset( $_SESSION['user_id'] ) )
-			redirect('outside/failed');
+  	if( ! isset( $_SESSION['user_id'] ) ){
+  		$this->setMessage( 'error', 'Your session has expired' );
+			redirect('/');
+		}
   }
 
   private function load_user(){
@@ -31,7 +33,7 @@ class MY_Controller extends CI_Controller{
 		return $menu;
 	}
 
-  public function view( $view, $data = Null ){  	
+  public function view( $view, $data = Null ){
   	$this->load_user();
 		if( isset( $_SESSION['guest'] ) ){
 			$this->load->view('private/header_guest');
@@ -57,7 +59,7 @@ class MY_Controller extends CI_Controller{
 	}
 
 	private function unsetMessage(){
-		unset($_SESSION['message']);
+		unset( $_SESSION['message'] );
 	}
 
 	private function make_app_menu(){

@@ -35,7 +35,7 @@ class Outside extends CI_Controller {
 		}
 		//@todo add config file for guests on/off
 		if( $this->ip[1] == 'local' && ALLOW_GUESTS ){
-//		    $this->handle_guest();
+			//$this->handle_guest();
 		}
 
 		$this->view('public/welcome_message');
@@ -43,10 +43,10 @@ class Outside extends CI_Controller {
 
 	public function login(){
 		if( !isset( $_REQUEST['user_name'] ) 
-		|| !isset( $_REQUEST['password'] ) 
-		|| empty( $_REQUEST['user_name'] ) 
-		|| empty( $_REQUEST['password'] ) ){
-		   redirect( 'outside/failed' );
+			|| !isset( $_REQUEST['password'] ) 
+			|| empty( $_REQUEST['user_name'] ) 
+			|| empty( $_REQUEST['password'] ) ){
+		  	redirect( 'outside/failed' );
 		}
 		$user_name = strtolower ( $_REQUEST['user_name'] );
 		$password  = md5( $_REQUEST['password'] );
@@ -82,8 +82,12 @@ class Outside extends CI_Controller {
 		$this->rabbitmq->publisher( 'stats.network', 'hello', 'exchage', 'quue=null' );		
 	}
 
-	public function info(){
-		phpinfo();
+	public function setMessage( $type, $message){
+		$_SESSION['message'] = array( 'type' => $type, 'msg' => $message );
+	}
+
+	private function unsetMessage(){
+		unset($_SESSION['message']);
 	}
 }
 
