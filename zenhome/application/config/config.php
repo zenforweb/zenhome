@@ -35,7 +35,7 @@ require_once('debug.php');
 
 if( DEVELOPMENT ){
 	//$config['base_url'] = DEVELOPMENT_USER_PATH . 'zenhome/';
-	$config['base_url'] = 'http://blackbox.dyn-o-saur.com/dev/~alix/zenhome/';
+	$config['base_url'] = 'http://zen.homedns.org/~chris/zenhome/';
 	define('FRONT_END', 'zenhome/public_html/');
 } else {
 	define('FRONT_END', 'production/public_html/');
