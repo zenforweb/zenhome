@@ -8,8 +8,10 @@ class MY_Controller extends CI_Controller{
   function __construct(){
   	parent::__construct();
   	session_start();
-  	if( ! isset( $_SESSION['user_id'] ) )
-			redirect('outside/failed');
+  	if( ! isset( $_SESSION['user_id'] ) ){
+  		$this->setMessage( 'error', 'Your session has expired' );
+			redirect('/');
+		}
   }
 
   private function load_user(){

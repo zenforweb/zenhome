@@ -82,8 +82,12 @@ class Outside extends CI_Controller {
 		$this->rabbitmq->publisher( 'stats.network', 'hello', 'exchage', 'quue=null' );		
 	}
 
-	public function info(){
-		phpinfo();
+	public function setMessage( $type, $message){
+		$_SESSION['message'] = array( 'type' => $type, 'msg' => $message );
+	}
+
+	private function unsetMessage(){
+		unset($_SESSION['message']);
 	}
 }
 
