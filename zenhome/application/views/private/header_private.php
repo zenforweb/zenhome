@@ -25,6 +25,8 @@
 								      <b class="caret"></b>
 								    </a>
 							  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+							  			<li><a href="<? echo base_url(); ?>apps">Control Panel</a></li>
+							  			<li class="divider"></li>
 							  			<?
 						  				foreach ($item[3] as $app) {
 						  					?>

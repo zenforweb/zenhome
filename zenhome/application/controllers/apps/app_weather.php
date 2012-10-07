@@ -34,7 +34,7 @@ class App_weather extends MY_Controller {
 			'stats_overtime' => $this->WeatherModel->getTempLastMonth(),
 			'stats_recent' 	 => $this->WeatherModel->getRecentStats(),
 		);
-		$this->view( 'apps/app_weather_index', $data );
+		$this->view( 'apps/weather/app_weather_index', $data );
 	}
 
 	/**
@@ -42,7 +42,7 @@ class App_weather extends MY_Controller {
 	*
 	*/
 	public function settings(){
-		$this->view( 'apps/app_weather_settings' );
+		$this->view( 'apps/weather/app_weather_settings' );
 	}
 
 	/**
@@ -50,7 +50,7 @@ class App_weather extends MY_Controller {
 	*
 	*/
 	public function user_settings(){
-		$this->view_portlet( 'apps/app_weather_user_settings' );
+		$this->view_portlet( 'apps/weather/app_weather_user_settings' );
 	}
 
 	/**
@@ -63,7 +63,7 @@ class App_weather extends MY_Controller {
 			'current' => $this->WeatherModel->getLastPoll(),
 		);
 
-		$this->view_portlet( 'apps/app_weather_portlet', $data );
+		$this->view_portlet( 'apps/weather/app_weather_portlet', $data );
 	}
 
 }
