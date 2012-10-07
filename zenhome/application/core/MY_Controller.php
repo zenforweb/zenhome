@@ -33,7 +33,7 @@ class MY_Controller extends CI_Controller{
 		return $menu;
 	}
 
-  public function view( $view, $data = Null ){  	
+  public function view( $view, $data = Null ){
   	$this->load_user();
 		if( isset( $_SESSION['guest'] ) ){
 			$this->load->view('private/header_guest');
@@ -59,7 +59,7 @@ class MY_Controller extends CI_Controller{
 	}
 
 	private function unsetMessage(){
-		unset($_SESSION['message']);
+		unset( $_SESSION['message'] );
 	}
 
 	private function make_app_menu(){
