@@ -5,13 +5,13 @@ import json
 class DBController(object):
     def __init__(self):
         self.default_db = 'production'
-        self.config = self.load_json_config()
-    def load_json_config(self):
-        config_data = open('../../../../db_config.json','r')
-        config=json.load(config_data)
-        print config
-        config_data.close()
-        return config
+        #self.config = self.load_json_config()
+#    def load_json_config(self):
+#        config_data = open('../../../../db_config.json','r')
+#        config=json.load(config_data)
+#        print config
+#        config_data.close()
+#        return config
     def getdb(self,**kwargs):
         conn = None
         retry = 0
