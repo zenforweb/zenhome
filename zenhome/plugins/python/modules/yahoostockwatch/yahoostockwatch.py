@@ -36,7 +36,7 @@ class YahooStockWatch(object):
             return False
         return_data = {}
         return_data['stock_id'] = stock_id
-        return_data['stock_date'] = datetime.now().strftime('%Y-%m-%d')
+        return_data['stat_date'] = datetime.now().strftime('%Y-%m-%d')
 
         #stock_sym = get from db
         #open_num = o
