@@ -3,16 +3,42 @@
 ?>
 
 <script type="text/javascript">
-	jQuery('document').ready(function($){
-		<?
-		foreach ( $apps as $app ) {
-			?>
-			$.get("<? echo base_url() .'apps/'. $app->slug_name .'/user_settings'; ?>", function(data) { $('#app_settings_list').append(data); });
-			<?
-		}
-		?>
+	jQuery('document').ready(function($){	
+		$('form').click( function(){
+			console.log( 'it happened' );
+		});
 	});
+
 </script>
+
+<!-- MODEL: Change Password -->
+<div class="modal fade" id="change_password">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">x</button>
+    <h3>Change Password</h3>
+  </div>
+	<form action="<? echo base_url(); ?>profile/change_pass" method="POST">
+		<div class="modal-body">
+	    <fieldset>
+	      <div class="control-group">
+	      	<label>Current Password</label>
+			  	<input type="text" name="current_password" placeholder="password" type="password">
+			  	<span class="help-block">Your current password.</span>
+
+				  <label>New Password</label>
+				  <input type="text" type="password" name="password_1" placeholder="password">
+				  <br />
+				  <input type="text" type="password" name="password_2" placeholder="password">
+				  <span class="help-block">Your password, twice please</span>	
+			  </div>
+	    </fieldset>
+		</div>
+	  <div class="modal-footer">
+	    <a data-dismiss="modal" href="#" class="btn">Close</a>
+	    <button type="submit" class="btn btn-primary">Save</button>
+	  </div>
+  </form>
+</div>
 
 <div id="wrap" class="container-fluid">
 	<div class="row-fluid">
@@ -50,37 +76,4 @@
 	<div id="app_settings" class="row-fluid">
 		<h3>App Settings</h3>
 		<div id="app_settings_list" class="span12">
-		</div>
-	</div>
 
-</div>
-
-
-<!-- MODEL: Change Password -->
-<div class="modal fade" id="change_password">
-  <div class="modal-header">
-    <button class="close" data-dismiss="modal">x</button>
-    <h3>Change Password</h3>
-  </div>
-	<form action="<? echo base_url(); ?>profile/change_pass" method="POST">
-		<div class="modal-body">
-	    <fieldset>
-	      <div class="control-group">
-	      	<label>Current Password</label>
-			  	<input type="text" name="current_password" placeholder="password" type="password">
-			  	<span class="help-block">Your current password.</span>
-
-				  <label>New Password</label>
-				  <input type="text" type="password" name="password_1" placeholder="password">
-				  <br />
-				  <input type="text" type="password" name="password_2" placeholder="password">
-				  <span class="help-block">Your password, twice please</span>	
-			  </div>
-	    </fieldset>
-		</div>
-	  <div class="modal-footer">
-	    <a data-dismiss="modal" href="#" class="btn">Close</a>
-	    <button type="submit" class="btn btn-primary">Save</button>
-	  </div>
-  </form>
-</div>

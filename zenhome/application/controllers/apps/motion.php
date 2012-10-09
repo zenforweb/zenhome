@@ -19,7 +19,7 @@ class Motion extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('AppsModel');
-		$this->app_id = $this->AppsModel->getApp('motion');
+		$this->app_id = $this->AppsModel->getAppID('motion');
 	}
 
 	/**
