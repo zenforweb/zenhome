@@ -29,6 +29,6 @@
 	Wind at <b><? echo $current->wind_mph; ?></b> MPH to the <? echo $current->wind_direction; ?>
 	<br />
 	<p>
-		<a class="btn" href="<? echo base_url(); ?>apps/app_weather">View details &raquo;</a>
+		<a class="btn" href="<? echo base_url(); ?>apps/weather">View details &raquo;</a>
 	</p>
 </div>

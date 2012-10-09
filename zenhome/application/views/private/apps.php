@@ -45,13 +45,13 @@
 								<? 
 								if( !$app->enabled ){
 									?>
-									<a class="btn btn-success btn-small" href="<? echo base_url() . 'apps/apps/enable/' . $app->row_id; ?>">
+									<a class="btn btn-success btn-small" href="<? echo base_url() . 'app/enable/' . $app->row_id; ?>">
 										Enable
 									</a>
 									<?
 								} else {
 									?>
-									<a class="btn btn-danger btn-small" href="<? echo base_url() . 'apps/apps/disable/' . $app->row_id; ?>">
+									<a class="btn btn-danger btn-small" href="<? echo base_url() . 'app/disable/' . $app->row_id; ?>">
 										Disable
 									</a>
 									<?
