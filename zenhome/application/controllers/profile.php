@@ -19,10 +19,11 @@ class Profile extends MY_Controller {
 
 	public function index(){
 		$this->load->model('AppsModel');
+		$extra_views = $this->get_app_user_settings_pages();		
 		$data = array(
 			'apps' => $this->AppsModel->getEnabledApps(),
 		);
-		$this->view( 'private/profile', $data );
+		$this->view_profile( 'private/profile', $data, $extra_views );
 	}
 
 	public function change_pass(){
@@ -38,7 +39,42 @@ class Profile extends MY_Controller {
 			redirect( 'profile' );
 		}
 	}
-	
+
+  private function view_profile( $view, $data = Null, $extra_views = Null ){
+  	$this->header();
+		$this->load->view( $view, $data );
+		if( count( $extra_views ) > 0 ){
+			foreach( $extra_views as $view){
+				$this->load->view( $view['view_path'], $view['view_data'] );
+			}
+		}
+		//echo "</div><!-- end #app_settings_list --></div><!-- end #app_settings --></div><!-- end #wrap -- >";
+		$this->load->view( 'private/footer.php' );
+		if( isset( $_SESSION['message'] ) )
+			$this->unsetMessage();
+	}
+
+	private function get_app_user_settings_pages(){
+		$this->load->model('AppsModel');
+		$apps = $this->AppsModel->getEnabledApps();
+		$dir = substr( __DIR__, 0, -11 ) . 'views/apps/';
+		$views_to_load = array();
+		foreach( $apps as $app ){
+			$view_path = $dir . $app->slug_name . '/user_settings.php';
+			if( file_exists( $view_path ) ){				
+				$data = $this->AppsModel->getUserAppSettings( $app->row_id, $this->user['user_id'] ) ;
+				$data['app_info'] = $app;
+
+				$views_to_load[] = array(
+					'view_path' => 'apps/' . $app->slug_name . '/user_settings',
+				  'view_data' => $data,
+				);
+			}	
+		}
+		
+		return $views_to_load;
+	}	
+                                                      
 }
 
 /* End of file profile.php */

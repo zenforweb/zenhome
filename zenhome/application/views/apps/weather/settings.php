@@ -17,8 +17,8 @@
 	  			<i class="icon-white icon-chevron-down"></i> Options
 	  		</a>
 	  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    		<li><a href="#">Weather</a></li>
-	    		<li><a href="<? echo base_url(); ?>apps/app_weather/settings">Settings</a></li>
+	    		<li><a href="<? echo base_url(); ?>apps/weather">Weather</a></li>
+	    		<li><a href="<? echo base_url(); ?>apps/weather/settings">Settings</a></li>
 	  		</ul>
 			</div>
 		</div>		
@@ -31,9 +31,9 @@
 					<div class="control-group">
 					  <label class="control-label" for="device_name">Api Key</label>
 					  <div class="controls">
-					    <input name="device_name" class="input-xlarge focused" id="device_name" type="text" value="">
+					    <input name="device_name" class="input-xlarge focused" id="device_name" type="text" value="52342342342423423424243234">
 					  </div>
-					</div>
+					</div>					
 					<div class="control-group">
 					  <div class="controls">
 					    <button type="submit" class="btn btn-primary">Submit</button>

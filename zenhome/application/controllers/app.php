@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Apps extends MY_Controller {
+class App extends MY_Controller {
 
 	/**
 	 * Main App interface
@@ -28,17 +28,33 @@ class Apps extends MY_Controller {
 			redirect( 'apps/' );
 		$this->load->model( 'AppsModel' );
 		$this->AppsModel->enableApp( $app_id );
-		redirect( 'apps/' );
+		redirect( 'app/' );
 	}
 
-	public function disable( $app_id ){
+	public function disable( $app_id, $user_id = Null ){
 		if( !isset( $app_id ) )
-			//@todo report error
 			redirect( 'apps/' );
 		$this->load->model( 'AppsModel' );
-		$this->AppsModel->disableApp( $app_id );
-		redirect( 'apps/' );
-	}	
+		if( isset( $user_id ) && !empty( $user_id ) ){
+			$boom = $this->AppsModel->disableUserApp( $app_id, $user_id );
+		} else {
+			$this->AppsModel->disableApp( $app_id );			
+		}
+		redirect( 'app/' );
+	}
+
+	public function user_enable( $app_id ){
+		$this->load->model('AppsModel');
+		$this->AppsModel->enableUserApp( $app_id, $this->user['user_id'] );
+		redirect( 'profile');
+	}
+
+	public function user_disable( $app_id ){
+		$this->load->model('AppsModel');
+		$this->AppsModel->disableUserApp( $app_id, $this->user['user_id'] );
+		redirect( 'profile');
+	}
+
 }
 
 /* End of file apps.php */

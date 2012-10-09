@@ -60,8 +60,8 @@
 	  			<i class="icon-white icon-chevron-down"></i> Options
 	  		</a>
 	  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    		<li><a href="#">Enable</a></li>
-	    		<li><a href="<? echo base_url(); ?>apps/app_weather/settings">Settings</a></li>
+	    		<li><a href="<? echo base_url(); ?>apps/weather">Weather</a></li>
+	    		<li><a href="<? echo base_url(); ?>apps/weather/settings">Settings</a></li>
 	  		</ul>
 			</div>
 		</div>

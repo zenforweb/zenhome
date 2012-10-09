@@ -9,14 +9,15 @@ class MY_Controller extends CI_Controller{
   	parent::__construct();
   	session_start();
   	if( ! isset( $_SESSION['user_id'] ) ){
-  		$this->setMessage( 'error', 'Your session has expired' );
+  		$this->setMessage( 'error', 'Your session does not exist' );
 			redirect('/');
 		}
+		$this->load_user();
   }
 
   private function load_user(){
   	$this->load->model('AccountModel');
-		$this->user = $this->AccountModel->userInfo( $_SESSION['user_id'] );        
+		$this->user = $this->AccountModel->userInfo( $_SESSION['user_id'] );
   }
 
 	private function main_menu(){
@@ -34,6 +35,14 @@ class MY_Controller extends CI_Controller{
 	}
 
   public function view( $view, $data = Null ){
+  	$this->header();
+		$this->load->view( $view, $data );
+		$this->load->view( 'private/footer.php' );
+		if( isset( $_SESSION['message'] ) )
+			$this->unsetMessage();
+	}
+
+  public function header(){
   	$this->load_user();
 		if( isset( $_SESSION['guest'] ) ){
 			$this->load->view('private/header_guest');
@@ -44,10 +53,6 @@ class MY_Controller extends CI_Controller{
 			);
 			$this->load->view('private/header_private', $header );
 		}
-		$this->load->view( $view, $data );
-		$this->load->view( 'private/footer.php' );
-		if( isset( $_SESSION['message'] ) )
-			$this->unsetMessage();
 	}
 
 	public function view_portlet( $view, $data = Null ){

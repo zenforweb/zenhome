@@ -8,11 +8,11 @@ class Networkscan extends MY_Controller {
 	 * Fetches weather, from weather underground
 	 *
 	 *	WEB INTERFACE
-	 *		/application/controllers/app_networkscan.php 					CONTROLLER
-	 *		/application/views/apps/app_networkscan_index.php  		VIEW
-	 *		/application/views/apps/app_networkscan_settings.php	VIEW
-	 *		/application/views/apps/app_networkscan_portlet.php	 	VIEW
-	 *
+	 *		/application/controllers/networkscan.php 				CONTROLLER
+	 *		/application/views/apps/index.php  							VIEW
+	 *		/application/views/apps/user_settings.php				VIEW
+	 *		/application/views/apps/settings.php						VIEW
+	 *		/application/views/apps/portlet.php	 						VIEW
 	 *
 	 */
 
@@ -25,7 +25,7 @@ class Networkscan extends MY_Controller {
 	*
 	*/
 	public function index(){
-		$this->view( 'apps/networkscan/app_networkscan_index' );
+		$this->view( 'apps/networkscan/index' );
 	}
 
 	/**
@@ -33,15 +33,7 @@ class Networkscan extends MY_Controller {
 	*
 	*/
 	public function settings(){
-		$this->view( 'apps/networkscan/app_networkscan_settings' );
-	}
-
-	/**
-	* Method which will render the user settings for an App, displayed in profile
-	*
-	*/
-	public function user_settings(){
-		$this->view_portlet( 'apps/networkscan/app_networkscan_user_settings' );
+		$this->view( 'apps/networkscan/settings' );
 	}
 
 	/**
@@ -49,11 +41,10 @@ class Networkscan extends MY_Controller {
 	*
 	*/
 	public function portlet(){
-		$this->view_portlet( 'apps/networkscan/app_networkscan_portlet' );
+		$this->view_portlet( 'apps/networkscan/portlet' );
 	}
-
 
 }
 
-/* End of file app_networkscan.php */
-/* Location: ./application/controllers/apps/app_networkscan.php */
+/* End of file networkscan.php */
+/* Location: ./application/controllers/apps/networkscan.php */
