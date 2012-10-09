@@ -25,17 +25,6 @@ class AppsModel extends CI_Model {
 		return $apps;
 	}
 
-	private function getEnabledAppsCommaSeperated(){
-		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`apps_info` WHERE `enabled` = 1 " );
-		$apps = '';
-		foreach ($query->result() as $row){
-			$apps .= $row->row_id . ',';
-		}
-			// Alix {debug}
-		echo "<pre>"; print_r( $apps ); die();
-		return $apps;
-	}
-
 	public function enableApp( $app_id ){
 		//@todo santize $app_id
 		$this->db->query( "UPDATE `". DB_NAME ."`.`apps_info` SET `enabled` = 1 WHERE `row_id` = '$app_id'" );
@@ -83,6 +72,17 @@ class AppsModel extends CI_Model {
 		} else {
 			$this->db->query( "INSERT INTO `". DB_NAME . "`.`user_apps_settings` (`setting_name`, `setting_value`, `user_id`, `app_id`) VALUES( 'enabled', '0', ".$user_id.", ".$app_id." )"   );
 		}
+	}
+
+	private function getEnabledAppsCommaSeperated(){
+		//@todo update
+		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`apps_info` WHERE `enabled` = 1 " );
+		$apps = '';
+		foreach ($query->result() as $row){
+			$apps .= $row->row_id . ',';
+		}
+
+		return $apps;
 	}
 
 }
