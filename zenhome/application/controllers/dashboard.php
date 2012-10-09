@@ -26,9 +26,6 @@ class Dashboard extends MY_Controller {
 			'enabled' => $this->AppsModel->getEnabledApps(),
 		);
 
-			// Alix {debug}
-		echo "<pre>"; print_r( $data ); die();
-
 		$this->view( 'private/dashboard', $data );
 	}
 
