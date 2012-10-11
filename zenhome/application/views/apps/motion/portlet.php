@@ -5,7 +5,7 @@
 */
 ?>
 
-<div id="app_weather_portlet" class="portlet span4">
+<div id="app_motion_portlet" class="portlet span4">
 	<h2>Motion</h2>
 	<img style="-webkit-user-select: none" src="http://10.1.10.52:8081/">
 	<img style="-webkit-user-select: none" src="http://10.1.10.52:8082/">
