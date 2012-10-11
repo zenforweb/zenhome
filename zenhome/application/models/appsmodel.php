@@ -24,6 +24,12 @@ class AppsModel extends CI_Model {
 		}
 		return $apps;
 	}
+	
+	public function getApp( $app_id ){
+	       $query   = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`apps_info` WHERE `row_id` = ". $app_id ." LIMIT 1" );
+	       $package = $query->result();
+	       return $package[0];
+	}
 
 	public function enableApp( $app_id ){
 		//@todo santize $app_id
@@ -41,8 +47,14 @@ class AppsModel extends CI_Model {
 		return $return[0]->row_id;
 	}
 
-	public function getEnabledAppsForUser(){
-		// SELECT * FROM `user_apps_settings` WHERE `setting_name` = 'enabled' AND `user_id` = 2 AND `app_id` IN( 1, 3, 4);
+	public function getEnabledAppsForUser( $user_id ){
+	       $query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`user_apps_settings` WHERE `setting_name` = 'enabled' AND `setting_value` = '1' AND `user_id` = ". $user_id ." AND `app_id` IN( ". $this->getEnabledAppsCommaSeperated() ." )" );
+	       //echo "<pre>"; print_r($query); die();
+	       $apps = array();
+	       foreach( $query->result() as $row ){
+	       		$apps[] = $this->getApp( $row->app_id );	
+	       }
+	       return $apps;
 	}
 
 	public function getUserAppSettings( $app_id, $user_id ){
@@ -51,6 +63,11 @@ class AppsModel extends CI_Model {
 		foreach ($query->result() as $row){
 			$user_settings[$row->setting_name] = $row;
 		}
+		if( count( $query->result() ) == 0 ){
+			$row = $query->result();
+			$user_settings['enabled'] = '';
+		}
+
 		return $user_settings;
 	}	
 
@@ -75,14 +92,12 @@ class AppsModel extends CI_Model {
 	}
 
 	private function getEnabledAppsCommaSeperated(){
-		//@todo update
 		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`apps_info` WHERE `enabled` = 1 " );
 		$apps = '';
 		foreach ($query->result() as $row){
 			$apps .= $row->row_id . ',';
 		}
-
-		return $apps;
+		return substr( $apps, 0, -1 );
 	}
 
 }

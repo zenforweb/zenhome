@@ -39,7 +39,7 @@ class WeatherModel extends CI_Model {
 			} elseif( $i == 1 ){
 				$stats[$avg[0]]['date_format'] = 'Yesterday';
 			} elseif( $i < 7 ){
-				$stats[$avg[0]]['date_format'] = date( 'l', strtotime( $avg[0] ) );
+				$stats[$avg[0]]['date_format'] = date( 'D', strtotime( $avg[0] ) );
 			} else {
 				$stats[$avg[0]]['date_format'] = substr( $avg[0], 5);
 			}
