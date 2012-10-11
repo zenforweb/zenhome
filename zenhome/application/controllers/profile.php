@@ -71,7 +71,6 @@ class Profile extends MY_Controller {
 				);
 			}	
 		}
-		
 		return $views_to_load;
 	}	
                                                       

@@ -2,7 +2,12 @@
 /*
 *	NETWORKSCAN :: GENERIC USER SETTINGS TEMPLATE
 *
+* $app_info			@stdClass Obj
+*	$enabled 			@bool
+* $temp_format	@string
 */
+
+
 ?>
 
 <div class="container-fluid">
@@ -12,7 +17,7 @@
 		</div>
 		<div class="span4 pull-right">
 			<?
-			if( isset( $enabled ) && $enabled->setting_value == 1 ){
+			if( is_object( $enabled ) && $enabled->setting_value == '1' ){
 				?>
 					<a href="<? echo base_url(); ?>app/user_disable/<? echo $app_info->row_id; ?>" class="btn btn-danger">Disable</a>
 				<?
