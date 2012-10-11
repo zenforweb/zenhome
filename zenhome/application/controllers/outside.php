@@ -38,7 +38,7 @@ class Outside extends CI_Controller {
 			//$this->handle_guest();
 		}
 
-		$this->view('public/welcome_message');
+		$this->view('public/login');
 	}
 
 	public function login(){
