@@ -17,7 +17,6 @@
 	  			<i class="icon-white icon-chevron-down"></i> Options
 	  		</a>
 	  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    		<li><a href="#">Enable</a></li>
 	    		<li><a href="<? echo base_url(); ?>apps/motion/settings">Settings</a></li>
 	  		</ul>
 			</div>
@@ -25,18 +24,15 @@
 	</div>
 
 	<div class="row-fluid">
-		<div class="span3">
+		<div class="span12">
+			<img style="-webkit-user-select: none" src="http://10.1.10.52:8081/">	
+			<br />
+			<img style="-webkit-user-select: none" src="http://10.1.10.52:8082/">			
+			<br />
+			
 		</div>
 	</div>
 	
-	<div class="row-fluid">
-		<div class="span6">
-		</div>
-
-		<div class="span6">			
-		</div>
 
 	</div>
-
-
 </div>

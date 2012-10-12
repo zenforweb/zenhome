@@ -4,9 +4,15 @@
 
 <script type="text/javascript">
 	jQuery('document').ready(function($){	
-		$('form').click( function(){
-			console.log( 'it happened' );
+		console.log( 'were here');
+		$('select').change( function(){
+			console.log( $(this) );
 		});
+
+                $('input').change( function(){
+                        console.log( $(this) );
+                });
+
 	});
 
 </script>

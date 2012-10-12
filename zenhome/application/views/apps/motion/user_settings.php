@@ -12,13 +12,13 @@
 		</div>
 		<div class="span4 pull-right">
 			<?
-			if( isset( $enabled ) && $enabled->setting_value == 1 ){
+			if( is_object( $enabled ) && $enabled->setting_value == '1' ){
 				?>
-					<a href="<? echo base_url(); ?>app/user_disable/5" class="btn btn-danger">Disable</a>
+					<a href="<? echo base_url(); ?>app/user_disable/<? echo $app_info->row_id; ?>" class="btn btn-danger">Disable</a>
 				<?
 			} else {
 				?>
-				<a href="<? echo base_url(); ?>app/user_enable/5" class="btn btn-success">Enable</a>
+				<a href="<? echo base_url(); ?>app/user_enable/<? echo $app_info->row_id; ?>" class="btn btn-success">Enable</a>
 				<?
 			}
 			?>
