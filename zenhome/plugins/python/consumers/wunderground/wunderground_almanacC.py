@@ -1,5 +1,6 @@
 import pika
 import json
+from datetime import datetime
 from modules.wunderground import wunderground
 from modules.db_controller import db_controller
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='10.1.10.52'))
@@ -15,7 +16,7 @@ queue_name = result.method.queue
 channel.queue_bind(
     exchange='apps',
     queue=queue_name,
-    routing_key='run.wunderground.daily'
+    routing_key='run.wunderground.almanac'
 )
 
 def callback(ch, method, properties, body):
@@ -38,7 +39,8 @@ def callback(ch, method, properties, body):
     except KeyError, e:
         wunder_city = 'Golden'
     wunder = wunderground.WUnderground(wunder_api)
-    current_weather = wunder.get_current_weather(wunder_state,wunder_city)
+    daily_almanac = wunder.get_daily_almanac(wunder_state,wunder_city)
+    daily_almanac['stat_date']=datetime.now().strftime('%y-%m-%d')
     if return_method == 'return':
         try:
             return_route = message_obj['return_route']
@@ -48,10 +50,11 @@ def callback(ch, method, properties, body):
     elif return_method == 'save':
         dbcont = db_controller.DBController()
         dbconn, dbcurs = dbcont.getLocal()
-        insert_sql = """INSERT INTO zenhome.apps_wunderground_data (local_timezone,heat_index_c,heat_index_f,weather,wind_direction,windchill_c,windchill_f, obs_city,obs_elevation,obs_latitude,obs_longitude,dewpoint_f,dewpoint_c,feelslike_c,feelslike_f,temp_f,temp_c,uv,wind_mph,solar_radiation,station_id,pressure_trend,visibility_mi,pressure_in,wind_degrees,rel_humidity,wind_desc) VALUES ('%(local_timezone)s','%(heat_index_c)s','%(heat_index_f)s','%(weather)s','%(wind_direction)s','%(windchill_c)s','%(windchill_f)s','%(obs_city)s','%(obs_elevation)s','%(obs_latitude)s','%(obs_longitude)s','%(dewpoint_f)s','%(dewpoint_c)s','%(feelslike_c)s','%(feelslike_f)s','%(temp_f)s','%(temp_c)s','%(uv)s','%(wind_mph)s','%(solar_radiation)s','%(station_id)s','%(pressure_trend)s','%(visibility_mi)s','%(pressure_in)s','%(wind_degrees)s','%(rel_humidity)s','%(wind_desc)s')"""
-        dbcurs.execute(insert_sql%current_weather)
-        dbconn.commit()
-        dbconn.close()
+        insert_sql = """INSERT INTO zenhome.apps_wunderground_almanac (stat_date,record_high_f,record_high_c,normal_high_c,normal_high_f,normal_low_f,normal_low_c,record_low_c,record_low_f,record_high_year,record_low_year) VALUES ('%(stat_date)s','%(record_high_f)s','%(record_high_c)s','%(normal_high_c)s','%(normal_high_f)s','%(normal_low_f)s','%(normal_low_c)s','%(record_low_c)s','%(record_low_f)s','%(record_low_year)s','%(record_high_year)s')"""
+        print insert_sql
+        #dbcurs.execute(insert_sql%daily_almanac)
+        #dbconn.commit()
+        #dbconn.close()
     ch.basic_ack(delivery_tag = method.delivery_tag)
 #    channel.exchange_declare(
 #        exchange='session_traffic',
