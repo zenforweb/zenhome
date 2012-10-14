@@ -15,7 +15,7 @@ queue_name = result.method.queue
 channel.queue_bind(
     exchange='apps',
     queue=queue_name,
-    routing_key='run.wunderground'
+    routing_key='run.wunderground.daily'
 )
 
 def callback(ch, method, properties, body):
