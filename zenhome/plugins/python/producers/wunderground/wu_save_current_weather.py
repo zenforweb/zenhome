@@ -14,7 +14,7 @@ if __name__=='__main__':
         type='topic'
         )
 
-    routing_key = 'run.wunderground'
+    routing_key = 'run.wunderground.daily'
     message = '{"return_type":"save","state":"%(state)s","city":"%(city)s"}' % {'state':state,'city':city}
 
     channel.basic_publish(
