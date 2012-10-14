@@ -9,6 +9,24 @@ class WUnderground(object):
                                'north':'N',
                                'south':'S'
                                }
+    def get_daily_almanac(self,state,city):
+        res = urllib2.urlopen('http://api.wunderground.com/api/%(api_key)s/almanac/q/%(state)s/%(city)s.json'%{'api_key':self.api_key,'state':state,'city':city}).read()
+        w_xml = json.loads(res)
+        w_xml = w_xml['almanac']
+        return_dict = {
+            'record_low_c':w_xml['temp_low']['record']['C'],
+            'record_low_f':w_xml['temp_low']['record']['F'],
+            'record_low_year':w_xml['temp_low']['recordyear'],
+            'normal_low_c':w_xml['temp_low']['normal']['C'],
+            'normal_low_f':w_xml['temp_low']['normal']['F'],
+            'airport_code':w_xml['airport_code'],
+            'record_high_c':w_xml['temp_high']['record']['C'],
+            'record_high_f':w_xml['temp_high']['record']['F'],
+            'record_high_year':w_xml['temp_high']['recordyear'],
+            'normal_high_c':w_xml['temp_high']['normal']['C'],
+            'normal_high_f':w_xml['temp_high']['normal']['F']
+            }
+        return return_dict
     def get_current_weather(self,state,city):
         res = urllib2.urlopen('http://api.wunderground.com/api/%(api_key)s/conditions/q/%(state)s/%(city)s.json'%{'api_key':self.api_key,'state':state,'city':city}).read()
         w_xml = json.loads(res)
