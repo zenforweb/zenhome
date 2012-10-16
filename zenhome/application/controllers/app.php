@@ -43,16 +43,9 @@ class App extends MY_Controller {
 		redirect( 'app/' );
 	}
 
-	public function user_enable( $app_id ){
-		$this->load->model('AppsModel');
-		$this->AppsModel->enableUserApp( $app_id, $this->user['user_id'] );
-		redirect( 'profile');
-	}
-
-	public function user_disable( $app_id ){
-		$this->load->model('AppsModel');
-		$this->AppsModel->disableUserApp( $app_id, $this->user['user_id'] );
-		redirect( 'profile');
+	public function update_user_setting( $app_id, $setting_name, $setting_value ){		
+		$this->load->model( 'AppsModel' );
+		$this->AppsModel->update_user_setting( $app_id, $this->user['user_id'], $setting_name, $setting_value );
 	}
 
 }

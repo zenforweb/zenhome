@@ -48,7 +48,14 @@ class Profile extends MY_Controller {
 				$this->load->view( $view['view_path'], $view['view_data'] );
 			}
 		}
-		//echo "</div><!-- end #app_settings_list --></div><!-- end #app_settings --></div><!-- end #wrap -- >";
+		/*
+		echo '</div>'; 
+		echo '</div>';
+		echo '</div>';
+		*/
+		//"!-- end #app_settings_list -->
+		//<!-- end #app_settings --><
+		//<!-- end #wrap -- >";
 		$this->load->view( 'private/footer.php' );
 		if( isset( $_SESSION['message'] ) )
 			$this->unsetMessage();
