@@ -48,13 +48,12 @@ class AppsModel extends CI_Model {
 	}
 
 	public function getEnabledAppsForUser( $user_id ){
-	       $query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`user_apps_settings` WHERE `setting_name` = 'enabled' AND `setting_value` = '1' AND `user_id` = ". $user_id ." AND `app_id` IN( ". $this->getEnabledAppsCommaSeperated() ." )" );
-	       //echo "<pre>"; print_r($query); die();
-	       $apps = array();
-	       foreach( $query->result() as $row ){
-	       		$apps[] = $this->getApp( $row->app_id );	
-	       }
-	       return $apps;
+		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`user_apps_settings` WHERE `setting_name` = 'enabled' AND `setting_value` = '1' AND `user_id` = ". $user_id ." AND `app_id` IN( ". $this->getEnabledAppsCommaSeperated() ." )" );
+		$apps = array();
+		foreach( $query->result() as $row ){
+				$apps[] = $this->getApp( $row->app_id );	
+		}
+		return $apps;
 	}
 
 	public function getUserAppSettings( $app_id, $user_id ){
@@ -69,25 +68,15 @@ class AppsModel extends CI_Model {
 		}
 
 		return $user_settings;
-	}	
-
-	public function enableUserApp( $app_id, $user_id ){
-		$query  = $this->db->query( "SELECT * FROM `". DB_NAME . "`.user_apps_settings WHERE `user_id` = " . $user_id . " AND `app_id` = " . $app_id . " AND `setting_name` = 'enabled'" );
-		$result = $query->result();
-		if( isset( $result[0]->setting_id ) ){
-			$this->db->query( "UPDATE `". DB_NAME . "`.`user_apps_settings` SET `setting_value` = 1 WHERE `setting_id` = " . $result[0]->setting_id );
-		} else {
-			$this->db->query( "INSERT INTO `". DB_NAME . "`.`user_apps_settings` (`setting_name`, `setting_value`, `user_id`, `app_id`) VALUES( 'enabled', '1', ".$user_id.", ".$app_id." )"   );
-		}
 	}
 
-	public function disableUserApp( $app_id, $user_id ){
-		$query  = $this->db->query( "SELECT * FROM `". DB_NAME . "`.user_apps_settings WHERE `user_id` = " . $user_id . " AND `app_id` = " . $app_id . " AND `setting_name` = 'enabled'" );
+	public function update_user_setting( $app_id, $user_id, $setting_name, $setting_value){
+		$query  = $this->db->query( "SELECT * FROM `". DB_NAME . "`.user_apps_settings WHERE `user_id` = " . $user_id . " AND `app_id` = " . $app_id . " AND `setting_name` = '" . $setting_name . "'" );
 		$result = $query->result();
 		if( isset( $result[0]->setting_id ) ){
-			$this->db->query( "UPDATE `". DB_NAME . "`.`user_apps_settings` SET `setting_value` = 0 WHERE `setting_id` = " . $result[0]->setting_id );
+			$this->db->query( "UPDATE `". DB_NAME . "`.`user_apps_settings` SET `setting_value` = '" . $setting_value . "' WHERE `setting_id` = " . $result[0]->setting_id );
 		} else {
-			$this->db->query( "INSERT INTO `". DB_NAME . "`.`user_apps_settings` (`setting_name`, `setting_value`, `user_id`, `app_id`) VALUES( 'enabled', '0', ".$user_id.", ".$app_id." )"   );
+			$this->db->query( "INSERT INTO `". DB_NAME . "`.`user_apps_settings` (`setting_name`, `setting_value`, `user_id`, `app_id`) VALUES( '". $setting_name ."', '".$setting_value."', ".$user_id.", ".$app_id." )"   );			
 		}
 	}
 

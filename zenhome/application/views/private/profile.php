@@ -4,17 +4,38 @@
 
 <script type="text/javascript">
 	jQuery('document').ready(function($){	
-		console.log( 'were here');
-		$('select').change( function(){
-			console.log( $(this) );
+		var base_url = '<? echo base_url(); ?>app/update_user_setting/'
+
+		function update_settings( app_id, setting_name, setting_value ){
+			var update_url = base_url + app_id + '/' + setting_name + '/' + setting_value;
+			$.ajax({ url: update_url, });
+			console.log( update_url );
+		}		
+		
+		// App enabled handler
+    $('.app-enable button').click( function(){
+			var button  = $(this),
+					app_box = button.closest( '.user_app_settings' ),
+					app_id  = app_box.attr( 'data-app-id' ),
+			    value   = button.text();
+			if( value == 'Enable'){
+				value = 1;
+			} else {
+				value = 0;
+			}
+			update_settings( app_id, 'enabled', value);
+    });
+
+		// App settings handler
+		$('select, input').change( function( event ){
+			var form_element = $(this),
+				 	app_id       = form_element.closest('form').attr('data-app-id'),
+				 	name 				 = form_element.attr('name'),
+				 	value 			 = form_element.val();
+			console.log( value );
+			update_settings( app_id, name, value );
 		});
-
-                $('input').change( function(){
-                        console.log( $(this) );
-                });
-
 	});
-
 </script>
 
 <!-- MODEL: Change Password -->
@@ -82,4 +103,3 @@
 	<div id="app_settings" class="row-fluid">
 		<h3>App Settings</h3>
 		<div id="app_settings_list" class="span12">
-

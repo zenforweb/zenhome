@@ -18,37 +18,37 @@
 				<a class="brand" href="<? echo base_url(); ?>dashboard">ZenHome</a>
 				<ul class="nav">
 					<?
-						if( isset( $menu ) ){
-							foreach ( $menu as $item ) {
-								if( $item[1] == 'apps' ){
-									?>
-									<li class="dropdown">
-								    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								      Apps
-								      <b class="caret"></b>
-								    </a>
-							  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-							  			<li><a href="<? echo base_url(); ?>app">Control Panel</a></li>
-							  			<li class="divider"></li>
-							  			<?
-						  				foreach ($item[3] as $app) {
-						  					?>
-						  					<li><a href="<?php echo base_url() .'apps/'. $app[1]; ?>"><? echo $app[0]; ?></a></li>		
-						  					<?
-						  				}
-							  			?>
-							  		</ul>
-									</li>
-									<?
-								} else {
-									?>
-									<li class="<? if( $item[2] ) { echo 'active'; } ?>">
-										<a href="<?php echo base_url() . $item[1]; ?>"><? echo $item[0]; ?></a>
-									</li>
-									<?
-								}
+					if( isset( $menu ) ){
+						foreach ( $menu as $item ) {
+							if( $item[1] == 'apps' ){
+								?>
+								<li class="dropdown">
+							    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							      Apps
+							      <b class="caret"></b>
+							    </a>
+						  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						  			<li><a href="<? echo base_url(); ?>app">Control Panel</a></li>
+						  			<li class="divider"></li>
+						  			<?
+					  				foreach ($item[3] as $app) {
+					  					?>
+					  					<li><a href="<?php echo base_url() .'apps/'. $app[1]; ?>"><? echo $app[0]; ?></a></li>		
+					  					<?
+					  				}
+						  			?>
+						  		</ul>
+								</li>
+								<?
+							} else {
+								?>
+								<li class="<? if( $item[2] ) { echo 'active'; } ?>">
+									<a href="<?php echo base_url() . $item[1]; ?>"><? echo $item[0]; ?></a>
+								</li>
+								<?
 							}
 						}
+					}
 					?>
 				</ul>
 

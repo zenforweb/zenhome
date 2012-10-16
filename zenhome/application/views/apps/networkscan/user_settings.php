@@ -6,34 +6,28 @@
 *	$enabled 			@bool
 * $temp_format	@string
 */
-
-
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid user_app_settings" data-app-id="<? echo $app_info->row_id; ?>">
 	<div class="row-fluid">
 		<div class="span4">
 			<h4>Network Scan</h4>
 		</div>
 		<div class="span4 pull-right">
-			<?
-			if( is_object( $enabled ) && $enabled->setting_value == '1' ){
-				?>
-					<a href="<? echo base_url(); ?>app/user_disable/<? echo $app_info->row_id; ?>" class="btn btn-danger">Disable</a>
-				<?
-			} else {
-				?>
-				<a href="<? echo base_url(); ?>app/user_enable/<? echo $app_info->row_id; ?>" class="btn btn-success">Enable</a>
-				<?
-			}
-			?>
+	    <div class="btn-group app-enable" data-toggle="buttons-radio">
+	    	<button type="button" class="btn <? if( is_object( $enabled ) && $enabled->setting_value == '1' ){ ?> active<? } ?>">Enable</button>
+	    	<button type="button" class="btn <? if( !is_object( $enabled ) || $enabled->setting_value == '0' ){ ?> active<? } ?>">Disable</button>
+	    </div>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
-		<label class="checkbox">
-    	<input type="checkbox"> Display Volume Button
-  	</label>	
+			<form data-app-id="<? echo $app_info->row_id; ?>">
+				<label class="checkbox">
+    			<input type="checkbox" name="display_only_me">Display only my devices
+  			</label>
+  			
+  		</form>
 		</div>
 	</div>
 </div>

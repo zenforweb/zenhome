@@ -33,13 +33,16 @@
 					  <div class="controls">
 					    <input name="device_name" class="input-xlarge focused" id="device_name" type="text" value="52342342342423423424243234">
 					  </div>
+					  <label class="control-label" for="device_name">Zipcode</label>
+					  <div class="controls">
+					    <input name="device_name" class="input-small focused" id="device_name" type="text" value="80401">
+					  </div>					  
 					</div>					
 					<div class="control-group">
 					  <div class="controls">
 					    <button type="submit" class="btn btn-primary">Submit</button>
 					  </div>
 					</div>
-
 			</form>
 		</div>
 	</div>
