@@ -72,48 +72,46 @@
     <h3>Add a New Device</h3>
   </div>
 
-	<form action="<? echo base_url(); ?>devices/add_device" method="POST">
-		<div class="modal-body">
-	    <fieldset>
-	      <div class="control-group">
-	        <label class="control-label" for="device_name">Device Name</label>
-	        <div class="controls">
-	          <input name="device_name" class="input-xlarge focused" id="device_name" type="text" value="">
-	        </div>
-	      </div>
-
-	      <div class="control-group">
-	        <label class="control-label" for="focusedInput">Device Type</label>
-	        <div class="controls">
-	        	<select name="device_type">
-	        		<option value="1">Desktop</option>
-	        		<option value="2">Laptop</option>
-	        		<option value="3">Tablet</option>
-	        		<option value="4">Phone</option>
-	        		<option value="5">Router</option>
-	        		<option value="6">Camera</option>
-	        		<option value="7">Tv</option>
-	        		<option value="8">Reciever</option>
-	        		<option value="9">Server</option>
-	        		<option value="10">Micro Controller</option>
-	        	</select>
-	        </div>
-	      </div>
-
-	      <div class="control-group">
-	        <label class="control-label" for="device_user">Usage</label>
-	        <div class="controls">
-	        	<select name="device_user" id="device_user">
-	        		<option value="<? echo $user['user_id']; ?>">Personal Device</option>
-	        		<option value="0">Shared</option>
-	        	</select>
-	        </div>
-	      </div>  
-	    </fieldset>
-		</div>
-	  <div class="modal-footer">
-	    <a data-dismiss="modal" href="#" class="btn">Close</a>
-	    <button type="submit" class="btn btn-primary">Save</button>
+  <form action="<? echo base_url(); ?>devices/add_device" method="POST">
+    <div class="modal-body">
+      <fieldset>
+        <div class="control-group">
+	  <label class="control-label" for="device_name">Device Name</label>
+	  <div class="controls">
+	    <input name="device_name" class="input-xlarge focused" id="device_name" type="text" value="">
 	  </div>
+	</div>
+	<div class="control-group">
+	  <label class="control-label" for="focusedInput">Device Type</label>
+	  <div class="controls">
+	    <select name="device_type">
+	      <option value="1">Desktop</option>
+	      <option value="2">Laptop</option>
+	      <option value="3">Tablet</option>
+	      <option value="4">Phone</option>
+	      <option value="5">Router</option>
+	      <option value="6">Camera</option>
+	      <option value="7">Tv</option>
+	      <option value="8">Reciever</option>
+	      <option value="9">Server</option>
+	      <option value="10">Micro Controller</option>
+	    </select>
+	  </div>
+	</div>
+	<div class="control-group">
+	  <label class="control-label" for="device_user">Usage</label>
+	  <div class="controls">
+	    <select name="device_user" id="device_user">
+	      <option value="<? echo $user['user_id']; ?>">Personal Device</option>
+	      <option value="0">Shared</option>
+	    </select>
+	  </div>
+	</div>  
+      </fieldset>
+    </div>
+    <div class="modal-footer">
+     <a data-dismiss="modal" href="#" class="btn">Close</a>
+     <button type="submit" class="btn btn-primary">Save</button>
+    </div>
   </form>
 </div>
