@@ -14,21 +14,13 @@ class App extends MY_Controller {
 		parent::__construct();
 	}
 	
-	public function index(){
-		$this->load->model( 'AppsModel' );
-		$data = array(
-			'apps' => $this->AppsModel->getAllApps(),
-		);
-		$this->view( 'private/apps', $data );
-	}
-
 	public function enable( $app_id ){
 		if( !isset( $app_id ) )
 			//@todo report error
 			redirect( 'apps/' );
 		$this->load->model( 'AppsModel' );
 		$this->AppsModel->enableApp( $app_id );
-		redirect( 'app/' );
+		redirect( 'admin/apps' );
 	}
 
 	public function disable( $app_id, $user_id = Null ){
@@ -40,7 +32,7 @@ class App extends MY_Controller {
 		} else {
 			$this->AppsModel->disableApp( $app_id );			
 		}
-		redirect( 'app/' );
+		redirect( 'admin/apps' );
 	}
 
 	public function update_user_setting( $app_id, $setting_name, $setting_value ){		
