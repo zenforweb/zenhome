@@ -28,8 +28,6 @@
 							      <b class="caret"></b>
 							    </a>
 						  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-						  			<li><a href="<? echo base_url(); ?>app">Control Panel</a></li>
-						  			<li class="divider"></li>
 						  			<?
 					  				foreach ($item[3] as $app) {
 					  					?>
@@ -60,7 +58,7 @@
    	 				</a>
     				<ul class="dropdown-menu">
     					<li><a href="<? echo base_url(); ?>profile">Profile</a></li>
-							<li><a tabindex="-1" href="<? echo base_url(); ?>admin">Admin</a></li>
+							<li><a tabindex="-1" href="<? echo base_url(); ?>admin/home">Admin</a></li>
  							<li class="divider"></li>
  							<li><a href="<? echo base_url(); ?>outside/logout">Logout</a></li>  						
     				</ul>

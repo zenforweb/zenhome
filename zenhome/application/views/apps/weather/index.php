@@ -54,14 +54,14 @@
 		<div class="span4">
 			<h3>Weather</h3>
 		</div>
-		<div class="span3 pull-right">
-			<div class="dropdown">
+		<div class="span2 pull-right">
+			<div class="dropdown pull-right">
 	  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
 	  			<i class="icon-white icon-chevron-down"></i> Options
 	  		</a>
 	  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    		<li><a href="<? echo base_url(); ?>apps/weather">Weather</a></li>
-	    		<li><a href="<? echo base_url(); ?>apps/weather/settings">Settings</a></li>
+	    		    <li><a href="<? echo base_url(); ?>apps/weather">Weather</a></li>
+	    		    <li><a href="<? echo base_url(); ?>apps/weather/settings">Settings</a></li>
 	  		</ul>
 			</div>
 		</div>
