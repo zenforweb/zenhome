@@ -4,6 +4,8 @@
 *
 * $app_info			@stdClass Obj
 *	$enabled 			@bool
+* 	// Remote custom user settings
+* 		$widget_enabled 			@stdClass Obj
 * $display_vol	@string
 */
 ?>

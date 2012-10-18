@@ -1,12 +1,12 @@
 <?php
-	// APPS index
+	// ADMIN :: APPS :: CONTROL PANEL
 ?>
 
 <div id="wrap" class="container-fluid">
 	<!-- Page Title -->
 	<div class="row-fluid">
 		<div class="span4">
-				<h3>Apps</h3>
+				<h3>Admin Apps Control Panel</h3>
 		</div>
 		<div class="span3 pull-right">
 			<div class="dropdown pull-right">
@@ -26,12 +26,12 @@
 			<div class="well sidebar-nav">
 				<ul class="nav nav-list">
 				  <li class="nav-header">General</li>
-				  <li><a href="#">Basic Settings</li>
-				  <li><a href="#">Advanced Settings</a></li>
+				  <li><a href="<? echo base_url(); ?>admin/settings/basic">Basic Settings</li>
+				  <li><a href="<? echo base_url(); ?>admin/settings/advanced">Advanced Settings</a></li>
 				  <li class="nav-header">Users</li>
 				  <li><a href="<? echo base_url(); ?>admin/home">All Users</a></li>
 				  <li class="nav-header">Apps</li>
-				  <li><a href="<? echo base_url(); ?>admin/apps" class="active">Control Panel </a></li>		  
+				  <li><a href="<? echo base_url(); ?>admin/apps">Control Panel </a></li>		  
 				  <li class="nav-header">Devices</li>
 				  <li><a href="#">All Devices</a></li>
 				</ul>
