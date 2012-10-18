@@ -19,7 +19,7 @@ class Apps extends MY_Controller {
 		$data = array(
 			'apps' => $this->AppsModel->getAllApps(),
 		);
-		$this->view( 'private/apps', $data );
+		$this->view( 'admin/apps', $data );
 	}
 
 }

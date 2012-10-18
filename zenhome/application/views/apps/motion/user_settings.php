@@ -4,7 +4,7 @@
 *
 * $app_info			@stdClass Obj
 *	$enabled 			@bool
-* 	// Weather custom user settings
+* 	// Motion custom user settings
 * 		$widget_enabled 			@stdClass Obj
 */
 ?>
@@ -87,8 +87,8 @@
 							<td>Show Recent Images Widget</td>
 							<td>
 								<div class="btn-group app-setting" data-toggle="buttons-radio" name="widget_carosel_enabled">
-			  					<button type="button" class="btn <? if( isset( $widget_carosel_enabled ) && ( $widget_carosel_enabled->setting_value == 1 ) ){ ?>active<? } ?>" value="1">Show</button>
-			 					  <button type="button" class="btn <? if( isset( $widget_carosel_enabled ) && ( $widget_carosel_enabled->setting_value  == 0) ){ ?>active<? } ?>" value="0">Hide</button>
+			  					<button type="button" class="btn btn-small <? if( isset( $widget_carosel_enabled ) && ( $widget_carosel_enabled->setting_value == 1 ) ){ ?>active<? } ?>" value="1">Show</button>
+			 					  <button type="button" class="btn btn-small <? if( isset( $widget_carosel_enabled ) && ( $widget_carosel_enabled->setting_value  == 0) ){ ?>active<? } ?>" value="0">Hide</button>
 								</div>
 							</td>
 						</tr>						

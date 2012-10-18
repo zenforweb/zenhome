@@ -26,7 +26,7 @@ class Home extends MY_Controller {
 			'users' => $this->UserModel->getUsers(),
 		);	
 
-		$this->view('private/admin', $data);
+		$this->view('admin/home', $data);
 	}
 
 	public function add_user(){
