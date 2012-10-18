@@ -8,8 +8,8 @@
 			<h3>Admin</h3>
 		</div>
 
-		<div class="span3 pull-right">
-			<div class="dropdown">
+		<div class="span2 pull-right">
+			<div class="dropdown pull-right">
 	  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
 	  			<i class="icon-white icon-chevron-down"></i> Options
 	  		</a>
@@ -21,7 +21,23 @@
 	</div>
 
 	<div class="row-fluid">
-		<div class="span8">
+		<div class="span3">
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+				  <li class="nav-header">General</li>
+				  <li><a href="#">Basic Settings</li>
+				  <li><a href="#">Advanced Settings</a></li>
+				  <li class="nav-header">Users</li>
+				  <li><a href="#">All Users</a></li>
+				  <li class="nav-header">Apps</li>
+				  <li><a href="<? echo base_url(); ?>admin/apps">Control Panel </a></li>		  
+				  <li class="nav-header">Devices</li>
+				  <li><a href="#">All Devices</a></li>
+				</ul>
+      </div>			
+		</div>
+
+		<div class="span9">
 			<table class="table table-striped table-edit">
 				<thead>
 					<tr>

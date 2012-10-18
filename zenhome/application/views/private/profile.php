@@ -27,14 +27,22 @@
     });
 
 		// App settings handler
-		$('select, input').change( function( event ){
+		$('select, input').change( function(){
 			var form_element = $(this),
 				 	app_id       = form_element.closest('form').attr('data-app-id'),
 				 	name 				 = form_element.attr('name'),
 				 	value 			 = form_element.val();
-			console.log( value );
 			update_settings( app_id, name, value );
 		});
+		// App settings handler for btn-groups
+		$('.app-setting button').click( function(){
+			var form_element = $(this),
+				 	app_id       = form_element.closest('form').attr('data-app-id'),
+				 	name 				 = form_element.parent('.app-setting').attr('name'),
+				 	value 			 = form_element.val();
+			update_settings( app_id, name, value );
+		});
+
 	});
 </script>
 

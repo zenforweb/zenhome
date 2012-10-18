@@ -11,8 +11,8 @@
 		<div class="span4">
 			<h3>Motion</h3>
 		</div>
-		<div class="span3 pull-right">
-			<div class="dropdown">
+		<div class="span2 pull-right">
+			<div class="dropdown pull-right">
 	  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
 	  			<i class="icon-white icon-chevron-down"></i> Options
 	  		</a>
