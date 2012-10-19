@@ -11,6 +11,9 @@
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="<?php echo base_url() . FRONT_END; ?>bootstrap/js/bootstrap.min.js"></script>
 		<script src="<?php echo base_url() . FRONT_END; ?>js/libs/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript">
+			var base_url = '<? echo base_url(); ?>';
+		</script>
 	</head>
 	<body>
 		<div class="hidden-phone navbar">
