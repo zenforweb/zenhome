@@ -51,10 +51,9 @@ def callback(ch, method, properties, body):
         dbcont = db_controller.DBController()
         dbconn, dbcurs = dbcont.getLocal()
         insert_sql = """INSERT INTO zenhome.apps_wunderground_almanac (stat_date,record_high_f,record_high_c,normal_high_c,normal_high_f,normal_low_f,normal_low_c,record_low_c,record_low_f,record_high_year,record_low_year) VALUES ('%(stat_date)s','%(record_high_f)s','%(record_high_c)s','%(normal_high_c)s','%(normal_high_f)s','%(normal_low_f)s','%(normal_low_c)s','%(record_low_c)s','%(record_low_f)s','%(record_low_year)s','%(record_high_year)s')"""
-        print insert_sql
-        #dbcurs.execute(insert_sql%daily_almanac)
-        #dbconn.commit()
-        #dbconn.close()
+        dbcurs.execute(insert_sql%daily_almanac)
+        dbconn.commit()
+        dbconn.close()
     ch.basic_ack(delivery_tag = method.delivery_tag)
 #    channel.exchange_declare(
 #        exchange='session_traffic',
