@@ -20,5 +20,15 @@ if ( ! function_exists('getIP')){
 	}
 }
 
+if ( ! function_exists('format_time')){
+	function format_time(  $time, $format = Null ){
+		$stamp = strtotime( $time );
+		if( $format == Null ){
+			return date('D h:i:s', $stamp);
+		} else {
+			return date( $format, $stamp);	
+		}
+	}
+}
 ?>
 
