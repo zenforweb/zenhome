@@ -14,12 +14,14 @@ class Motion extends MY_Controller {
 	 *		/application/views/apps/motion/portlet.php	 										VIEW
 	 *
 	 *
+	 * 		sudo apt-get install php5-curl
 	 */
 
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('AppsModel');
-		$this->app_id = $this->AppsModel->getAppID('motion');
+		$this->app_id 			 = $this->AppsModel->getAppID('motion');
+		$this->app_motion_fp = 'security';
 	}
 
 	/**
@@ -27,8 +29,26 @@ class Motion extends MY_Controller {
 	*
 	*/
 	public function index(){
-		$data = array();
+		$this->load->model('apps/MotionModel');
+		
+		$data = array(
+			'status' => $this->MotionModel->systemStatus(),
+			'images' => $this->MotionModel->readRecentImages(),
+			//'recent' => $this->MotionModel->readMotion(),
+		);
+
+			// Alix {debug
 		$this->view( 'apps/motion/index', $data );
+	}
+
+	/**
+	* Method which will render the dashboard portlet
+	*
+	*/
+	public function portlet(){
+		$data = array(
+		);
+		$this->view_portlet( 'apps/motion/portlet', $data );
 	}
 
 	/**
@@ -47,23 +67,23 @@ class Motion extends MY_Controller {
 		$this->view_portlet( 'apps/motion/user_settings' );
 	}
 
-	/**
-	* Method which will render the user settings for an App, displayed in profile
-	*
-	*/
-	public function user_settings_submit(){
-		redirect( 'profile' );
-	}
-
-	/**
-	* Method which will render the dashboard portlet
-	*
-	*/
-	public function portlet(){
-		$this->load->model('apps/WeatherModel');
-		$data = array(
-		);
-		$this->view_portlet( 'apps/motion/portlet', $data );
+	public function arm( $value, $cam = Null ){
+		$this->load->model('apps/MotionModel');
+		//@todo: read this from a motion app settings
+		$motion = 'http://blackbox:cleancut@10.1.10.52:8080/';
+		if( $cam == Null ){
+			$camera = '0/detection/';
+			$cam = 0;
+		} else {
+			$camera = $cam .'/detection/';
+		}
+		if( $value == 1){
+			$signal = 'start';
+		} elseif ( $value == 0) {
+			$signal = 'pause';
+		}
+		$command = $motion . $camera .  $signal;
+		$this->MotionModel->systemArm( $this->user['user_id'], $cam, $value, $command );
 	}
 
 }

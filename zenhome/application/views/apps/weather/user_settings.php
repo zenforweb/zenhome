@@ -9,6 +9,8 @@
 * 		$widget_graph					@stdClass Obj
 * 		$temp_format					@string
 */
+	// Alix {debug}
+//echo "<pre>"; print_r( $enabled ); die();
 ?>
 
 <div class="container-fluid user_app_settings" data-app-id="<? echo $app_info->row_id; ?>">
@@ -18,8 +20,8 @@
 		</div>
 		<div class="span4 pull-right">
 	    <div class="btn-group app-enable" data-toggle="buttons-radio">
-	    	<button type="button" class="btn <? if( is_object( $enabled ) && $enabled->setting_value == '1' ){ ?> active<? } ?>">Enable</button>
-	    	<button type="button" class="btn <? if( !is_object( $enabled ) || $enabled->setting_value == '0' ){ ?> active<? } ?>">Disable</button>
+	    	<button type="button" class="btn <? if( $enabled['setting_value'] == 1 ){ ?> active<? } ?>">Enable</button>
+	    	<button type="button" class="btn <? if( $enabled['setting_value'] == 0 ){ ?> active<? } ?>">Disable</button>
 	    </div>
 		</div>
 	</div>
@@ -34,8 +36,8 @@
 								<? 
 								if( isset( $temp_format ) ){
 									?>
-									<option <? if( $temp_format->setting_value == "f" ){ ?>selected="selected"<? }?> value="f">Fahrenheit</option>
-			            <option <? if( $temp_format->setting_value == "c" ){ ?>selected="selected"<? }?> value="c">Celcius</option>
+									<option <? if( $temp_format['setting_value'] == "f" ){ ?>selected="selected"<? }?> value="f">Fahrenheit</option>
+			            <option <? if( $temp_format['setting_value'] == "c" ){ ?>selected="selected"<? }?> value="c">Celcius</option>
 									<?
 								} else {
 							  	?>
@@ -60,8 +62,8 @@
 							<td>Show Weather Widget</td>
 							<td>
 								<div class="btn-group app-setting" data-toggle="buttons-radio" name="widget_enabled">
-			  					<button type="button" class="btn <? if( isset( $widget_enabled ) && ( $widget_enabled->setting_value == 1 ) ){ ?>active<? } ?>" value="1">Show</button>
-			 					  <button type="button" class="btn <? if( isset( $widget_enabled ) && ( $widget_enabled->setting_value  == 0) ){ ?>active<? } ?>" value="0">Hide</button>
+			  					<button type="button" class="btn <? if( $widget_enabled['setting_value'] == 1 ){ ?>active<? } ?>" value="1">Show</button>
+			 					  <button type="button" class="btn <? if( $widget_enabled['setting_value']  == 0){ ?>active<? } ?>" value="0">Hide</button>
 								</div>
 							</td>
 						</tr>
@@ -69,8 +71,8 @@
 							<td>Show 12 Hour Graph</td>
 							<td>
 								<div class="btn-group  app-setting" data-toggle="buttons-radio" name="widget_graph">
-			  					<button type="button" class="btn btn-small <? if( isset( $widget_graph ) && ( $widget_graph->setting_value  == 1) ){ ?>active<? } ?>" value="1">Show</button>
-			 					  <button type="button" class="btn btn-small <? if( isset( $widget_graph ) && ( $widget_graph->setting_value  == 0) ){ ?>active<? } ?>"value="0">Hide</button>
+			  					<button type="button" class="btn btn-small <? if( $widget_graph['setting_value']  == 1 ){ ?>active<? } ?>" value="1">Show</button>
+			 					  <button type="button" class="btn btn-small <? if( $widget_graph['setting_value']  == 0 ){ ?>active<? } ?>"value="0">Hide</button>
 								</div>
 							</td>
 						</tr>
