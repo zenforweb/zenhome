@@ -22,7 +22,7 @@ class Weather extends MY_Controller {
 		parent::__construct();
 		$this->load->model('AppsModel');
 		$this->app_id = $this->AppsModel->getAppID('weather');
-		//$this->app_user_settings = $this->
+		$this->userAppSet = $this->AppsModel->getUserAppSettings( $this->app_id, $this->user['user_id']);
 	}
 
 	/**
@@ -33,8 +33,8 @@ class Weather extends MY_Controller {
 		$this->load->model('apps/WeatherModel');
 		$data = array(
 			'current' 			 => $this->WeatherModel->getLastPoll(),
-			'stats_overtime' => $this->WeatherModel->getTempLastMonth(),
-			'stats_recent' 	 => $this->WeatherModel->getRecentStats(),
+			'stats_overtime' => $this->WeatherModel->getTempLastMonth( $this->userAppSet['temp_format']['setting_value'] ),
+			'stats_recent' 	 => $this->WeatherModel->getRecentStats( ),
 		);
 		$this->view( 'apps/weather/index', $data );
 	}
@@ -44,6 +44,7 @@ class Weather extends MY_Controller {
 	*
 	*/
 	public function portlet(){
+
 		$this->load->model('apps/WeatherModel');
 		$data = array(
 			'current' => $this->WeatherModel->getLastPoll(),
