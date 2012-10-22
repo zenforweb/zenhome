@@ -20,14 +20,18 @@ class WeatherModel extends CI_Model {
 		return $package;
 	}
 
-	public function getTempLastMonth(){
-		$stats_avg  = array_reverse( $this->fetchSimpleStats( 'AVG', 'temp_f' ) );
-		$stats_high = array_reverse( $this->fetchSimpleStats( 'MAX', 'temp_f' ) );
-		$stats_low  = array_reverse( $this->fetchSimpleStats( 'MIN', 'temp_f' ) );
+	public function getTempLastMonth( $unit ){
+		if( $unit == 'c'){
+			$unit = 'temp_c';
+		} else {
+			$unit = 'temp_f';
+		}
+		$stats_avg  = array_reverse( $this->fetchSimpleStats( 'AVG', $unit ) );
+		$stats_high = array_reverse( $this->fetchSimpleStats( 'MAX', $unit ) );
+		$stats_low  = array_reverse( $this->fetchSimpleStats( 'MIN', $unit ) );
 		$stats = array();
 		$i = 0;
 		foreach( $stats_avg as $avg ){
-
 			$stats[$avg[0]] = array(
 				'high' 				=> $stats_high[$i][1],
 				'low' 	 			=> $stats_low[$i][1],

@@ -60,14 +60,31 @@ class AppsModel extends CI_Model {
 		$query = $this->db->query( "SELECT * FROM `". DB_NAME . "`.user_apps_settings WHERE `user_id` = ". $user_id ." AND `app_id` = ". $app_id ) ;
 		$user_settings = array();
 		foreach ($query->result() as $row){
-			$user_settings[$row->setting_name] = $row;
+			$user_settings[$row->setting_name] = array(
+				'setting_id' 		=> $row->setting_id,
+				'setting_name'	=> $row->setting_name,
+				'setting_value' => $row->setting_value,
+				'user_id'				=> $row->user_id,
+				'app_id'				=> $row->app_id,
+			);
 		}
-		if( count( $query->result() ) == 0 ){
-			$row = $query->result();
-			$user_settings['enabled'] = '';
-		}
+		$full_details = array_merge( $this->getAllAppSettingsUser( $app_id, $user_id ), $user_settings );
+		return $full_details;
+	}
 
-		return $user_settings;
+	private function getAllAppSettingsUser( $app_id, $user_id ){
+		$query = $this->db->query( "SELECT DISTINCT(`setting_name`) FROM ". DB_NAME . ".`user_apps_settings` WHERE `app_id` = $app_id" );
+		$all_setting_types = array();
+		foreach ($query->result() as $row){
+			$all_setting_types[$row->setting_name] = array(
+				'setting_id' 		=> '',
+				'setting_name'	=> $row->setting_name,
+				'setting_value' => '',
+				'user_id'				=> $user_id,
+				'app_id'				=> $app_id,				
+			);
+		}
+		return $all_setting_types;
 	}
 
 	public function update_user_setting( $app_id, $user_id, $setting_name, $setting_value){

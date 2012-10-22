@@ -15,10 +15,10 @@
 			<h4>Chat</h4>
 		</div>
 		<div class="span4 pull-right">
-	    	     <div class="btn-group app-enable" data-toggle="buttons-radio">
-	    	     	  <button type="button" class="btn <? if( is_object( $enabled ) && $enabled->setting_value == '1' ){ ?> active<? } ?>">Enable</button>
-	    		  <button type="button" class="btn <? if( !is_object( $enabled ) || $enabled->setting_value == '0' ){ ?> active<? } ?>">Disable</button>
-	    	     </div>
+	  	<div class="btn-group app-enable" data-toggle="buttons-radio">
+	    	<button type="button" class="btn <? if( $enabled['setting_value'] == 1 ){ ?> active<? } ?>">Enable</button>
+	    	<button type="button" class="btn <? if( $enabled['setting_value'] == 0 ){ ?> active<? } ?>">Disable</button>
+	    </div>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -27,7 +27,7 @@
 				<table>
 					<tr>
 						<td width="200px">Chat Timestamp</td>
-						<td><input type="text" name="" /></td>
+						<td><input type="text" name="chat_timestamp" /></td>
 					</tr>					
 				</table>
 
@@ -42,8 +42,8 @@
 							<td>Show Chat Widget</td>
 							<td>
 								<div class="btn-group app-setting" data-toggle="buttons-radio" name="widget_enabled">
-			  					     <button type="button" class="btn <? if( isset( $widget_enabled ) && ( $widget_enabled->setting_value == 1 ) ){ ?>active<? } ?>" value="1">Show</button>
-			 					     <button type="button" class="btn <? if( isset( $widget_enabled ) && ( $widget_enabled->setting_value  == 0) ){ ?>active<? } ?>" value="0">Hide</button>
+			  					     <button type="button" class="btn <? if( $widget_enabled['setting_value'] == 1 ){ ?>active<? } ?>" value="1">Show</button>
+			 					     <button type="button" class="btn <? if( $widget_enabled['setting_value']  == 0 ){ ?>active<? } ?>" value="0">Hide</button>
 								</div>
 							</td>
 						</tr>					

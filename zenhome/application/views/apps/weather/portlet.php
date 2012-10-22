@@ -2,7 +2,14 @@
 /*
 *	WEATHER :: GENERIC PORTLET TEMPLATE
 *
+* 	// Weather custom user settings
+* 		$widget_enabled 			@stdClass Obj
+* 		$widget_graph					@stdClass Obj
+* 		$temp_format					@string
 */
+
+	// Alix {debug}
+//echo "<pre>"; print_r( $widget_graph ); die();
 ?>
 
 <style type="text/css">
@@ -16,7 +23,7 @@
 	}
 </style>
 
-<div id="app_weather_portlet" class="portlet span4">
+<div id="app_weather_widget" class="portlet span4">
 	<h2>Weather</h2>
 	<span class="app_weather_temp"><? echo $current->temp_f; ?>&deg;</span>
 	@
