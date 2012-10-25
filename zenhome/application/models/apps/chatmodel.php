@@ -8,6 +8,7 @@ class ChatModel extends CI_Model {
 	}
 
 	public function writeChat( $user_id, $message ){
+		$message = $this->checkForLink( $message );
 		$this->db->query( "INSERT INTO `". DB_NAME ."`.`app_chat` ( `user_id`, `message` ) VALUES( '$user_id', ". $this->db->escape( $message ) . " )" );
 	}
 
@@ -37,4 +38,11 @@ class ChatModel extends CI_Model {
 		return $ci->AccountModel->userInfo( $user_id ); 
 	}
 
+	private function checkForLink( $message ){
+		$reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+		if(preg_match($reg_exUrl, $message, $url)) {
+			$message = preg_replace($reg_exUrl, "<a target='_blank' href=". $url[0] . ">" . $url[0] ."</a> ", $message);
+		}
+		return $message;
+	}
 }

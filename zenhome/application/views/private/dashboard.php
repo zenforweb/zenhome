@@ -10,7 +10,7 @@
 		<?
 		foreach( $enabled as $app ){
 			?>
-			$.get("<? echo base_url() .'apps/'. $app->slug_name .'/portlet'; ?>", function(data) { $('#row_1').append(data); });
+			$.get("<? echo base_url() .'apps/'. $app->slug_name .'/widget'; ?>", function(data) { $('#row_1').append(data); });
 			<?
 		}
 		?>

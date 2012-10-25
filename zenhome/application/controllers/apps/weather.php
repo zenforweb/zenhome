@@ -43,13 +43,12 @@ class Weather extends MY_Controller {
 	* Method which will render the dashboard portlet
 	*
 	*/
-	public function portlet(){
-
+	public function widget(){
 		$this->load->model('apps/WeatherModel');
 		$data = array(
 			'current' => $this->WeatherModel->getLastPoll(),
 		);
-		$this->view_portlet( 'apps/weather/portlet', $data );
+		$this->view_portlet( 'apps/weather/widget', $data );
 	}
 
 	/**
