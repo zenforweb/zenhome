@@ -45,10 +45,10 @@ class Motion extends MY_Controller {
 	* Method which will render the dashboard portlet
 	*
 	*/
-	public function portlet(){
+	public function widget(){
 		$data = array(
 		);
-		$this->view_portlet( 'apps/motion/portlet', $data );
+		$this->view_portlet( 'apps/motion/widget', $data );
 	}
 
 	/**

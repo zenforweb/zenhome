@@ -1,0 +1,10 @@
+.chat_image{
+	float: left;
+	width: 50px;
+
+}
+
+.chat_details{
+	float: left;
+	padding-left: 14px;
+}
