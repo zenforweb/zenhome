@@ -2,6 +2,11 @@ jQuery('document').ready(function($){
 
 	function send_message( msg ) {
 		msg = encodeURIComponent( msg );
+		msg = msg.split( '.' ).join( '%2E' );
+		msg = msg.split( '!' ).join( '%21' );
+		msg = msg.split( '%2F' ).join( '%800' );
+
+		console.log( msg );
 		$.ajax({ url: base_url + 'apps/chat/write/' + msg, });
 	}
 

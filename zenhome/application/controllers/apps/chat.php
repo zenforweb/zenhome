@@ -42,12 +42,12 @@ class Chat extends MY_Controller {
 	* Method which will render the dashboard portlet
 	*
 	*/
-	public function portlet(){
+	public function widget(){
 		$this->load->model('apps/ChatModel');
 		$data = array(
 			'chat' => $this->ChatModel->readChat( ),
 		);
-		$this->view_portlet( 'apps/chat/portlet', $data );
+		$this->view_portlet( 'apps/chat/widget', $data );
 	}
 
 	/**
@@ -59,6 +59,7 @@ class Chat extends MY_Controller {
 	}
 
 	public function write( $message ){
+		$message = str_replace('%800', '%2F', $message);
 		$message = urldecode( $message );
 		$this->load->model('apps/ChatModel');
 		$this->ChatModel->writeChat( $this->user['user_id'], $message );

@@ -15,6 +15,8 @@ class AccountModel extends CI_Model {
 			'user_name'  => $user->user_name,
 			'first_name' => $user->first_name,
 			'last_name'  => $user->last_name,
+			'email'			 => $user->email,
+			'gravatar'   => md5( $user->email ),
 		);
 	}
 
