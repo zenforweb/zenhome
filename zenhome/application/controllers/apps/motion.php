@@ -30,7 +30,6 @@ class Motion extends MY_Controller {
 	*/
 	public function index(){
 		$this->load->model('apps/MotionModel');
-		
 		$data = array(
 			'status' => $this->MotionModel->systemStatus(),
 			'images' => $this->MotionModel->readRecentImages(),
