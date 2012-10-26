@@ -7,6 +7,12 @@
 
 <script src="<?php echo base_url() . FRONT_END; ?>apps/chat/js/chat.js"></script>
 
+<style type="text/css">
+	.chat_details {
+		width: 300px;
+	}
+</style>
+
 <link href="<?php echo base_url() . FRONT_END; ?>apps/chat/css/chat.css" rel="stylesheet">
 
 <div id="app_chat_portlet" class="portlet span4">
