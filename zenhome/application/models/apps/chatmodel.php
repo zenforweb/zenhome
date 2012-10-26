@@ -41,7 +41,15 @@ class ChatModel extends CI_Model {
 	private function checkForLink( $message ){
 		$reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
 		if(preg_match($reg_exUrl, $message, $url)) {
-			$message = preg_replace($reg_exUrl, "<a target='_blank' href=". $url[0] . ">" . $url[0] ."</a> ", $message);
+			
+			if( strlen( $url[0] > 50 ) ){
+				$message = preg_replace($reg_exUrl, "<a target='_blank' href=". $url[0] . ">Url too long, just click it</a> ", $message);
+			} else {
+				$message = preg_replace($reg_exUrl, "<a target='_blank' href=". $url[0] . ">" . $url[0] ."</a> ", $message);	
+			}
+			
+
+			strlen( $message );
 		}
 		return $message;
 	}
