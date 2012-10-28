@@ -4,19 +4,18 @@
 *	
 * $app_info							@stdClass Obj
 *	$enabled 							@bool
-* 	// Weather custom user settings
+*
+* | Weather custom user settings
 * 		$widget_enabled 			@stdClass Obj
 * 		$widget_graph					@stdClass Obj
 * 		$temp_format					@string
 */
-	// Alix {debug}
-//echo "<pre>"; print_r( $enabled ); die();
 ?>
 
 <div class="container-fluid user_app_settings" data-app-id="<? echo $app_info->row_id; ?>">
 	<div class="row-fluid">
 		<div class="span4">
-			<h4>Outdoor Weather</h4>
+			<h4>Weather</h4>
 		</div>
 		<div class="span4 pull-right">
 	    <div class="btn-group app-enable" data-toggle="buttons-radio">
@@ -61,9 +60,9 @@
 						<tr>
 							<td>Show Weather Widget</td>
 							<td>
-								<div class="btn-group app-setting" data-toggle="buttons-radio" name="widget_enabled">
-			  					<button type="button" class="btn <? if( $widget_enabled['setting_value'] == 1 ){ ?>active<? } ?>" value="1">Show</button>
-			 					  <button type="button" class="btn <? if( $widget_enabled['setting_value']  == 0){ ?>active<? } ?>" value="0">Hide</button>
+								<div class="btn-group app-setting" data-toggle="buttons-radio" name="widget">
+			  					<button type="button" class="btn <? if( $widget['setting_value'] == 1 ){ ?>active<? } ?>" value="1">Show</button>
+			 					  <button type="button" class="btn <? if( $widget['setting_value']  == 0){ ?>active<? } ?>" value="0">Hide</button>
 								</div>
 							</td>
 						</tr>
