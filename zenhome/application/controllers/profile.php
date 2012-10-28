@@ -56,6 +56,7 @@ class Profile extends MY_Controller {
 		//"!-- end #app_settings_list -->
 		//<!-- end #app_settings --><
 		//<!-- end #wrap -- >";
+
 		$this->load->view( 'private/footer.php' );
 		if( isset( $_SESSION['message'] ) )
 			$this->unsetMessage();
@@ -71,7 +72,6 @@ class Profile extends MY_Controller {
 			if( file_exists( $view_path ) ){				
 				$data = $this->AppsModel->getUserAppSettings( $app->row_id, $this->user['user_id'] ) ;
 				$data['app_info'] = $app;
-
 				$views_to_load[] = array(
 					'view_path' => 'apps/' . $app->slug_name . '/user_settings',
 				  'view_data' => $data,

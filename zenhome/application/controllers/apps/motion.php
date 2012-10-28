@@ -3,18 +3,35 @@
 class Motion extends MY_Controller {
 
 	/**
-	 * Motion App
+	 *	 _____     _   _         
+	 *	|     |___| |_|_|___ ___ 
+	 *	| | | | . |  _| | . |   |
+	 * 	|_|_|_|___|_| |_|___|_|_|			//http://patorjk.com/software/taag/#p=display&f=Rectangles&t=Weather
+   *                
 	 *
-	 * Pulls in local camera feeds from Motion
+	 * Pulls in local live camera feeds from Motion, and displays recently captured images
 	 *
-	 *	WEB INTERFACE
-	 *		/application/controllers/apps/motion.php 									CONTROLLER
-	 *		/application/views/apps/motion/index.php  											VIEW
-	 *		/application/views/apps/motion/settings.php											VIEW	 
-	 *		/application/views/apps/motion/portlet.php	 										VIEW
+	 *	 ____FILE MANIFEST________________________________________________________
+	 *	|		/application/controllers/apps/motion.php 									CONTROLLER 	
+	 *	|		/application/views/apps/motion/index.php  								VIEW        
+	 *	|		/application/views/apps/motion/settings.php								VIEW	 		 	
+	 *	|		/application/views/apps/motion/widget.php	 								VIEW 				
+	 *
+	 *			
+	 *	 ____APPP SETTINGS______________________________
+	 *	|		enabled 							@bool
+	 *	|		widget_cams 					@bool
+	 *	|		widget_carosel   		 	@bool
+	 *	|
 	 *
 	 *
-	 * 		sudo apt-get install php5-curl
+	 *	 ____APPP USER SETTINGS_________________________
+	 *	|		enabled 							@bool
+	 *	|		widget_cams 					@bool
+	 *	|		widget_carosel   		 	@bool
+	 *	|
+	 * 
+	 *	sudo apt-get install php5-curl
 	 */
 
 	public function __construct(){
@@ -35,8 +52,6 @@ class Motion extends MY_Controller {
 			'images' => $this->MotionModel->readRecentImages(),
 			//'recent' => $this->MotionModel->readMotion(),
 		);
-
-			// Alix {debug
 		$this->view( 'apps/motion/index', $data );
 	}
 
@@ -44,10 +59,22 @@ class Motion extends MY_Controller {
 	* Method which will render the dashboard portlet
 	*
 	*/
-	public function widget(){
+	public function widget_cams(){
+		$data = array();
+		$this->view_portlet( 'apps/motion/widget_cams', $data );
+	}
+
+	/**
+	* Method which will render the dashboard portlet
+	*
+	*/
+	public function widget_carosel(){
+		$this->load->model('apps/MotionModel');
 		$data = array(
+			'images' => $this->MotionModel->readRecentImages(),
 		);
-		$this->view_portlet( 'apps/motion/widget', $data );
+		$this->view_portlet( 'apps/motion/widget_carosel', $data );
+
 	}
 
 	/**

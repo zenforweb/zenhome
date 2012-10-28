@@ -3,19 +3,30 @@
 class Weather extends MY_Controller {
 
 	/**
-	 * Weather App
+	 *	 _ _ _         _   _           
+	 *	| | | |___ ___| |_| |_ ___ ___ 
+	 *	| | | | -_| .'|  _|   | -_|  _|
+	 * 	|_____|___|__,|_| |_|_|___|_|  
 	 *
-	 * Fetches weather, from weather underground
+	 * 	Fetches weather, from weather underground
 	 *
-	 *	WEB INTERFACE
-	 *		/application/controllers/apps/app_weather.php 					CONTROLLER
-	 *		/application/models/apps/weathermodel.php 							MODEL
-	 *		/application/views/apps/weather/index.php  							VIEW
-	 *		/application/views/apps/weather/settings.php						VIEW
-	 *		/application/views/apps/weather/user_settings.php				VIEW	 
-	 *		/application/views/apps/weather/portlet.php	 						VIEW
+	 *	 ____ FILE MANIFEST ___________________________________________________
+	 *	|		/application/controllers/apps/app_weather.php 					CONTROLLER
+	 *	|		/application/models/apps/weathermodel.php 							MODEL
+	 *	|		/application/views/apps/weather/index.php  							VIEW
+	 *	|		/application/views/apps/weather/settings.php						VIEW
+	 *	|		/application/views/apps/weather/user_settings.php				VIEW	 
+	 *	|		/application/views/apps/weather/portlet.php	 						VIEW
 	 *
 	 *
+	 *	 ___ APPP SETTINGS _______________
+	 *	|		api_key						@string
+	 *			
+	 *	 ___ APPP USER SETTINGS _____________
+	 *	|		enabled 					@bool
+	 * 	|		temp_format				@string
+	 *  |		widget_enabled 		@bool
+	 *	|		widget_graph      @bool
 	 */
 
 	public function __construct(){

@@ -25,13 +25,6 @@
 		<div class="span6">
 			<form data-app-id="<? echo $app_info->row_id; ?>">
 				<table>
-					<tr>
-						<td width="200px">Chat Timestamp</td>
-						<td><input type="text" name="chat_timestamp" /></td>
-					</tr>					
-				</table>
-
-				<table>
 					<thead>
 						<tr>
 							<td width="200px"><h5>Widget Options</h5></td>
@@ -41,9 +34,9 @@
 						<tr>
 							<td>Show Chat Widget</td>
 							<td>
-								<div class="btn-group app-setting" data-toggle="buttons-radio" name="widget_enabled">
-			  					     <button type="button" class="btn <? if( $widget_enabled['setting_value'] == 1 ){ ?>active<? } ?>" value="1">Show</button>
-			 					     <button type="button" class="btn <? if( $widget_enabled['setting_value']  == 0 ){ ?>active<? } ?>" value="0">Hide</button>
+								<div class="btn-group app-setting" data-toggle="buttons-radio" name="widget">
+			  					     <button type="button" class="btn <? if( $widget['setting_value'] == 1 ){ ?>active<? } ?>" value="1">Show</button>
+			 					     <button type="button" class="btn <? if( $widget['setting_value']  == 0 ){ ?>active<? } ?>" value="0">Hide</button>
 								</div>
 							</td>
 						</tr>					
