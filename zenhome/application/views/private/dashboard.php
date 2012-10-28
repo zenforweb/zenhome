@@ -8,9 +8,9 @@
 <script type="text/javascript">
 	jQuery('document').ready(function($){
 		<?
-		foreach( $enabled as $app ){
+		foreach( $widgets as $widget ){
 			?>
-			$.get("<? echo base_url() .'apps/'. $app->slug_name .'/widget'; ?>", function(data) { $('#row_1').append(data); });
+			$.get("<? echo base_url() .'apps/'. $widget['widget_uri']; ?>", function(data) { $('#row_1').append(data); });
 			<?
 		}
 		?>

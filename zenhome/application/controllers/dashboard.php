@@ -17,17 +17,16 @@ class Dashboard extends MY_Controller {
 	}
 
 	public function index(){
-		if( isset($_SESSION['guest']) && $_SESSION['guest'] ){
+		if( isset($_SESSION['guest']) && $_SESSION['guest'] )
 			$this->guest();
-		}
 		$this->load->model( 'AppsModel' );
-		$apps = $this->AppsModel->getEnabledAppsForUser( $this->user['user_id'] );
-		if( count( $apps ) == 0 ){
-		    $message = 'You dont have any enabled Applications, you should go set one in your <a class="btn btn-mini btn-info" href=" '. base_url() . 'profile">Profile</a>';
+		$widgets = $this->AppsModel->getUserDashboard( $this->user['user_id'] );
+		if( count( $widgets ) == 0 ){
+		    $message = 'You dont have any enabled widgets, you should enable one in your <a class="btn btn-mini btn-info" href=" '. base_url() . 'profile">Profile</a>';
 		    $this->setMessage( 'info', $message );
 		}
 		$data = array(
-			'enabled' => $apps,
+			'widgets' => $widgets,
 		);
 		$this->view( 'private/dashboard', $data );
 	}

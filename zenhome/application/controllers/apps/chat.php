@@ -3,19 +3,22 @@
 class Chat extends MY_Controller {
 
 	/**
-	 * Chat App
+	 *   _____ _       _   
+	 *  |     | |_ ___| |_ 
+	 *  |   --|   | .'|  _|
+	 *  |_____|_|_|__,|_|  
 	 *
 	 * Allows users to chat on internal site
 	 *
-	 *	WEB INTERFACE
-	 *		/application/controllers/apps/chat.php					CONTROLLER
-	 *		/application/models/apps/chatmodel.php 					MODEL
-	 *		/application/views/apps/chat/index.php  				VIEW 
-	 *		/application/views/apps/chat/settings.php				VIEW 
-	 *		/application/views/apps/chat/user_settings.php 	VIEW  
-	 *		/application/views/apps/chat/portlet.php	 			VIEW
-	 *		/application/views/apps/chat/chat_append.php	 	AJAX-VIEW
-	 *		/public_html/apps/chat/js/chat_js.php	 					JS
+	 *	 ____FILE MANIFEST________________________________________________________
+	 *	|		/application/controllers/apps/chat.php											CONTROLLER
+	 *	|		/application/models/apps/chatmodel.php 											MODEL
+	 *	|		/application/views/apps/chat/index.php  										VIEW 
+	 *	|		/application/views/apps/chat/settings.php										VIEW 
+	 *	|		/application/views/apps/chat/user_settings.php 							VIEW  
+	 *	|		/application/views/apps/chat/portlet.php	 									VIEW
+	 *	|		/application/views/apps/chat/chat_append.php	 							AJAX-VIEW
+	 *	|		/public_html/apps/chat/js/chat_js.php	 											JS
 	 *
 	 */
 
