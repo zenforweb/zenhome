@@ -92,16 +92,20 @@
 		</div>
 	</div>
 
+
+	<h3>General Settings</h3>
 	<div id="general_settings" class="row-fluid">
-		<h3>General Settings</h3>
-		<div class="span12">
+		<div class="span2">
+			<img src="http://0.gravatar.com/avatar/<? echo $this->user['gravatar']; ?>?s=150&r=pg&d=mm"/>
+		</div>
+		<div class="span9"
 			<form>
 				User Name: <input type="text" class="input" value="<? echo $user['user_name']; ?>">
 				<br />
 				Name: <input type="text" class="input input-small" value="<? echo $user['first_name']; ?>"> 
 				<input type="text" class="input input-medium" value="<? echo $user['last_name']; ?>"> 
 				<br />
-				//@todo make this work 
+				Email: <input type="text" class="input" value="<? echo $user['user_name']; ?>">				
 				<br/>
 				<button type="subit" class="btn btn-primary">Save</button>
 			</form>

@@ -110,32 +110,51 @@ class AppsModel extends CI_Model {
 	* 	desc: gets the users enabled dashboard widgets, returning the uri from the controller to load.
 	*/
 	public function getUserDashboard( $user_id ){
-		$all_widgets = $this->getAllDashboardWidgets();
+		$all_widgets       = $this->getAllDashboardWidgets( $user_id );
+		$user_enabled_apps = $this->getUserEnabledAppsCommaSeperated( $user_id, true );
+		if( count( $user_enabled_apps ) == 0 ){
+			return array();
+		}
 		$widgets_to_load = array();
-		foreach ($all_widgets as $widget) {
-			$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`user_apps_settings` WHERE `setting_name` = '$widget->setting_value' AND `app_id` = ".$widget->app_id . " AND `user_id` = " . $user_id );		
-			if( count( $query->result() ) > 0 ){
-				$result = $query->result();
-				if( $result[0]->setting_value == 1 ){
-					$widget_info = $this->getApp( $result[0]->app_id );
-					$widgets_to_load[] = array(
-						'app_name'    => $widget_info->pretty_name,
-						'app_id'			=> $result[0]->app_id,
-						'widget_uri'	=> $widget_info->slug_name .'/'. $result[0]->setting_name,
-					);
+		foreach ($all_widgets as $widget){
+			if( in_array($widget->app_id, $user_enabled_apps ) ){
+				$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`user_apps_settings` WHERE `setting_name` = '$widget->setting_value' AND `app_id` = ".$widget->app_id . " AND `user_id` = " . $user_id );		
+				if( count( $query->result() ) > 0 ){
+					$result = $query->result();
+					if( $result[0]->setting_value == 1 ){
+						$widget_info = $this->getApp( $result[0]->app_id );
+						$widgets_to_load[] = array(
+							'app_name'    => $widget_info->pretty_name,
+							'app_id'			=> $result[0]->app_id,
+							'widget_uri'	=> $widget_info->slug_name .'/'. $result[0]->setting_name,
+						);
+					}
 				}
 			}
 		}
 		return $widgets_to_load;
 	}
 
-	private function getAllDashboardWidgets(){
+	private function getAllDashboardWidgets( $user_id ){
 		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`app_settings` WHERE `setting_name` = 'widget' AND `app_id` IN( " . $this->getEnabledAppsCommaSeperated() . " )" );
 		$widgets = array();
 		foreach ($query->result() as $row){
 			$widgets[] = $row;
 		}
 		return $widgets;
+	}
+
+	private function getUserEnabledAppsCommaSeperated( $user_id, $array = null ){
+		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`user_apps_settings` WHERE `setting_name` = 'enabled' AND `setting_value` = '1' AND `user_id` = '$user_id' AND `app_id` IN( " . $this->getEnabledAppsCommaSeperated() . " )" );
+		$apps = '';
+		$app_array = array();
+		foreach( $query->result() as $row ){
+			$app_array[] = $row->app_id;
+			$apps 			.= $row->app_id . ',';
+		}
+		if( $array )
+			return $app_array;
+		return substr( $apps, 0, -1 );
 	}
 
 	private function getEnabledAppsCommaSeperated(){

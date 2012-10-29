@@ -1,6 +1,6 @@
 
 <div id="app_chat_portlet" class="portlet span4">
-	<a href="<? base_url(); ?>apps/chat">
+	<a href="<? base_url(); ?>apps/motion">
 		<h2>Motion Recent</h2>
 	</a>
 	<div id="myCarousel" class="carousel slide">

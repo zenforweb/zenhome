@@ -19,11 +19,18 @@ class Settings extends MY_Controller {
 	public function index(){}
 
 	public function basic(){
-		$this->view('admin/settings-basic');
+		$data = array(
+			'admin_menu' => $this->admin_menu(),
+		);
+		$this->view('admin/settings-basic', $data);
 	}
 
 	public function advanced(){
-		$this->view('admin/settings-advanced');
+		$data = array(
+			'admin_menu' => $this->admin_menu(),
+		);
+
+		$this->view('admin/settings-advanced', $data);
 	}	
 
 }

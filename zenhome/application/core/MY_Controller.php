@@ -63,13 +63,28 @@ class MY_Controller extends CI_Controller{
 		$_SESSION['message'] = array( 'type' => $type, 'msg' => $message );
 	}
 
+	public function admin_menu(){
+		$menu = array();
+		$menu['General']['Basic Settings'] = 'admin/settings/basic';
+		$menu['General']['Advanced Settings'] = 'admin/settings/advanced';
+
+		$menu['User']['All Users'] = 'admin/users';
+		$menu['User']['User Stats'] = '#';
+
+		$menu['Apps']['App Control'] = 'admin/apps';
+
+		$menu['Devices']['All Devices'] = '#';
+
+		return $menu;
+	}
+
 	private function unsetMessage(){
 		unset( $_SESSION['message'] );
 	}
 
 	private function make_app_menu(){
 		$this->load->model('AppsModel');
-		$enabled_apps = $this->AppsModel->getEnabledApps();
+		$enabled_apps = $this->AppsModel->getEnabledAppsForUser( $this->user['user_id']);
 		$app_menu = array();
 		foreach ($enabled_apps as $app) {
 			$app_menu[] = array( $app->pretty_name, $app->slug_name, 0 );
