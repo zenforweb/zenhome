@@ -1,11 +1,11 @@
 <?php
-	// ADMIN :: SETTINGS :: ADVANCED
+	// ADMIN USER INFO
 ?>
 
 <div id="wrap" class="container-fluid">
 	<div class="row-fluid">
 		<div class="span4">
-			<h3>Admin Advanced Settings</h3>
+			<h3>Admin: User Info</h3>
 		</div>
 
 		<div class="span2 pull-right">
@@ -21,6 +21,7 @@
 	</div>
 
 	<div class="row-fluid">
+
 		<!-- Admin Menu -->
 		<div class="span3">
 			<div class="well sidebar-nav">
@@ -41,8 +42,28 @@
       </div>
 		</div>
 
-		<div class="span9">
-			here we will put the advanced settings and junk
+		<div class="span3">
+			<h4>Recent Connections</h4>
+			<table class="table table-striped table-edit">
+				<thead>
+					<tr>
+						<th>IP</th>
+						<th>Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?
+					foreach ($logins as $login) {
+						?>
+						<tr>
+							<td><? echo $login->ip; ?></td>
+							<td><? echo $login->login_ts; ?></td>
+						</tr>
+						<?
+					}
+					?>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

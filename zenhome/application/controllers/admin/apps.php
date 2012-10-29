@@ -17,6 +17,7 @@ class Apps extends MY_Controller {
 	public function index(){
 		$this->load->model( 'AppsModel' );
 		$data = array(
+			'admin_menu' => $this->admin_menu(),
 			'apps' => $this->AppsModel->getAllApps(),
 		);
 		$this->view( 'admin/apps', $data );

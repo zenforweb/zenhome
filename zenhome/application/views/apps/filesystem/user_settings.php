@@ -12,7 +12,7 @@
 <div class="container-fluid user_app_settings" data-app-id="<? echo $app_info->row_id; ?>">
 	<div class="row-fluid">
 		<div class="span4">
-			<h4>Chat</h4>
+			<h4>File System</h4>
 		</div>
 		<div class="span4 pull-right">
 	  	<div class="btn-group app-enable" data-toggle="buttons-radio">
