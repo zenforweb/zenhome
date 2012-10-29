@@ -6,22 +6,21 @@ class Motion extends MY_Controller {
 	 *	 _____     _   _         
 	 *	|     |___| |_|_|___ ___ 
 	 *	| | | | . |  _| | . |   |
-	 * 	|_|_|_|___|_| |_|___|_|_|			//http://patorjk.com/software/taag/#p=display&f=Rectangles&t=Weather
+	 * 	|_|_|_|___|_| |_|___|_|_|
    *                
 	 *
-	 * Pulls in local live camera feeds from Motion, and displays recently captured images
+	 * 	Pulls in local live camera feeds from Motion, and displays recently captured images
 	 *
 	 *	 ____FILE MANIFEST________________________________________________________
 	 *	|		/application/controllers/apps/motion.php 									CONTROLLER 	
 	 *	|		/application/views/apps/motion/index.php  								VIEW        
 	 *	|		/application/views/apps/motion/settings.php								VIEW	 		 	
 	 *	|		/application/views/apps/motion/widget.php	 								VIEW 				
-	 *
-	 *			
+	 *	|
+	 *	
+	 *		
 	 *	 ____APPP SETTINGS______________________________
 	 *	|		enabled 							@bool
-	 *	|		widget_cams 					@bool
-	 *	|		widget_carosel   		 	@bool
 	 *	|
 	 *
 	 *

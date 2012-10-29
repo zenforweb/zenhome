@@ -56,7 +56,12 @@
 				<ul class="nav pull-right">
   				<li class="dropdown">
     				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-      				<? echo ucfirst( $this->user['user_name'] ); ?>
+    					<img src="http://0.gravatar.com/avatar/<? echo $this->user['gravatar']; ?>?s=20&r=pg&d=mm"/>
+      				<?
+
+      				
+      		
+      				 echo ucfirst( $this->user['user_name'] ); ?>
       				<b class="caret"></b>
    	 				</a>
     				<ul class="dropdown-menu">

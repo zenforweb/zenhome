@@ -1,16 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Home extends MY_Controller {
+class Users extends MY_Controller {
 
 	/**
-	 * Admin controller.
+	 * Admin User controller.
 	 *
-	 * This is an interface for adding users, monitoring users, and other 
+	 * This is an interface for modifying users, monitoring users, and other 
 	 *
-	 * Maps to the following URL
-	 *      http://example.com/admin
-	 *  - or -  
-	 *      http://example.com/index.php/admin/index
 	 *
 	 */
 
@@ -22,11 +18,21 @@ class Home extends MY_Controller {
 	public function index(){
 		$this->load->model('UserModel');
 		$data = array(
-			'admin_menu' => $this->admin_menu(),
+			'admin_menu' => $this->admin_menu(),	
 			'users' => $this->UserModel->getUsers(),
 		);	
 		$this->view('admin/home', $data);
 	}
+
+	public function info( $user_id ){
+		$this->load->model('AdminModel');
+		$data = array(
+			'admin_menu' => $this->admin_menu(),
+			'logins'		 => $this->AdminModel->getUserLogins( $user_id ),
+		);
+		$this->view('admin/users/user_info', $data);
+	}
+
 
 	public function add_user(){
 		if( !isset( $_REQUEST['user_name'] ) 
