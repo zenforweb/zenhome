@@ -33,10 +33,7 @@ class Filesystem extends MY_Controller {
 	*/
 	public function index(){
 		$this->load->model('apps/FilesystemModel');
-		if( ! $this->appConfigured() ){
-			$message = 'This App is not configured yet, head over to the apps setting page';
-			$this->setMessage('info', $message);
-		}
+		$this->appConfiguredCheck();
 		$data = array();
 		$this->view( 'apps/filesystem/index', $data );
 	}
@@ -61,9 +58,17 @@ class Filesystem extends MY_Controller {
 		$this->view( 'apps/filesystem/settings' );
 	}
 
-	private function appConfigured(){
+	public function setup(){
+		$this->view( 'apps/filesystem/setup' );
+	}
+
+	private function appConfiguredCheck(){
 		$this->load->model('AppsModel');
-		return $this->FilesystemModel->checkForAppDiskSettings( $this->app_id );
+		if( ! $this->FilesystemModel->checkForAppDiskSettings( $this->app_id ) ){
+			$message = 'This App is not configured yet, head over to the apps setting page';
+			$this->setMessage('info', $message);
+			redirect('apps/filesystem/setup');
+		}
 	}
 
 }

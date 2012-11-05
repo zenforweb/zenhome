@@ -7,7 +7,7 @@ class Motion extends MY_Controller {
 	 *	|     |___| |_|_|___ ___ 
 	 *	| | | | . |  _| | . |   |
 	 * 	|_|_|_|___|_| |_|___|_|_|
-   *                
+   *
 	 *
 	 * 	Pulls in local live camera feeds from Motion, and displays recently captured images
 	 *
@@ -20,14 +20,14 @@ class Motion extends MY_Controller {
 	 *	
 	 *		
 	 *	 ____APPP SETTINGS______________________________
-	 *	|		enabled 							@bool
+	 *	|		enabled 		@bool
 	 *	|
 	 *
 	 *
 	 *	 ____APPP USER SETTINGS_________________________
-	 *	|		enabled 							@bool
-	 *	|		widget_cams 					@bool
-	 *	|		widget_carosel   		 	@bool
+	 *	|		enabled 				@bool
+	 *	|		widget_cams 		@bool
+	 *	|		widget_carosel  @bool
 	 *	|
 	 * 
 	 *	sudo apt-get install php5-curl
@@ -41,7 +41,7 @@ class Motion extends MY_Controller {
 	}
 
 	/**
-	* Method which will render the Apps landing page
+	* Method which renders the apps main page
 	*
 	*/
 	public function index(){
@@ -51,6 +51,10 @@ class Motion extends MY_Controller {
 			'images' => $this->MotionModel->readRecentImages(),
 			//'recent' => $this->MotionModel->readMotion(),
 		);
+		if( $this->view_cameras() ){
+		    $data['cameras'] = array( array( 'cam_name' => 'Front Door' )  );
+		}
+
 		$this->view( 'apps/motion/index', $data );
 	}
 
@@ -60,6 +64,9 @@ class Motion extends MY_Controller {
 	*/
 	public function widget_cams(){
 		$data = array();
+		if( $this->view_cameras() ){
+		    $data['cameras'] = array();
+		}
 		$this->view_portlet( 'apps/motion/widget_cams', $data );
 	}
 
@@ -84,14 +91,6 @@ class Motion extends MY_Controller {
 		$this->view( 'apps/motion/settings' );
 	}
 
-	/**
-	* Method which will render the user settings for an App, displayed in profile
-	*
-	*/
-	public function user_settings(){
-		$this->view_portlet( 'apps/motion/user_settings' );
-	}
-
 	public function arm( $value, $cam = Null ){
 		$this->load->model('apps/MotionModel');
 		//@todo: read this from a motion app settings
@@ -110,7 +109,17 @@ class Motion extends MY_Controller {
 		$command = $motion . $camera .  $signal;
 		$this->MotionModel->systemArm( $this->user['user_id'], $cam, $value, $command );
 	}
-
+	
+	private function view_cameras(){
+		//@todo read setting to allow offsite IPs to read cameras,
+		// and store a potential set of whitelisted IPs
+		$user_ip = getIP();
+		if( $user_ip[1] != 'local' ){
+		    return False;
+		} else {
+		  return True;
+		}
+	}
 }
 
 /* End of file motion.php */
