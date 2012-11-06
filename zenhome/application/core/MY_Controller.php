@@ -65,6 +65,7 @@ class MY_Controller extends CI_Controller{
 
 	public function admin_menu(){
 		$menu = array();
+		$menu['General']['Status'] = '#';
 		$menu['General']['Basic Settings'] = 'admin/settings/basic';
 		$menu['General']['Advanced Settings'] = 'admin/settings/advanced';
 
