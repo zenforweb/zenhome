@@ -39,25 +39,16 @@ class Remote extends MY_Controller {
 	}
 
 	/**
-	* Method which will render the user settings for an App, displayed in profile
+	* Method which will render the dashboard widget
 	*
 	*/
-	public function user_settings(){
-		$this->view_portlet( 'apps/remote/user_settings' );
-	}
-
-	/**
-	* Method which will render the dashboard portlet
-	*
-	*/
-	public function portlet(){
-		$data = array( );
-
-		$this->view_portlet( 'apps/remote/portlet', $data );
+	public function widget(){
+		
+		$this->view_portlet( 'apps/remote/widget' );
 	}
 
 	public function command( $device, $command ) {
-		if( $device = 'reciever'){
+		if( $device == 'reciever'){
 			$this->reciever( $command );
 		}
 	}

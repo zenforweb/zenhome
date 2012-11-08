@@ -6,14 +6,21 @@
 		<link href="<?php echo base_url() . FRONT_END; ?>bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="<?php echo base_url() .FRONT_END; ?>bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 		<link href="<?php echo base_url() . FRONT_END; ?>css/layout.css" rel="stylesheet">
-				<!-- @todo dynamically load media files -->
+				<!-- @todo dynamically load media files ie desktop, tablet, mobile-->
 		<link href="<?php echo base_url() . FRONT_END; ?>css/media/phone.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="<?php echo base_url() . FRONT_END; ?>bootstrap/js/bootstrap.min.js"></script>
-		<script src="<?php echo base_url() . FRONT_END; ?>js/libs/jquery-1.8.2.min.js"></script>
+
 		<script type="text/javascript">
 			var base_url = '<? echo base_url(); ?>';
 		</script>
+		
+		<style type="text/css">
+		  body {
+		    background-image: url('<? echo base_url() . FRONT_END; ?>img/backgrounds/body-bg.png');
+		  }
+		</style>
+		<? // here we'll load set the users chossen background image ?>
 	</head>
 	<body>
 		<div class="hidden-phone navbar">
