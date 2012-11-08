@@ -1,11 +1,103 @@
 #wrap {
     margin-top: 20px;
 }
-
 /* Large desktop */
 @media (min-width: 1200px) { 
 }
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
+}
+
+/* DASHBOARD STUFF */
+#widget_platter {
+    margin: auto;
+}
+.widget-header {
+  height: 20px;
+  border-bottom: 1px solid #DDD;
+  margin-bottom: -1px;
+  padding: 10px;
+  padding-bottom: 15px;
+  padding-top: 0;
+  background-color: #FAFAFA;
+  background-image: -moz-linear-gradient(top, #FAFAFA, #EFEFEF);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FAFAFA), to(#EFEFEF));
+  background-image: -webkit-linear-gradient(top, #FAFAFA, #EFEFEF);
+  background-image: -o-linear-gradient(top, #FAFAFA, #EFEFEF);
+  background-image: linear-gradient(to bottom, #FAFAFA, #EFEFEF);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fafafa', endColorstr='#efefef', GradientType=0);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 2px 2px 0px 0px;
+  -moz-border-radius: 2px 2px 0px 0px;
+  border-radius: 2px 2px 0px 0px;
+  overflow: hidden;
+}
+
+.widget-header a h2{
+    display: inline;
+    font-size: 19px;
+    color: #646464;
+    font-weight: 100;
+    margin: 0px;
+}
+
+.widget-body{
+    padding: 10px;
+}
+
+.widget-controls{
+  padding-top: 8px;
+}
+
+.widget-controls span{
+  padding-left: 6px;
+}
+
+.widget {
+  padding: 0px;
+  margin: 10px;
+  border: 1px solid #DDD;
+  background: #ffffff;
+}
+
+.shadow{
+  position: relative;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: rgba(0,0,0, .8);
+  text-shadow: 0 1px 0 #fff;
+  line-height: 1.5;
+}
+
+.shadow:before, .shadow:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%; 
+  top: 80%;
+  max-width:300px;
+  background: rgba(0, 0, 0, 0.7); 
+  -webkit-box-shadow: 0 15px 10px rgba(0,0,0, 0.7);   
+  -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  -webkit-transform: rotate(-3deg);    
+  -moz-transform: rotate(-3deg);   
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.shadow:after {
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
 }
