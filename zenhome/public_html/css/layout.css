@@ -20,20 +20,6 @@
   padding: 10px;
   padding-bottom: 15px;
   padding-top: 0;
-  background-color: #FAFAFA;
-  background-image: -moz-linear-gradient(top, #FAFAFA, #EFEFEF);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FAFAFA), to(#EFEFEF));
-  background-image: -webkit-linear-gradient(top, #FAFAFA, #EFEFEF);
-  background-image: -o-linear-gradient(top, #FAFAFA, #EFEFEF);
-  background-image: linear-gradient(to bottom, #FAFAFA, #EFEFEF);
-  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fafafa', endColorstr='#efefef', GradientType=0);
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  -webkit-border-radius: 2px 2px 0px 0px;
-  -moz-border-radius: 2px 2px 0px 0px;
-  border-radius: 2px 2px 0px 0px;
-  overflow: hidden;
 }
 
 .widget-header a h2{
@@ -63,6 +49,30 @@
   background: #ffffff;
 }
 
+
+/* user settings */
+
+.user_app_settings {
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.header-gradient{
+  background-color: #FAFAFA;
+  background-image: -moz-linear-gradient(top, #FAFAFA, #EFEFEF);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FAFAFA), to(#EFEFEF));
+  background-image: -webkit-linear-gradient(top, #FAFAFA, #EFEFEF);
+  background-image: -o-linear-gradient(top, #FAFAFA, #EFEFEF);
+  background-image: linear-gradient(to bottom, #FAFAFA, #EFEFEF);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fafafa', endColorstr='#efefef', GradientType=0);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 2px 2px 0px 0px;
+  -moz-border-radius: 2px 2px 0px 0px;
+  border-radius: 2px 2px 0px 0px;
+  overflow: hidden;
+}
 .shadow{
   position: relative;
   -moz-border-radius: 4px;
@@ -101,3 +111,4 @@
   right: 10px;
   left: auto;
 }
+

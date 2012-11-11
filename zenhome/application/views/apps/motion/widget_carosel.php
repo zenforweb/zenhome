@@ -1,6 +1,6 @@
 
 <div id="app_widget_motion_carosel" class="widget span4 shadow">
-	<div class="widget-header">
+	<div class="widget-header header-gradient">
 		<a href="<? base_url(); ?>apps/motion" class="pull-left">
 			<h2>Motion Recent</h2>
 	  </a>
