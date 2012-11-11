@@ -28,8 +28,8 @@
 	});
 </script>
 
-<div id="app_widget_remote" class="widget span4">
-	<div class="widget-header">
+<div id="app_widget_remote" class="widget span4 shadow">
+	<div class="widget-header header-gradient">
 		 <a href="<? base_url(); ?>apps/remote" class="pull-left">
 			<h2>Remote</h2>
 		</a>

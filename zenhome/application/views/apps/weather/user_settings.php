@@ -13,7 +13,7 @@
 ?>
 
 <div class="container-fluid user_app_settings" data-app-id="<? echo $app_info->row_id; ?>">
-	<div class="row-fluid">
+	<div class="row-fluid header">
 		<div class="span4">
 			<h4>Weather</h4>
 		</div>

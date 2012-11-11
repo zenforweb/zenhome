@@ -115,6 +115,7 @@ class Motion extends MY_Controller {
 		// and store a potential set of whitelisted IPs
 		$user_ip = getIP();
 		if( $user_ip[1] != 'local' ){
+		    //$this->setMessage('warning', 'Sorry we cant show you the live camera feed');
 		    return False;
 		} else {
 		  return True;

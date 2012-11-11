@@ -21,7 +21,7 @@
 </style>
 
 <div id="app-widget-weather" class="widget span4 shadow">
-	<div class="widget-header">
+	<div class="widget-header header-gradient">
 		<a href="<? echo base_url(); ?>apps/weather" class="pull-left">
 			<h2>Weather</h2>
 		</a>
