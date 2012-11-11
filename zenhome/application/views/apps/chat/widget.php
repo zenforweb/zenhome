@@ -9,7 +9,7 @@
   <script src="<?php echo base_url() . FRONT_END; ?>apps/chat/js/chat.js"></script>
 	<link href="<?php echo base_url() . FRONT_END; ?>apps/chat/css/chat.css" rel="stylesheet">
 
-	<div class="widget-header">
+	<div class="widget-header header-gradient">
 	  <a href="<? base_url(); ?>apps/chat" class="pull-left">
 			<h2>Chat</h2>
 	  </a>
@@ -23,17 +23,16 @@
 			<?
 			foreach ( $chat as $msg ) {
 				?>
-				<li id="chat_<? echo $msg['id']; ?>">
-					<div class="chat_image" style="width:50px">
+				<li id="chat_<? echo $msg['id']; ?>" class="row-fluid">
+					<div class="chat_image span2">
 						<img src="http://0.gravatar.com/avatar/<? echo $msg['user']['gravatar']; ?>?s=50&r=pg&d=mm"/>
 					</div>
-					<div class="chat_details">
+					<div class="chat_details span9">
 						<b><? echo ucfirst( $msg['user']['user_name'] ); ?>: </b> <br />
 						<? echo $msg['msg'] ?>
 						<br />
 						<small><? echo format_time( $msg['date'], 'D h:i:s' ); ?></small>
-					</div>
-					<div style="clear:both"></div>
+					</div
 				</li>
 				<?
 			}

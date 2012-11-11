@@ -11,16 +11,13 @@
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="<?php echo base_url() . FRONT_END; ?>bootstrap/js/bootstrap.min.js"></script>
 
-		<script type="text/javascript">
-			var base_url = '<? echo base_url(); ?>';
-		</script>
-		
+		<script type="text/javascript">var base_url = '<? echo base_url(); ?>';</script>
+		<script src="<?php echo base_url() . FRONT_END; ?>/js/notify.js"></script>
 		<style type="text/css">
 		  body {
 		    background-image: url('<? echo base_url() . FRONT_END; ?>img/backgrounds/body-bg.png');
 		  }
 		</style>
-		<? // here we'll load set the users chossen background image ?>
 	</head>
 	<body>
 		<div class="hidden-phone navbar">
@@ -83,16 +80,31 @@
 			</div>
 		</div>
 
-		<?
-		// display messages
-		if( isset( $_SESSION['message'] ) ){
-			?>
-			<div class="row-fluid">
-				<div class="span4 offset4 alert alert-<? echo $_SESSION['message']['type']; ?>">
-					<button type="button" class="close" data-dismiss="alert">x</button>
-					<? echo $_SESSION['message']['msg']; ?>
-				</div>
-			</div>
-			<?
-		}
-		?>
+		<style type="text/css">
+			#notify{
+				z-index: 10;
+				position: fixed;
+				right: 20px;
+				width: 400px;
+			}
+			#notify ul {
+				list-style: none;
+			}
+			#notify ul li {
+				
+			}
+
+		</style>
+
+		<div id="notify">
+			<ul>
+			  <?
+			  if( isset( $_SESSION['message'] ) ){
+                             ?>
+                             <li class="alert alert-<? echo $_SESSION['message']['type']; ?>" style="display:none;">
+                                <? echo $_SESSION['message']['msg']; ?>
+				<button type="button" class="close" data-dismiss="alert">x</button>
+			     </li>
+			  <? } ?>
+			</ul>
+		</div>

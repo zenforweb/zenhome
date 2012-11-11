@@ -8,7 +8,10 @@
 
 		function update_settings( app_id, setting_name, setting_value ){
 			var update_url = base_url + app_id + '/' + setting_name + '/' + setting_value;
-			$.ajax({ url: update_url, });
+			$.ajax({ 
+			   url: update_url,
+			   success: add_notification('success', 'Your setting has been saved'), 
+		        });
 			console.log( update_url );
 		}		
 		
@@ -42,6 +45,8 @@
 				 	value 			 = form_element.val();
 			update_settings( app_id, name, value );
 		});
+
+		$('.user_app_settings .header').addClass('header-gradient');
 
 	});
 </script>
@@ -112,6 +117,14 @@
 		</div>
 	</div>
 
+	<div class="row-fluid">
+		<h3>Appearance</h3>
+	</div>
+
+	<div class="row-fluid">
+		<h3> Notifications</h3>
+	</div>
+
 	<div id="app_settings" class="row-fluid">
 		<h3>App Settings</h3>
-		<div id="app_settings_list" class="span12">
+		<div id="app_settings_list" class="offset1 span10">
