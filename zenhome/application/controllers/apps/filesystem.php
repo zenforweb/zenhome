@@ -33,22 +33,31 @@ class Filesystem extends MY_Controller {
 	*/
 	public function index(){
 		$this->load->model('apps/FilesystemModel');
-		$this->appConfiguredCheck();
-		$data = array();
+		//$this->appConfiguredCheck();
+		$disks = $this->FilesystemModel->scanDrives();
+		$disk_stats = $this->FilesystemModel->getDiskStats( $disks );
+
+		$data = array(
+			'disks'  		 => $disks,
+			'disk_stats' => $this->FilesystemModel->getDiskStats( $disks ),
+		);
 		$this->view( 'apps/filesystem/index', $data );
 	}
 
 	/**
-	* Method which will render the dashboard portlet
+	* Method which will render the dashboard widget
 	*
 	*/
-	// public function widget(){
-	// 	$this->load->model('apps/ChatModel');
-	// 	$data = array(
-	// 		'chat' => $this->ChatModel->readChat( ),
-	// 	);
-	// 	$this->view_portlet( 'apps/chat/widget', $data );
-	// }
+	public function widget_charts(){
+		$this->load->model('apps/FilesystemModel');
+		$disks = $this->FilesystemModel->scanDrives();
+		$disk_stats = $this->FilesystemModel->getDiskStats( $disks );
+		$data = array(
+			'disks'  		 => $disks,
+			'disk_stats' => $this->FilesystemModel->getDiskStats( $disks ),
+		);
+		$this->view_widget( 'apps/filesystem/widget_charts', $data );
+	}
 
 	/**
 	* Method which will render the settings for an App

@@ -50,7 +50,7 @@ class Chat extends MY_Controller {
 		$data = array(
 			'chat' => $this->ChatModel->readChat( ),
 		);
-		$this->view_portlet( 'apps/chat/widget', $data );
+		$this->view_widget( 'apps/chat/widget', $data );
 	}
 
 	/**
@@ -71,7 +71,7 @@ class Chat extends MY_Controller {
 	public function read_ajax( $last_read ){
 		$this->load->model('apps/ChatModel');
 		$data = array ( 'chat' => $this->ChatModel->readChat( $last_read ) );
-		$this->view_portlet('apps/chat/chat_append', $data);
+		$this->view_widget('apps/chat/chat_append', $data);
 	}
 }
 
