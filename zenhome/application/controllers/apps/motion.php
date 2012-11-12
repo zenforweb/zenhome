@@ -59,7 +59,7 @@ class Motion extends MY_Controller {
 	}
 
 	/**
-	* Method which will render the dashboard portlet
+	* Method which will render the dashboard widget
 	*
 	*/
 	public function widget_cams(){
@@ -67,11 +67,11 @@ class Motion extends MY_Controller {
 		if( $this->view_cameras() ){
 		    $data['cameras'] = array();
 		}
-		$this->view_portlet( 'apps/motion/widget_cams', $data );
+		$this->view_widget( 'apps/motion/widget_cams', $data );
 	}
 
 	/**
-	* Method which will render the dashboard portlet
+	* Method which will render the dashboard widget
 	*
 	*/
 	public function widget_carosel(){
@@ -79,8 +79,7 @@ class Motion extends MY_Controller {
 		$data = array(
 			'images' => $this->MotionModel->readRecentImages(),
 		);
-		$this->view_portlet( 'apps/motion/widget_carosel', $data );
-
+		$this->view_widget( 'apps/motion/widget_carosel', $data );
 	}
 
 	/**

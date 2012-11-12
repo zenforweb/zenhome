@@ -44,7 +44,7 @@ class Remote extends MY_Controller {
 	*/
 	public function widget(){
 		
-		$this->view_portlet( 'apps/remote/widget' );
+		$this->view_widget( 'apps/remote/widget' );
 	}
 
 	public function command( $device, $command ) {
