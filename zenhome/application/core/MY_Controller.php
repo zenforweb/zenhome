@@ -55,7 +55,7 @@ class MY_Controller extends CI_Controller{
 		}
 	}
 
-	public function view_portlet( $view, $data = Null ){
+	public function view_widget( $view, $data = Null ){
 		$this->load->view( $view, $data );
 	}
 

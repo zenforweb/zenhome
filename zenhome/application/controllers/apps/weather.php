@@ -16,7 +16,7 @@ class Weather extends MY_Controller {
 	 *	|		/application/views/apps/weather/index.php  							VIEW
 	 *	|		/application/views/apps/weather/settings.php						VIEW
 	 *	|		/application/views/apps/weather/user_settings.php				VIEW	 
-	 *	|		/application/views/apps/weather/portlet.php	 						VIEW
+	 *	|		/application/views/apps/weather/widget.php	 						VIEW
 	 *
 	 *
 	 *	 ___ APPP SETTINGS _______________
@@ -51,7 +51,7 @@ class Weather extends MY_Controller {
 	}
 
 	/**
-	* Method which will render the dashboard portlet
+	* Method which will render the dashboard widget
 	*
 	*/
 	public function widget(){
@@ -59,7 +59,7 @@ class Weather extends MY_Controller {
 		$data = array(
 			'current' => $this->WeatherModel->getLastPoll(),
 		);
-		$this->view_portlet( 'apps/weather/widget', $data );
+		$this->view_widget( 'apps/weather/widget', $data );
 	}
 
 	/**
@@ -68,14 +68,6 @@ class Weather extends MY_Controller {
 	*/
 	public function settings(){
 		$this->view( 'apps/weather/settings' );
-	}
-
-	/**
-	* Method which will render the user settings for an App, displayed in profile
-	*
-	*/
-	public function user_settings_submit(){
-		$this->view_portlet( 'apps/weather/user_settings' );
 	}
 
 }

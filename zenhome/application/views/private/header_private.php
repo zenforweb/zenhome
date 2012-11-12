@@ -93,18 +93,17 @@
 			#notify ul li {
 				
 			}
-
 		</style>
 
 		<div id="notify">
 			<ul>
 			  <?
 			  if( isset( $_SESSION['message'] ) ){
-                             ?>
-                             <li class="alert alert-<? echo $_SESSION['message']['type']; ?>" style="display:none;">
-                                <? echo $_SESSION['message']['msg']; ?>
-				<button type="button" class="close" data-dismiss="alert">x</button>
-			     </li>
+					?>
+					<li class="alert alert-<? echo $_SESSION['message']['type']; ?>" style="display:none;">
+						<? echo $_SESSION['message']['msg']; ?>
+						<button type="button" class="close" data-dismiss="alert">x</button>
+			    </li>
 			  <? } ?>
 			</ul>
 		</div>
