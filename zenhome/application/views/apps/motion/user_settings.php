@@ -4,8 +4,8 @@
 *
 * $app_info			@stdClass Obj
 *	$enabled 			@bool
-* 	// Motion custom user settings
-* 		$widget_enabled 			@stdClass Obj
+* 	
+* Motion custom user settings
 */
 
 ?>

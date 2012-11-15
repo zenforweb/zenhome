@@ -28,17 +28,17 @@
 	});
 </script>
 
-<div id="app_widget_remote" class="widget span4 shadow">
-	<div class="widget-header header-gradient">
+<div id="app_widget_remote" class="box span4 shadow">
+	<div class="box-header header-gradient">
 		 <a href="<? base_url(); ?>apps/remote" class="pull-left">
 			<h2>Remote</h2>
 		</a>
-		<div class="widget-controls pull-right">
+		<div class="box-controls pull-right">
 			<span class="icon-chevron-up"></span>
 			<span class="icon-remove"></span>
 		</div>
 	</div>
-	<div class="widget-body">
+	<div class="box-body">
 			<div id="app_remote_controls">
 				<button value="1PWR01" class="btn btn-success btn-small">on</button>
 				<button value="1PWR00" class="btn btn-danger btn-small">off</button>

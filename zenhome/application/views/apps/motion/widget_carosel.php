@@ -1,15 +1,15 @@
 
-<div id="app_widget_motion_carosel" class="widget span4 shadow">
-	<div class="widget-header header-gradient">
+<div id="app_widget_motion_carosel" class="box span4 shadow">
+	<div class="box-header header-gradient">
 		<a href="<? base_url(); ?>apps/motion" class="pull-left">
 			<h2>Motion Recent</h2>
 	  </a>
-	 	<div class="widget-controls pull-right">
+	 	<div class="box-controls pull-right">
 			<span class="icon-chevron-up"></span>
 			<span class="icon-remove"></span>
 		</div>	 
 	</div>
-	<div class="widget-body">
+	<div class="box-body">
 		<div id="myCarousel" class="carousel slide">
 		  <!-- Carousel items -->
 		  <div class="carousel-inner" style="height:250px;">
