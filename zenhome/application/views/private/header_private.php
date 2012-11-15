@@ -9,12 +9,14 @@
 				<!-- @todo dynamically load media files ie desktop, tablet, mobile-->
 		<link href="<?php echo base_url() . FRONT_END; ?>css/media/phone.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
-		<script src="<?php echo base_url() . FRONT_END; ?>bootstrap/js/bootstrap.min.js"></script>
+		<script src="<?php echo base_url() . FRONT_END; ?>bootstrap/js/bootstrap.js"></script>
 
 		<script type="text/javascript">var base_url = '<? echo base_url(); ?>';</script>
-		<script src="<?php echo base_url() . FRONT_END; ?>/js/notify.js"></script>
+		<script src="<?php echo base_url() . FRONT_END; ?>js/notify.js"></script>
+				<script src="<?php echo base_url() . FRONT_END; ?>js/box-controls.js"></script>
 		<style type="text/css">
 		  body {
+		  	
 		    background-image: url('<? echo base_url() . FRONT_END; ?>img/backgrounds/body-bg.png');
 		  }
 		</style>

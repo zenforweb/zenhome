@@ -29,10 +29,10 @@
   }
 
   <?
+  // create each disks graph
   foreach( $disks as $disk ){
   	?>
-		google.setOnLoadCallback(drawChart_<? echo $disk['slug_name']; ?>);
-
+	google.setOnLoadCallback(drawChart_<? echo $disk['slug_name']; ?>);
 	  function drawChart_<? echo $disk['slug_name']; ?>() {
 	    var data = google.visualization.arrayToDataTable([
 	      ['Drive', 'Gigabytes'],
@@ -60,30 +60,49 @@
 		</div>
 		<div class="span2 pull-right">
 			<div class="dropdown pull-right">
-	  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-	  			<i class="icon-white icon-chevron-down"></i> Options
-	  		</a>
-	  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    		<li><a href="<? echo base_url(); ?>apps/filesystem/settings">Settings</a></li>
-	  		</ul>
+		  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+		  			<i class="icon-white icon-chevron-down"></i> Options
+		  		</a>
+		  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		    		<li><a href="<? echo base_url(); ?>apps/filesystem/settings">Settings</a></li>
+		  		</ul>
 			</div>
 		</div>
 	</div>
 
 	<div class="row-fluid">
 		<div class="span6">
-			<div class="header-gradient">
-				<a href=""><h2>Disk Stats</h2></a>
-			</div>
 			<? 
 			foreach( $disks as $disk ){
 				?>
-				<div id="chart_disk<? echo $disk['slug_name']; ?>" style="height:300px;"></div>
+				<div class="box shadow">
+					<div class="box-header header-gradient">
+						<h2>Disk: <strong><? echo ucfirst( $disk['pretty_name'] ); ?></strong></h2>
+						<div class="box-controls pull-right">
+							<span class="icon-chevron-up"></span>
+						</div>						
+					</div>
+					<div class="box-body">		
+						<div id="chart_disk<? echo $disk['slug_name']; ?>" style="height:300px;"></div>
+						<button class="btn btn-primary">Disk Files</button>
+					</div>
+				</div>
 				<?
 			}
 			?>
 		</div>
-
-		<div id="chart_totalSpace" class="span6" style="height:400px;"></div>
+		<div class="span6">
+			<div class="box shadow">
+				<div class="box-header header-gradient">
+					<h2>Disks Total</h2>
+					<div class="box-controls pull-right">
+						<span class="icon-chevron-up"></span>
+					</div>						
+				</div>
+				<div class="box-body">
+					<div id="chart_totalSpace" style="height:400px;"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

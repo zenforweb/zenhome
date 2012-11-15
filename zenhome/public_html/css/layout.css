@@ -9,11 +9,20 @@
 @media (min-width: 768px) and (max-width: 979px) { 
 }
 
+h2 {
+    display: inline;
+    font-size: 16px;
+    color: #646464;
+    font-weight: 100;
+    margin: 0px;
+}
+
 /* DASHBOARD STUFF */
 #widget_platter {
     margin: auto;
 }
-.widget-header {
+
+.widget-header, .box-header {
   height: 20px;
   border-bottom: 1px solid #DDD;
   margin-bottom: -1px;
@@ -22,36 +31,27 @@
   padding-top: 0;
 }
 
-.widget-header a h2{
-    display: inline;
-    font-size: 19px;
-    color: #646464;
-    font-weight: 100;
-    margin: 0px;
-}
 
-.widget-body{
+.widget-body, .box-body{
     padding: 10px;
 }
 
-.widget-controls{
+.box-controls{
   padding-top: 8px;
 }
 
-.widget-controls span{
+.box-controls span{
   padding-left: 6px;
 }
 
-.widget {
+.widget, .box{
   padding: 0px;
   margin: 10px;
   border: 1px solid #DDD;
   background: #ffffff;
 }
 
-
 /* user settings */
-
 .user_app_settings {
   background-color: white;
   margin-bottom: 20px;
@@ -73,6 +73,7 @@
   border-radius: 2px 2px 0px 0px;
   overflow: hidden;
 }
+
 .shadow{
   position: relative;
   -moz-border-radius: 4px;
@@ -111,4 +112,3 @@
   right: 10px;
   left: auto;
 }
-

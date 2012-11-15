@@ -68,29 +68,44 @@
 	</div>
 
 	<div class="row-fluid">	
-		<div class="span3">
-			<span class="app_weather_temp"><? echo $current->temp_f; ?>&deg;</span>
-			@
-			<span class="app_weather_humidity"><? echo $current->rel_humidity; ?></span> humidity
-			<br />
-			<? echo $current->weather; ?>
-			<br />
-			Feels like <b><? echo $current->feelslike_f; ?></b>
-			<br />
-			Wind at <b><? echo $current->wind_mph; ?></b> MPH to the <? echo $current->wind_direction; ?>
+		<div class="offset1 span10 box shadow">
+			<div class="box-header header-gradient">
+				<h2>Current Weather</h2>
+			</div>
+			<div class="box-body">
+				<span class="app_weather_temp"><? echo $current->temp_f; ?>&deg;</span>
+				@
+				<span class="app_weather_humidity"><? echo $current->rel_humidity; ?></span> humidity
+				<br />
+				<? echo $current->weather; ?>
+				<br />
+				Feels like <b><? echo $current->feelslike_f; ?></b>
+				<br />
+				Wind at <b><? echo $current->wind_mph; ?></b> MPH to the <? echo $current->wind_direction; ?>
+			</div>
 		</div>
 	</div>
 	
 	<div class="row-fluid">
-		<div class="span6 offset3">
-			<div id="chart_div_1" style="width: 600px; height: 300px;"></div>
+		
+		<div class="offset1 span5 box shadow">
+			<div class="box-header header-gradient">
+				<h2>Recent Weather</h2>
+			</div>
+			<div class="box=body">
+				<div id="chart_div_1" style=""></div>
+			</div>
 		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span6 offset3">
-			<div id="chart_div_2" style="width: 600px; height: 300px;"></div>
+
+		<div class="span5 box shadow">
+			<div class="box-header header-gradient">
+				<h2>Last 24 Hours</h2>
+			</div>
+			<div class="box=body">
+				<div id="chart_div_2" style=""></div>
+			</div>
 		</div>
+
 	</div>
-	<div class="row-fluid">
-	</div>
+
 </div>

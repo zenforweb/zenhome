@@ -20,17 +20,17 @@
 	}
 </style>
 
-<div id="app-widget-weather" class="widget span4 shadow">
+<div id="app-widget-weather" class="box span4 shadow">
 	<div class="widget-header header-gradient">
 		<a href="<? echo base_url(); ?>apps/weather" class="pull-left">
 			<h2>Weather</h2>
 		</a>
-		<div class="widget-controls pull-right">
+		<div class="box-controls pull-right">
 			<span class="icon-chevron-up"></span>
 			<span class="icon-remove"></span>
 		</div>
 	</div>
-	<div class="widget-body">
+	<div class="box-body">
 		<span class="app_weather_temp"><? echo $current->temp_f; ?>&deg;</span>
 		@
 		<span class="app_weather_humidity"><? echo $current->rel_humidity; ?></span> humidity
