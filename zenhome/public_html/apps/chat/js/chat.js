@@ -4,9 +4,8 @@ jQuery('document').ready(function($){
 		msg = encodeURIComponent( msg );
 		msg = msg.split( '.' ).join( '%2E' );
 		msg = msg.split( '!' ).join( '%21' );
+		msg = msg.split( '*' ).join( '%2a' );
 		msg = msg.split( '%2F' ).join( '%800' );
-
-		console.log( msg );
 		$.ajax({ url: base_url + 'apps/chat/write/' + msg, });
 	}
 
@@ -16,7 +15,8 @@ jQuery('document').ready(function($){
 		$.ajax({
 			url: base_url + 'apps/chat/read_ajax/' + last_id,
 			success: function(data) {
-				console.log( data.indexOf("li") != -1  );
+				//{debug} for ajax return
+				//console.log( data.indexOf("li") != -1  );
 				if( data.indexOf("li") != -1 ){
 					var chat_display = $('#chat_display');
 					chat_display.append( data );
@@ -49,7 +49,7 @@ jQuery('document').ready(function($){
 
 	setInterval( function(){ 
 		chat_refresh();
-	}, 3000);
+	}, 2000);
 
 	$('#chat_display').scrollTop( $("#chat_display").get(0).scrollHeight );
 });	
