@@ -12,19 +12,19 @@
 */
 ?>
 
-<div class="container-fluid user_app_settings" data-app-id="<? echo $app_info->row_id; ?>">
-	<div class="row-fluid header">
-		<div class="span4">
+<div class="container box user_app_settings" data-app-id="<? echo $app_info->row_id; ?>">
+	<div class="box-header header-gradient">
+		<div class="span3">
 			<h4>Weather</h4>
 		</div>
-		<div class="span4 pull-right">
-	    <div class="btn-group app-enable" data-toggle="buttons-radio">
-	    	<button type="button" class="btn <? if( $enabled['setting_value'] == 1 ){ ?> active<? } ?>">Enable</button>
-	    	<button type="button" class="btn <? if( $enabled['setting_value'] == 0 ){ ?> active<? } ?>">Disable</button>
-	    </div>
+		<div class="span3 pull-right">
+	    	<div class="btn-group app-enable" data-toggle="buttons-radio">
+	    		<button type="button" class="btn <? if( $enabled['setting_value'] == 1 ){ ?> active<? } ?>">Enable</button>
+	    		<button type="button" class="btn <? if( $enabled['setting_value'] == 0 ){ ?> active<? } ?>">Disable</button>
+	    	</div>
 		</div>
 	</div>
-	<div class="row-fluid">
+	<div class="box-body">
 		<div class="span6">
 			<form data-app-id="<? echo $app_info->row_id; ?>">
 				<table>

@@ -5,7 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="<?php echo base_url() . FRONT_END; ?>bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="<?php echo base_url() .FRONT_END; ?>bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-		<link href="<?php echo base_url() . FRONT_END; ?>css/layout.css" rel="stylesheet">
+		<link href="<?php echo base_url() . FRONT_END; ?>css/helpers.css" rel="stylesheet">			
+		<link href="<?php echo base_url() . FRONT_END; ?>css/layout.css" rel="stylesheet">	
 				<!-- @todo dynamically load media files ie desktop, tablet, mobile-->
 		<link href="<?php echo base_url() . FRONT_END; ?>css/media/phone.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -63,22 +64,19 @@
   				<li class="dropdown">
     				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
     					<img src="http://0.gravatar.com/avatar/<? echo $this->user['gravatar']; ?>?s=20&r=pg&d=mm"/>
-      				<?
-
-      				
-      		
-      				 echo ucfirst( $this->user['user_name'] ); ?>
+      				<? echo ucfirst( $this->user['user_name'] ); ?>
       				<b class="caret"></b>
    	 				</a>
     				<ul class="dropdown-menu">
     					<li><a href="<? echo base_url(); ?>profile">Profile</a></li>
-							<li><a tabindex="-1" href="<? echo base_url(); ?>admin/home">Admin</a></li>
+    						<? if( $this->user['user_id'] == 2 || $this->user['user_id'] == 3 || $this->user['user_id'] == 4 ){ //@todo: implenent the ACL here, so we show only to Admins?>
+								<li><a tabindex="-1" href="<? echo base_url(); ?>admin/home">Admin</a></li>
+							<? } ?>
  							<li class="divider"></li>
  							<li><a href="<? echo base_url(); ?>outside/logout">Logout</a></li>  						
     				</ul>
   				</li>
 				</ul>
-
 			</div>
 		</div>
 
@@ -91,9 +89,6 @@
 			}
 			#notify ul {
 				list-style: none;
-			}
-			#notify ul li {
-				
 			}
 		</style>
 

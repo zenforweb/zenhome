@@ -9,22 +9,19 @@ class Xbmc extends MY_Controller {
 	 *	|-   -| . |     |  _|
 	 *	|__|__|___|_|_|_|___|
 	 *
-	 * 	Fetches weather, from weather underground
+	 * 	Connects to the Xbmc database and gets some different information. This app is still in it's infancy.
 	 *
 	 *	 ____ FILE MANIFEST ___________________________________________________
-	 *	|		/application/controllers/apps/xbmc.											CONTROLLER
-	 *	|		/application/models/apps/xbmcmodel.php 	 								MODEL
-	 *	|		/application/views/apps/xbmc/index.php  								VIEW
-	 *	|		/application/views/apps/xbmc/settings.php								VIEW
-	 *	|		/application/views/apps/xbmc/user_settings.php					VIEW	 
-	 *	|		/application/views/apps/xbmc/widget.php	 								VIEW
+	 *	|		/application/controllers/apps/xbmc.					CONTROLLER
+	 *	|		/application/models/apps/xbmcmodel.php 	 			MODEL
+	 *	|		/application/views/apps/xbmc/index.php  			VIEW
+	 *	|		/application/views/apps/xbmc/settings.php			VIEW
+	 *	|		/application/views/apps/xbmc/user_settings.php		VIEW
+	 *	|		/application/views/apps/xbmc/widget.php	 			VIEW
 	 *
 	 *			
 	 *	 ___ APPP USER SETTINGS _____________
 	 *	|		enabled 					@bool
-	 * 	|		temp_format				@string
-	 *  |		widget_enabled 		@bool
-	 *	|		widget_graph      @bool
 	 */
 
 	public function __construct(){
@@ -42,7 +39,8 @@ class Xbmc extends MY_Controller {
 		$this->load->model('apps/XbmcModel');
 		$this->XbmcModel->recentTvShows();
 		$data = array(
-			'recentDownloads' => $this->XbmcModel->recentTvShows(),
+			'recentDownloads' 	=> $this->XbmcModel->recentTvShows(),
+			'tvShows'			=> $this->XbmcModel->getAllTvShows(),
 		);
 		$this->view( 'apps/xbmc/index', $data );
 	}

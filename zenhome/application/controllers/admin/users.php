@@ -28,7 +28,8 @@ class Users extends MY_Controller {
 		$this->load->model('AdminModel');
 		$data = array(
 			'admin_menu' => $this->admin_menu(),
-			'logins'		 => $this->AdminModel->getUserLogins( $user_id ),
+			'logins'	 => $this->AdminModel->getUserLogins( $user_id ),
+			'user_id'	 => $user_id,
 		);
 		$this->view('admin/users/user_info', $data);
 	}
@@ -49,7 +50,14 @@ class Users extends MY_Controller {
 		redirect('admin/');
 	}
 
+	public function become_user( $user_id ){
+		session_destroy();
+		session_start();
+		$_SESSION['user_id'] = $user_id;
+		redirect('dashboard/');
+	}
+
 }
 
-/* End of file dashboard.php */
-/* Location: ./application/controllers/dashboard.php */
+/* End of file users.php */
+/* Location: ./application/controllers/admin/users.php */

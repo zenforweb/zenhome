@@ -56,8 +56,4 @@ class UserModel extends CI_Model {
 		$this->db->query( "UPDATE `". DB_NAME ."`.`user_secure` SET `user_pass` = '$new_password' WHERE `user_id` = '$user_id' " );
 	}
 
-	public function get_logs(){
-  	// "select * from user_access where ip NOT LIKE '10%' AND ip NOT LIKE '192%'"
-	}
-
 }
