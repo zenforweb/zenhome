@@ -40,10 +40,13 @@
     ]);
 
     var options = {
-      title: 'Weather temps for the last 24 hours'
+     	title: 'Weather temps for the last 24 hours',
+    	colors: ['#FFF700', 'red'],
+	//	hAxis.gridlines.count: 4
+
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('chart_div_2'));
+    var chart = new google.visualization.AreaChart(document.getElementById('chart_div_2'));
     chart.draw(data, options);
   }  
 </script>
@@ -73,15 +76,24 @@
 				<h2>Current Weather</h2>
 			</div>
 			<div class="box-body">
-				<span class="app_weather_temp"><? echo $current->temp_f; ?>&deg;</span>
-				@
-				<span class="app_weather_humidity"><? echo $current->rel_humidity; ?></span> humidity
-				<br />
+				<div class="row-fluid">
+					<div class="span4">
+						<span class="app_weather_temp"><? echo $current->temp_f; ?>&deg;</span>
+					</div>
+					<div class="span1">@</div>
+					<div class="span4">
+						<span class="app_weather_humidity"><? echo $current->rel_humidity; ?></span> humidity
+					</div>
+				</div>
 				<? echo $current->weather; ?>
 				<br />
 				Feels like <b><? echo $current->feelslike_f; ?></b>
 				<br />
 				Wind at <b><? echo $current->wind_mph; ?></b> MPH to the <? echo $current->wind_direction; ?>
+
+				<div class="row-fluid">
+					<div id="chart_div_2" class="span12" style="height:200px;"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -92,7 +104,7 @@
 			<div class="box-header header-gradient">
 				<h2>Recent Weather</h2>
 			</div>
-			<div class="box=body">
+			<div class="box-body">
 				<div id="chart_div_1" style=""></div>
 			</div>
 		</div>
@@ -101,8 +113,8 @@
 			<div class="box-header header-gradient">
 				<h2>Last 24 Hours</h2>
 			</div>
-			<div class="box=body">
-				<div id="chart_div_2" style=""></div>
+			<div class="box-body">
+
 			</div>
 		</div>
 

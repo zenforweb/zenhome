@@ -12,10 +12,12 @@ class ChatModel extends CI_Model {
 		$this->db->query( "INSERT INTO `". DB_NAME ."`.`app_chat` ( `user_id`, `message` ) VALUES( '$user_id', ". $this->db->escape( $message ) . " )" );
 	}
 
-	public function readChat( $id = Null, $limit = 7 ){
+	public function readChat( $id = Null, $past = False ){
 		$hours24 = date ( 'Y-m-d G:i:s', time() - 86400 );
-		if( !isset( $id ) ){
-			$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`app_chat` WHERE date > '$hours24' ORDER BY `id` DESC" );
+		if( !isset( $id ) && $past == False ){
+			$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`app_chat` WHERE `date` > '$hours24' ORDER BY `id` DESC" );
+		} elseif( $id == 0 && $past == True ) {
+			$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`app_chat` ORDER BY `id` DESC LIMIT 10" );			
 		} else {
 			$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`app_chat` WHERE `id` > '" . $id . "'" );
 		}
@@ -25,7 +27,7 @@ class ChatModel extends CI_Model {
 			$chats[$i]['id']   = $row->id;
 			$chats[$i]['date'] = $row->date;
 			$chats[$i]['msg']  = $row->message;
-		  $chats[$i]['user'] = $this->getUser( $row->user_id );
+			$chats[$i]['user'] = $this->getUser( $row->user_id );
 			$i++;
 		}
 		$chats = array_reverse( $chats );
@@ -41,14 +43,11 @@ class ChatModel extends CI_Model {
 	private function checkForLink( $message ){
 		$reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
 		if(preg_match($reg_exUrl, $message, $url)) {
-			
 			if( strlen( $url[0] > 50 ) ){
 				$message = preg_replace($reg_exUrl, "<a target='_blank' href=". $url[0] . ">Url too long, just click it</a> ", $message);
 			} else {
 				$message = preg_replace($reg_exUrl, "<a target='_blank' href=". $url[0] . ">" . $url[0] ."</a> ", $message);	
 			}
-			
-
 			strlen( $message );
 		}
 		return $message;

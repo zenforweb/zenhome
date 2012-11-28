@@ -96,7 +96,7 @@
     <button class="close" data-dismiss="modal">x</button>
     <h3>Change Password</h3>
   </div>
-	<form action="<? echo base_url(); ?>admin/add_user"/ method="POST">
+	<form action="<? echo base_url(); ?>admin/users/add_user"/ method="POST">
 		<div class="modal-body">
 			<legend>Add User</legend>
 			<label>User</label>

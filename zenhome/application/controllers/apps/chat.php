@@ -11,14 +11,14 @@ class Chat extends MY_Controller {
 	 * Allows users to chat on internal site
 	 *
 	 *	 ____FILE MANIFEST________________________________________________________
-	 *	|		/application/controllers/apps/chat.php											CONTROLLER
-	 *	|		/application/models/apps/chatmodel.php 											MODEL
-	 *	|		/application/views/apps/chat/index.php  										VIEW 
-	 *	|		/application/views/apps/chat/settings.php										VIEW 
-	 *	|		/application/views/apps/chat/user_settings.php 							VIEW  
-	 *	|		/application/views/apps/chat/portlet.php	 									VIEW
-	 *	|		/application/views/apps/chat/chat_append.php	 							AJAX-VIEW
-	 *	|		/public_html/apps/chat/js/chat_js.php	 											JS
+	 *	|		/application/controllers/apps/chat.php					CONTROLLER
+	 *	|		/application/models/apps/chatmodel.php 					MODEL
+	 *	|		/application/views/apps/chat/index.php  				VIEW 
+	 *	|		/application/views/apps/chat/settings.php				VIEW 
+	 *	|		/application/views/apps/chat/user_settings.php 			VIEW  
+	 *	|		/application/views/apps/chat/portlet.php	 			VIEW
+	 *	|		/application/views/apps/chat/chat_append.php	 		AJAX-VIEW
+	 *	|		/public_html/apps/chat/js/chat_js.php	 				JS
 	 *
 	 */
 
@@ -48,7 +48,7 @@ class Chat extends MY_Controller {
 	public function widget(){
 		$this->load->model('apps/ChatModel');
 		$data = array(
-			'chat' => $this->ChatModel->readChat( ),
+			'chat' => $this->ChatModel->readChat(),
 		);
 		$this->view_widget( 'apps/chat/widget', $data );
 	}
@@ -68,9 +68,13 @@ class Chat extends MY_Controller {
 		$this->ChatModel->writeChat( $this->user['user_id'], $message );
 	}
 
-	public function read_ajax( $last_read ){
+	public function read_ajax( $last_read, $past = False ){
 		$this->load->model('apps/ChatModel');
-		$data = array ( 'chat' => $this->ChatModel->readChat( $last_read ) );
+		if( $past ):
+			$data = array ( 'chat' => $this->ChatModel->readChat( $last_read, True ) );
+		else:
+			$data = array ( 'chat' => $this->ChatModel->readChat( $last_read ) );
+		endif;
 		$this->view_widget('apps/chat/chat_append', $data);
 	}
 }

@@ -27,7 +27,7 @@
 	</div>
 
 	<div class="row-fluid">
-		<div class="span7 box shadow">
+		<div class="span10 box shadow">
 			<div class="box-header header-gradient">
 				<h2>Chat Box</h2>
 				<div class="box-controls pull-right">
@@ -57,6 +57,7 @@
 					}
 					?>
 				</ul>
+				<div id="chat_sound"></div>
 				<div class="input-append">
 			  		<input class="span10" id="chat_input" size="16" type="text">
 			  		<button class="btn" id="chat_input_btn" type="button">Send</button>

@@ -18,7 +18,7 @@
 		</div>	  
 	</div>
 	<div class="box-body">
-		<ul id="chat_display" style="word-wrap:break-word; padding-right:5px;">
+		<ul id="chat_display">
 			<?
 			foreach ( $chat as $msg ) {
 				?>
@@ -37,6 +37,7 @@
 			}
 			?>
 		</ul>
+		<div id="chat_sound"></div>
 		<div class="input-append row-fluid">
 			<input class="span9 pull-left" id="chat_input" size="16" type="text">
 			<button class="span3 btn pull-right" id="chat_input_btn" type="button">Send</button>

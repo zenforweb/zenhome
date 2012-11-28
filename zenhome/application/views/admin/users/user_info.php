@@ -14,7 +14,7 @@
 	  			<i class="icon-white icon-chevron-down"></i> Options
 	  		</a>
 	  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    		<li><a href="#change_password" data-toggle="modal">Add User</a></li>
+	    		<li><a href="<? echo base_url() . 'admin/users/become_user/'. $user_id; ?>" data-toggle="modal">Become User</a></li>
 	  		</ul>
 			</div>
 		</div>

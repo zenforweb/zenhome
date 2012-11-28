@@ -9,7 +9,7 @@
 	<!-- Page Title -->
 	<div class="row-fluid">
 		<div class="span4">
-				<h3>Motion Settings</h3>
+			<h3>Chat Settings</h3>
 		</div>
 		<div class="span2 pull-right">
 			<div class="dropdown pull-right">

@@ -127,4 +127,4 @@
 
 	<div id="app_settings" class="row-fluid">
 		<h3>App Settings</h3>
-		<div id="app_settings_list" class="offset1 span10">
+		<div id="app_settings_list" class="span12">
