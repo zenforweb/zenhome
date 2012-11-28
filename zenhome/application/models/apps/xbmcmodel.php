@@ -8,11 +8,6 @@ class XbmcModel extends CI_Model {
 		$this->xbmc_videoDB = 'MyVideos60';
 	}
 
-// SELECT * FROM 
-// 			`MyVideos60`.`episodeview`,
-// 			`MyVideos60`.`tvshowview` 
-// 			WHERE `episodeview`.`idShow` = `tvshowview`.`idShow` ORDER BY `episodeview`.`c05` DESC LIMIT 10
-
 	public function recentTvShows(){
 		$sql = "SELECT 
 				`tvshowview`.`c00` AS 'show_name',
@@ -44,14 +39,13 @@ class XbmcModel extends CI_Model {
 				$art_urls_raw = explode( 'http:', $row->show_art );
 				foreach ($art_urls_raw as $url) {
 					if( strpos( $url, 'graphical' ) !== false ) {
-						
-						$stripped_url = str_replace( '<thumb aspect="banner">',	'', $url 					);
-						$stripped_url = str_replace( "<thumb aspect='>", 				'', $stripped_url	);
-						$stripped_url = str_replace( '<thumb aspect=">', 				'', $stripped_url	);
-						$stripped_url = str_replace( '<thumb aspect=', 					'', $stripped_url	);
-						$stripped_url = str_replace( '<thumb>', 								'', $stripped_url	);
-						$stripped_url = str_replace( '</thumb>', 								'', $stripped_url	);
-						$art_urls['graphical'][] = 'http:' . $stripped_url;
+						$stripped_url 				= str_replace( '<thumb aspect="banner">',	'', $url 					);
+						$stripped_url 				= str_replace( "<thumb aspect='>", 			'', $stripped_url	);
+						$stripped_url 				= str_replace( '<thumb aspect=">', 			'', $stripped_url	);
+						$stripped_url 				= str_replace( '<thumb aspect=', 			'', $stripped_url	);
+						$stripped_url 				= str_replace( '<thumb>', 					'', $stripped_url	);
+						$stripped_url 				= str_replace( '</thumb>', 					'', $stripped_url	);
+						$art_urls['graphical'][] 	= 'http:' . $stripped_url;
 					} elseif( strpos( $url, 'posters' ) !== false ){
 						$stripped_url = str_replace('<thumb aspect="poster">', '', $url);
 						$stripped_url = str_replace('</thumb>', '', $stripped_url);
@@ -61,23 +55,35 @@ class XbmcModel extends CI_Model {
 			}
 
 			$shows[$i] = array(
-				'show_name'  					=> $row->show_name,
-				'show_art' 						=> $art_urls,
-				'show_genre'					=> $row->show_genre,
-				'show_studio'					=> $row->show_studio,
+				'show_name' 			=> $row->show_name,
+				'show_art' 				=> $art_urls,
+				'show_genre'			=> $row->show_genre,
+				'show_studio'			=> $row->show_studio,
 				'show_episode_count'	=> $row->totalCount,
-				'show_play_count'			=> $row->watchedcount,
-				'episode_name'  			=> $row->episode_name,
-				'episode_desc'				=> $row->episode_desc,
-				'epidsode_art'  			=> $row->episode_art,
-				'episode_aired' 			=> $row->episode_aired,
-				'episode_mpaa'				=> $row->mpaa,				
+				'show_play_count'		=> $row->watchedcount,
+				'episode_name'  		=> $row->episode_name,
+				'episode_desc'			=> $row->episode_desc,
+				'epidsode_art'  		=> $row->episode_art,
+				'episode_aired' 		=> $row->episode_aired,
+				'episode_mpaa'			=> $row->mpaa,				
 				'episode_play_count'	=> $row->playCount,
-				'episode_path'				=> $row->strPath . $row->strFileName,
+				'episode_path'			=> $row->strPath . $row->strFileName,
 			);
 			$i++;
 		}
 		return $shows;
 	}
 
+
+	public function getAllTvShows(){
+		$query = $this->db->query( "SELECT `idShow`, `c00` AS 'show_name' FROM `$this->xbmc_videoDB`.`tvshowview` ORDER BY `c00` ASC" );
+		$shows = array();
+		foreach( $query->result() as $row ){
+			$shows[] = array(
+				'show_name' => $row->show_name,
+				'id'		=> $row->idShow,
+			);
+		}
+		return $shows;
+	}
 }

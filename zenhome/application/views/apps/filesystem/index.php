@@ -84,7 +84,7 @@
 					</div>
 					<div class="box-body">		
 						<div id="chart_disk<? echo $disk['slug_name']; ?>" style="height:300px;"></div>
-						<button class="btn btn-primary">Disk Files</button>
+						<!-- <button class="btn btn-primary">Disk Files</button> -->
 					</div>
 				</div>
 				<?
