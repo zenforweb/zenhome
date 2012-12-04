@@ -52,6 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
+require_once( ZENHOME_DIR . 'application/libraries/acl.php');
 $autoload['libraries'] = array();
 
 
