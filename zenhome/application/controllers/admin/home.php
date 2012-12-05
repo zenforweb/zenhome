@@ -15,7 +15,8 @@ class Home extends MY_Controller {
 	 */
 
 	public function __construct(){
-		parent::__construct();		
+		parent::__construct();
+		$this->check_access( 'access_admin' );
 		$this->ip = getIP();
 	}
 
@@ -23,7 +24,7 @@ class Home extends MY_Controller {
 		$this->load->model('UserModel');
 		$data = array(
 			'admin_menu' => $this->admin_menu(),
-			'users' => $this->UserModel->getUsers(),
+			'users'      => $this->UserModel->getUsers(),
 		);	
 		$this->view('admin/home', $data);
 	}

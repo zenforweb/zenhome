@@ -12,6 +12,7 @@ class Apps extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->check_access( 'access_admin' );
 	}
 	
 	public function index(){
