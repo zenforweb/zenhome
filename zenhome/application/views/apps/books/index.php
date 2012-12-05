@@ -60,7 +60,7 @@
 							<?
 							if( ! empty( $book['file'] ) ){
 								?>
-								<a href="<? echo base_url() . FRONT_END . $book_path . $book['file']; ?>">
+								<a href="<? echo base_url() . 'apps/books/download/' . $book['id']; ?>">
 									<button class="btn btn-success btn-small">Download</button>
 								</a>
 								<?

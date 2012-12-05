@@ -14,18 +14,20 @@
 
 		<script type="text/javascript">var base_url = '<? echo base_url(); ?>';</script>
 		<script src="<?php echo base_url() . FRONT_END; ?>js/notify.js"></script>
-				<script src="<?php echo base_url() . FRONT_END; ?>js/box-controls.js"></script>
+		<script src="<?php echo base_url() . FRONT_END; ?>js/box-controls.js"></script>
+		
 		<style type="text/css">
 		  body {
-		  	
-		    background-image: url('<? echo base_url() . FRONT_END; ?>img/backgrounds/body-bg.png');
+				background-image: url('<? echo base_url() . FRONT_END; ?>img/backgrounds/body-bg.png');
 		  }
 		</style>
+
 	</head>
 	<body>
 		<div class="hidden-phone navbar">
 			<div class="navbar-inner">
 				<a class="brand" href="<? echo base_url(); ?>dashboard">ZenHome</a>
+
 				<ul class="nav">
 					<?
 					if( isset( $menu ) ){
@@ -33,19 +35,19 @@
 							if( $item[1] == 'apps' ){
 								?>
 								<li class="dropdown">
-							    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							      Apps
-							      <b class="caret"></b>
-							    </a>
-						  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-						  			<?
-					  				foreach ($item[3] as $app) {
-					  					?>
-					  					<li><a href="<?php echo base_url() .'apps/'. $app[1]; ?>"><? echo $app[0]; ?></a></li>		
-					  					<?
-					  				}
-						  			?>
-						  		</ul>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										Apps
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+										<?
+										foreach ($item[3] as $app) {
+											?>
+											<li><a href="<?php echo base_url() .'apps/'. $app[1]; ?>"><? echo $app[0]; ?></a></li>		
+											<?
+										}
+										?>
+									</ul>
 								</li>
 								<?
 							} else {
@@ -61,25 +63,28 @@
 				</ul>
 
 				<ul class="nav pull-right">
-  				<li class="dropdown">
-    				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    					<img src="http://0.gravatar.com/avatar/<? echo $this->user['gravatar']; ?>?s=20&r=pg&d=mm"/>
-      				<? echo ucfirst( $this->user['user_name'] ); ?>
-      				<b class="caret"></b>
-   	 				</a>
-    				<ul class="dropdown-menu">
-    					<li><a href="<? echo base_url(); ?>profile">Profile</a></li>
-    						<? if( $this->user['user_id'] == 2 || $this->user['user_id'] == 3 || $this->user['user_id'] == 4 ){ //@todo: implenent the ACL here, so we show only to Admins?>
-								<li><a tabindex="-1" href="<? echo base_url(); ?>admin/home">Admin</a></li>
-							<? } ?>
- 							<li class="divider"></li>
- 							<li><a href="<? echo base_url(); ?>outside/logout">Logout</a></li>  						
-    				</ul>
-  				</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<img src="http://0.gravatar.com/avatar/<? echo $this->user['gravatar']; ?>?s=20&r=pg&d=mm"/>
+						<? echo ucfirst( $this->user['user_name'] ); ?>
+						<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="<? echo base_url(); ?>profile">Profile</a></li>
+								<?
+									if( $userACL->hasPermission( 'access_admin' ) ){
+										?>
+										<li><a tabindex="-1" href="<? echo base_url(); ?>admin/home">Admin</a></li>
+										<?
+									}
+								?>
+								<li class="divider"></li>
+								<li><a href="<? echo base_url(); ?>outside/logout">Logout</a></li>  						
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
-
 		<style type="text/css">
 			#notify{
 				z-index: 10;
@@ -94,13 +99,13 @@
 
 		<div id="notify">
 			<ul>
-			  <?
+			<?
 			  if( isset( $_SESSION['message'] ) ){
 					?>
 					<li class="alert alert-<? echo $_SESSION['message']['type']; ?>" style="display:none;">
 						<? echo $_SESSION['message']['msg']; ?>
 						<button type="button" class="close" data-dismiss="alert">x</button>
-			    </li>
+					</li>
 			  <? } ?>
 			</ul>
 		</div>

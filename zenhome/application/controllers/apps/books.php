@@ -39,9 +39,6 @@ class Books extends MY_Controller {
 	*/
 	public function index(){
 		$this->load->model('apps/BooksModel');
-
-	//	echo "<pre>"; print_r( $this->BooksModel->getBooks() ); die();
-
 		$data = array(
 			'authors' 	=> $this->BooksModel->getAuthors(),
 			'books'			=> $this->BooksModel->getBooks(),
@@ -112,8 +109,14 @@ class Books extends MY_Controller {
 	* Download the book and track it
 	*
 	*/
-	public function download(){
-		
+	public function download( $book_id ){
+		$this->load->model('apps/BooksModel');
+		$book = $this->BooksModel->getBook( $book_id );
+		$book_file = base_url() . FRONT_END .'uploads/books/'. $book['file'];
+		$this->BooksModel->recordDownload( $book_id, $_SESSION['user_id'] );
+		header('Content-type: application/epub');
+		header( 'Content-Disposition: attachment; filename="'. $book['title'] . '.epub"' );
+		readfile( $book_file );		
 	}
 
 	/**
