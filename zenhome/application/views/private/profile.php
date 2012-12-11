@@ -8,7 +8,10 @@
 
 		function update_settings( app_id, setting_name, setting_value ){
 			var update_url = base_url + app_id + '/' + setting_name + '/' + setting_value;
-			$.ajax({ url: update_url, });
+			$.ajax({ 
+			   url: update_url,
+			   success: add_notification('success', 'Your setting has been saved'), 
+		        });
 			console.log( update_url );
 		}		
 		
@@ -27,14 +30,24 @@
     });
 
 		// App settings handler
-		$('select, input').change( function( event ){
+		$('select, input').change( function(){
 			var form_element = $(this),
 				 	app_id       = form_element.closest('form').attr('data-app-id'),
 				 	name 				 = form_element.attr('name'),
 				 	value 			 = form_element.val();
-			console.log( value );
 			update_settings( app_id, name, value );
 		});
+		// App settings handler for btn-groups
+		$('.app-setting button').click( function(){
+			var form_element = $(this),
+				 	app_id       = form_element.closest('form').attr('data-app-id'),
+				 	name 				 = form_element.parent('.app-setting').attr('name'),
+				 	value 			 = form_element.val();
+			update_settings( app_id, name, value );
+		});
+
+		$('.user_app_settings .header').addClass('header-gradient');
+
 	});
 </script>
 
@@ -84,20 +97,32 @@
 		</div>
 	</div>
 
+
+	<h3>General Settings</h3>
 	<div id="general_settings" class="row-fluid">
-		<h3>General Settings</h3>
-		<div class="span12">
+		<div class="span2">
+			<img src="http://0.gravatar.com/avatar/<? echo $this->user['gravatar']; ?>?s=150&r=pg&d=mm"/>
+		</div>
+		<div class="span9"
 			<form>
 				User Name: <input type="text" class="input" value="<? echo $user['user_name']; ?>">
 				<br />
 				Name: <input type="text" class="input input-small" value="<? echo $user['first_name']; ?>"> 
 				<input type="text" class="input input-medium" value="<? echo $user['last_name']; ?>"> 
 				<br />
-				//@todo make this work 
+				Email: <input type="text" class="input" value="<? echo $user['user_name']; ?>">				
 				<br/>
 				<button type="subit" class="btn btn-primary">Save</button>
 			</form>
 		</div>
+	</div>
+
+	<div class="row-fluid">
+		<h3>Appearance</h3>
+	</div>
+
+	<div class="row-fluid">
+		<h3> Notifications</h3>
 	</div>
 
 	<div id="app_settings" class="row-fluid">

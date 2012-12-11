@@ -8,11 +8,22 @@ if ( ! function_exists('getIP')){
 				foreach (explode(',', $_SERVER[$key]) as $ip) {
 					if (filter_var($ip, FILTER_VALIDATE_IP) !== false) {
 						$explode = explode(".", $ip);
-						if( $explode[0] = "10" && $explode[1] == "1" ) {
-							return array( $ip, 'local' );
+						
+						if( $explode[0] == 10 ){
+						  $local = True;
+						} elseif( $explode[0] == 172 && $explode[0] <= 32 && $explode[0] >= 16 ){
+						  $local = True;
+						} elseif( $explode[0] == 192 && $explode == 168){
+						  $local = True;
 						} else {
-							return array( $ip, 'outside' );	
+						  $local = False;
 						}
+
+						if( $local ){
+						    return array( $ip, 'local' );
+						} else {
+						  return array( $ip, 'outside' );
+						}   
 					}
 				}
 			}
@@ -20,5 +31,15 @@ if ( ! function_exists('getIP')){
 	}
 }
 
+if ( ! function_exists('format_time')){
+	function format_time(  $time, $format = Null ){
+		$stamp = strtotime( $time );
+		if( $format == Null ){
+			return date('D h:i:s', $stamp);
+		} else {
+			return date( $format, $stamp);	
+		}
+	}
+}
 ?>
 

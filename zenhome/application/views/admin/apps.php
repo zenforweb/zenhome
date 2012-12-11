@@ -1,15 +1,15 @@
 <?php
-	// APPS index
+	// ADMIN :: APPS :: CONTROL PANEL
 ?>
 
 <div id="wrap" class="container-fluid">
 	<!-- Page Title -->
 	<div class="row-fluid">
 		<div class="span4">
-				<h3>Apps</h3>
+				<h3>Admin Apps Control Panel</h3>
 		</div>
 		<div class="span3 pull-right">
-			<div class="dropdown">
+			<div class="dropdown pull-right">
 	  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
 	  			<i class="icon-white icon-chevron-down"></i> Options
 	  		</a>
@@ -22,7 +22,27 @@
 	</div>
 
 	<div class="row-fluid">
-		<div class="span8">
+		<!-- Admin Menu -->
+		<div class="span3">
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<?
+					foreach ($admin_menu as $title => $menu) {
+						?>
+						<li class="nav-header"><? echo $title; ?></li>
+						<?
+						foreach ($menu as $name => $link) {
+							?>
+							<li><a href="<? echo base_url() . $link ; ?>"><? echo $name; ?></a></li>
+							<?
+						}
+					}
+					?>
+				</ul>
+      </div>
+		</div>
+
+		<div class="span9">
 			<table class="table table-striped">
 				<thead>
 					<tr>

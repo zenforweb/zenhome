@@ -11,8 +11,8 @@
 		<div class="span4">
 				<h3>Weather Settings</h3>
 		</div>
-		<div class="span3 pull-right">
-			<div class="dropdown">
+		<div class="span2 pull-right">
+			<div class="dropdown pull-right">
 	  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
 	  			<i class="icon-white icon-chevron-down"></i> Options
 	  		</a>
@@ -27,22 +27,45 @@
 	<div class="row-fluid">
 		<div class="span8">
 			<form>
-		    <fieldset>
+				<fieldset>
 					<div class="control-group">
-					  <label class="control-label" for="device_name">Api Key</label>
-					  <div class="controls">
-					    <input name="device_name" class="input-xlarge focused" id="device_name" type="text" value="52342342342423423424243234">
-					  </div>
-					  <label class="control-label" for="device_name">Zipcode</label>
-					  <div class="controls">
-					    <input name="device_name" class="input-small focused" id="device_name" type="text" value="80401">
-					  </div>					  
+					     <label class="control-label" for="device_name">Api Key</label>
+					     <div class="controls">
+					     	  <input name="device_name" class="input-xlarge focused" id="device_name" type="text" value="52342342342423423424243234">
+						  <span class="help-block"><small>Get your key from <a href="http://www.wunderground.com/weather/api/">Weather Undground</a></small></span>
+					     </div>
+					     <label class="control-label" for="device_name">Zipcode</label>
+					     <div class="controls">
+					     	  <input name="device_name" class="input-small focused" id="device_name" type="text" value="80401">
+					    </div>
 					</div>					
 					<div class="control-group">
 					  <div class="controls">
-					    <button type="submit" class="btn btn-primary">Submit</button>
+					       <label class="control-label" for="current_weather">Run Current Weather</label>
+					       <div class="btn-group" data-toggle="buttons-radio">
+  					       	    <button type="button" class="btn active">On</button>
+  						    <button type="button" class="btn">Off</button>
+					      </div>
 					  </div>
 					</div>
+                                        <div class="control-group">
+                                          <div class="controls">
+                                               <label class="control-label" for="current_weather">Run Weather Alerts</label>
+                                               <div class="btn-group" data-toggle="buttons-radio">
+                                                    <button type="button" class="btn">On</button>
+                                                    <button type="button" class="btn active">Off</button>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <div class="controls">
+                                               <div class="btn-group" data-toggle="buttons-radio">
+                                               	    <button type="submit" class="btn btn-primary">Submit</button>
+                                              </div>
+                                          </div>
+                                        </div>
+
+			     </fieldset>
 			</form>
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Admin extends MY_Controller {
+class Home extends MY_Controller {
 
 	/**
 	 * Admin controller.
@@ -15,18 +15,18 @@ class Admin extends MY_Controller {
 	 */
 
 	public function __construct(){
-		parent::__construct();		
+		parent::__construct();
+		$this->check_access( 'access_admin' );
 		$this->ip = getIP();
 	}
 
 	public function index(){
 		$this->load->model('UserModel');
-
 		$data = array(
-			'users' => $this->UserModel->getUsers(),
+			'admin_menu' => $this->admin_menu(),
+			'users'      => $this->UserModel->getUsers(),
 		);	
-
-		$this->view('private/admin', $data);
+		$this->view('admin/home', $data);
 	}
 
 	public function add_user(){
