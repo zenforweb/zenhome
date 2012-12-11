@@ -3,26 +3,37 @@
 class Weather extends MY_Controller {
 
 	/**
-	 * Weather App
+	 *	 _ _ _         _   _           
+	 *	| | | |___ ___| |_| |_ ___ ___ 
+	 *	| | | | -_| .'|  _|   | -_|  _|
+	 * 	|_____|___|__,|_| |_|_|___|_|  
 	 *
-	 * Fetches weather, from weather underground
+	 * 	Fetches weather, from weather underground
 	 *
-	 *	WEB INTERFACE
-	 *		/application/controllers/apps/app_weather.php 					CONTROLLER
-	 *		/application/models/apps/weathermodel.php 							MODEL
-	 *		/application/views/apps/weather/index.php  							VIEW
-	 *		/application/views/apps/weather/settings.php						VIEW
-	 *		/application/views/apps/weather/user_settings.php				VIEW	 
-	 *		/application/views/apps/weather/portlet.php	 						VIEW
+	 *	 ____ FILE MANIFEST ___________________________________________________
+	 *	|		/application/controllers/apps/app_weather.php 					CONTROLLER
+	 *	|		/application/models/apps/weathermodel.php 							MODEL
+	 *	|		/application/views/apps/weather/index.php  							VIEW
+	 *	|		/application/views/apps/weather/settings.php						VIEW
+	 *	|		/application/views/apps/weather/user_settings.php				VIEW	 
+	 *	|		/application/views/apps/weather/widget.php	 						VIEW
 	 *
 	 *
+	 *	 ___ APPP SETTINGS _______________
+	 *	|		api_key						@string
+	 *			
+	 *	 ___ APPP USER SETTINGS _____________
+	 *	|		enabled 					@bool
+	 * 	|		temp_format				@string
+	 *  |		widget_enabled 		@bool
+	 *	|		widget_graph      @bool
 	 */
 
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('AppsModel');
 		$this->app_id = $this->AppsModel->getAppID('weather');
-		//$this->app_user_settings = $this->
+		$this->userAppSet = $this->AppsModel->getUserAppSettings( $this->app_id, $this->user['user_id']);
 	}
 
 	/**
@@ -33,22 +44,22 @@ class Weather extends MY_Controller {
 		$this->load->model('apps/WeatherModel');
 		$data = array(
 			'current' 			 => $this->WeatherModel->getLastPoll(),
-			'stats_overtime' => $this->WeatherModel->getTempLastMonth(),
-			'stats_recent' 	 => $this->WeatherModel->getRecentStats(),
+			'stats_overtime' => $this->WeatherModel->getTempLastMonth( $this->userAppSet['temp_format']['setting_value'] ),
+			'stats_recent' 	 => $this->WeatherModel->getRecentStats( ),
 		);
 		$this->view( 'apps/weather/index', $data );
 	}
 
 	/**
-	* Method which will render the dashboard portlet
+	* Method which will render the dashboard widget
 	*
 	*/
-	public function portlet(){
+	public function widget(){
 		$this->load->model('apps/WeatherModel');
 		$data = array(
 			'current' => $this->WeatherModel->getLastPoll(),
 		);
-		$this->view_portlet( 'apps/weather/portlet', $data );
+		$this->view_widget( 'apps/weather/widget', $data );
 	}
 
 	/**
@@ -57,14 +68,6 @@ class Weather extends MY_Controller {
 	*/
 	public function settings(){
 		$this->view( 'apps/weather/settings' );
-	}
-
-	/**
-	* Method which will render the user settings for an App, displayed in profile
-	*
-	*/
-	public function user_settings_submit(){
-		$this->view_portlet( 'apps/weather/user_settings' );
 	}
 
 }

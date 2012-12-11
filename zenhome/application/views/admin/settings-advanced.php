@@ -21,20 +21,24 @@
 	</div>
 
 	<div class="row-fluid">
+		<!-- Admin Menu -->
 		<div class="span3">
 			<div class="well sidebar-nav">
 				<ul class="nav nav-list">
-				  <li class="nav-header">General</li>
-				  <li><a href="<? echo base_url(); ?>admin/settings/basic">Basic Settings</li>
-				  <li><a href="<? echo base_url(); ?>admin/settings/advanced">Advanced Settings</a></li>
-				  <li class="nav-header">Users</li>
-				  <li><a href="<? echo base_url(); ?>admin/home">All Users</a></li>
-				  <li class="nav-header">Apps</li>
-				  <li><a href="<? echo base_url(); ?>admin/apps">Control Panel </a></li>		  
-				  <li class="nav-header">Devices</li>
-				  <li><a href="#">All Devices</a></li>
+					<?
+					foreach ($admin_menu as $title => $menu) {
+						?>
+						<li class="nav-header"><? echo $title; ?></li>
+						<?
+						foreach ($menu as $name => $link) {
+							?>
+							<li><a href="<? echo base_url() . $link ; ?>"><? echo $name; ?></a></li>
+							<?
+						}
+					}
+					?>
 				</ul>
-      </div>			
+      </div>
 		</div>
 
 		<div class="span9">

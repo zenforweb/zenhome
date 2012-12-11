@@ -4,26 +4,27 @@
 *	
 * $app_info							@stdClass Obj
 *	$enabled 							@bool
-* 	// Weather custom user settings
+*
+* | Weather custom user settings
 * 		$widget_enabled 			@stdClass Obj
 * 		$widget_graph					@stdClass Obj
 * 		$temp_format					@string
 */
 ?>
 
-<div class="container-fluid user_app_settings" data-app-id="<? echo $app_info->row_id; ?>">
-	<div class="row-fluid">
-		<div class="span4">
-			<h4>Outdoor Weather</h4>
+<div class="container box user_app_settings" data-app-id="<? echo $app_info->row_id; ?>">
+	<div class="box-header header-gradient">
+		<div class="span3">
+			<h4>Weather</h4>
 		</div>
-		<div class="span4 pull-right">
-	    <div class="btn-group app-enable" data-toggle="buttons-radio">
-	    	<button type="button" class="btn <? if( is_object( $enabled ) && $enabled->setting_value == '1' ){ ?> active<? } ?>">Enable</button>
-	    	<button type="button" class="btn <? if( !is_object( $enabled ) || $enabled->setting_value == '0' ){ ?> active<? } ?>">Disable</button>
-	    </div>
+		<div class="span3 pull-right">
+	    	<div class="btn-group app-enable" data-toggle="buttons-radio">
+	    		<button type="button" class="btn <? if( $enabled['setting_value'] == 1 ){ ?> active<? } ?>">Enable</button>
+	    		<button type="button" class="btn <? if( $enabled['setting_value'] == 0 ){ ?> active<? } ?>">Disable</button>
+	    	</div>
 		</div>
 	</div>
-	<div class="row-fluid">
+	<div class="box-body">
 		<div class="span6">
 			<form data-app-id="<? echo $app_info->row_id; ?>">
 				<table>
@@ -34,8 +35,8 @@
 								<? 
 								if( isset( $temp_format ) ){
 									?>
-									<option <? if( $temp_format->setting_value == "f" ){ ?>selected="selected"<? }?> value="f">Fahrenheit</option>
-			            <option <? if( $temp_format->setting_value == "c" ){ ?>selected="selected"<? }?> value="c">Celcius</option>
+									<option <? if( $temp_format['setting_value'] == "f" ){ ?>selected="selected"<? }?> value="f">Fahrenheit</option>
+			            <option <? if( $temp_format['setting_value'] == "c" ){ ?>selected="selected"<? }?> value="c">Celcius</option>
 									<?
 								} else {
 							  	?>
@@ -59,9 +60,9 @@
 						<tr>
 							<td>Show Weather Widget</td>
 							<td>
-								<div class="btn-group app-setting" data-toggle="buttons-radio" name="widget_enabled">
-			  					<button type="button" class="btn <? if( isset( $widget_enabled ) && ( $widget_enabled->setting_value == 1 ) ){ ?>active<? } ?>" value="1">Show</button>
-			 					  <button type="button" class="btn <? if( isset( $widget_enabled ) && ( $widget_enabled->setting_value  == 0) ){ ?>active<? } ?>" value="0">Hide</button>
+								<div class="btn-group app-setting" data-toggle="buttons-radio" name="widget">
+			  					<button type="button" class="btn <? if( $widget['setting_value'] == 1 ){ ?>active<? } ?>" value="1">Show</button>
+			 					  <button type="button" class="btn <? if( $widget['setting_value']  == 0){ ?>active<? } ?>" value="0">Hide</button>
 								</div>
 							</td>
 						</tr>
@@ -69,8 +70,8 @@
 							<td>Show 12 Hour Graph</td>
 							<td>
 								<div class="btn-group  app-setting" data-toggle="buttons-radio" name="widget_graph">
-			  					<button type="button" class="btn btn-small <? if( isset( $widget_graph ) && ( $widget_graph->setting_value  == 1) ){ ?>active<? } ?>" value="1">Show</button>
-			 					  <button type="button" class="btn btn-small <? if( isset( $widget_graph ) && ( $widget_graph->setting_value  == 0) ){ ?>active<? } ?>"value="0">Hide</button>
+			  					<button type="button" class="btn btn-small <? if( $widget_graph['setting_value']  == 1 ){ ?>active<? } ?>" value="1">Show</button>
+			 					  <button type="button" class="btn btn-small <? if( $widget_graph['setting_value']  == 0 ){ ?>active<? } ?>"value="0">Hide</button>
 								</div>
 							</td>
 						</tr>

@@ -52,9 +52,15 @@ class Outside extends CI_Controller {
 		$password  = md5( $_REQUEST['password'] );
 		$this->load->model('UserModel');
 		$verify = $this->UserModel->verify_user($user_name, $password);
+		$userACL = new ACL( $verify );
 		if( $verify ){
 			$_SESSION['user_id'] = $verify;
-			redirect('outside/index');
+			if( ! $userACL->hasPermission( 'access-site' ) ){		//@todo: figure out why this bool seems flipped
+				redirect('outside/index');
+			} else {
+				$this->setMessage('error', 'Sorry, you cannot access the site right now. Ask an administrator why, they might even know.');
+				redirect( '/outside/failed' );
+			}
 		} else {
 			redirect( '/outside/failed' );
 		}
@@ -70,7 +76,7 @@ class Outside extends CI_Controller {
 
 	public function logout(){
 		session_destroy();
-		redirect( 'outside/' );
+		redirect( '' );
 	}
 
 	public function failed(){

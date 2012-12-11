@@ -15,17 +15,17 @@ class Home extends MY_Controller {
 	 */
 
 	public function __construct(){
-		parent::__construct();		
+		parent::__construct();
+		$this->check_access( 'access_admin' );
 		$this->ip = getIP();
 	}
 
 	public function index(){
 		$this->load->model('UserModel');
-
 		$data = array(
-			'users' => $this->UserModel->getUsers(),
+			'admin_menu' => $this->admin_menu(),
+			'users'      => $this->UserModel->getUsers(),
 		);	
-
 		$this->view('admin/home', $data);
 	}
 

@@ -1,11 +1,82 @@
+/* General / Layout */
 #wrap {
     margin-top: 20px;
 }
 
+
 /* Large desktop */
-@media (min-width: 1200px) { 
-}
+@media (min-width: 1200px) { }
+
  
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) { 
+@media (min-width: 768px) and (max-width: 979px) { }
+
+
+/* Typography */
+h2 {
+    display: inline;
+    font-size: 16px;
+    color: #646464;
+    font-weight: 100;
+    margin: 0px;
+}
+
+
+/* Notifications */
+#notify{
+  z-index: 10;
+  position: fixed;
+  right: 20px;
+  width: 400px;
+}
+
+#notify ul {
+  list-style: none;
+}
+
+
+/* Dashboard */
+#widget_platter {
+    margin: auto;
+}
+
+
+/* Boxes */
+.widget, .box{
+  border: 1px solid #DDD;
+  background: #ffffff;
+  margin-bottom: 20px;
+}
+
+.widget-header, .box-header {
+  height: 38px;
+  border-bottom: 1px solid #DDD;
+}
+
+.box-header div, .box-header h2{
+  padding: 10px;
+}
+
+.widget-body, .box-body{
+  padding: 10px;
+}
+
+
+/* Box Controls */
+.box-controls{
+  padding-top: 8px;
+}
+
+.box-controls span{
+  padding-left: 6px;
+}
+
+
+/* User Profile - Settings */
+.user_app_settings .box-header {
+  height: 50px;
+}
+
+.app-enable{
+  margin-top:-9px;
 }

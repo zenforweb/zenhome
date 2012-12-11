@@ -3,32 +3,83 @@
 class Motion extends MY_Controller {
 
 	/**
-	 * Motion App
+	 *	 _____     _   _         
+	 *	|     |___| |_|_|___ ___ 
+	 *	| | | | . |  _| | . |   |
+	 * 	|_|_|_|___|_| |_|___|_|_|
+   *
 	 *
-	 * Pulls in local camera feeds from Motion
+	 * 	Pulls in local live camera feeds from Motion, and displays recently captured images
 	 *
-	 *	WEB INTERFACE
-	 *		/application/controllers/apps/motion.php 									CONTROLLER
-	 *		/application/views/apps/motion/index.php  											VIEW
-	 *		/application/views/apps/motion/settings.php											VIEW	 
-	 *		/application/views/apps/motion/portlet.php	 										VIEW
+	 *	 ____FILE MANIFEST________________________________________________________
+	 *	|		/application/controllers/apps/motion.php 									CONTROLLER 	
+	 *	|		/application/views/apps/motion/index.php  								VIEW        
+	 *	|		/application/views/apps/motion/settings.php								VIEW	 		 	
+	 *	|		/application/views/apps/motion/widget.php	 								VIEW 				
+	 *	|
+	 *	
+	 *		
+	 *	 ____APPP SETTINGS______________________________
+	 *	|		enabled 		@bool
+	 *	|
 	 *
 	 *
+	 *	 ____APPP USER SETTINGS_________________________
+	 *	|		enabled 				@bool
+	 *	|		widget_cams 		@bool
+	 *	|		widget_carosel  @bool
+	 *	|
+	 * 
+	 *	sudo apt-get install php5-curl
 	 */
 
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('AppsModel');
-		$this->app_id = $this->AppsModel->getAppID('motion');
+		$this->app_id 			 = $this->AppsModel->getAppID('motion');
+		$this->app_motion_fp = 'security';
 	}
 
 	/**
-	* Method which will render the Apps landing page
+	* Method which renders the apps main page
 	*
 	*/
 	public function index(){
-		$data = array();
+		$this->load->model('apps/MotionModel');
+		$data = array(
+			'status' => $this->MotionModel->systemStatus(),
+			'images' => $this->MotionModel->readRecentImages(),
+			//'recent' => $this->MotionModel->readMotion(),
+		);
+		if( $this->view_cameras() ){
+		    $data['cameras'] = array( array( 'cam_name' => 'Front Door' )  );
+		}
+
 		$this->view( 'apps/motion/index', $data );
+	}
+
+	/**
+	* Method which will render the dashboard widget
+	*
+	*/
+	public function widget_cams(){
+		$data = array();
+		if( $this->view_cameras() ){
+		    $data['cameras'] = array();
+		}
+		$this->view_widget( 'apps/motion/widget_cams', $data );
+	}
+
+	/**
+	* Method which will render the dashboard widget
+	*
+	*/
+	public function widget_carosel(){
+		$this->load->model('apps/MotionModel');
+		$data = array(
+			'images' => $this->MotionModel->readRecentImages(),
+		);
+		$this->view_widget( 'apps/motion/widget_carosel', $data );
 	}
 
 	/**
@@ -39,33 +90,36 @@ class Motion extends MY_Controller {
 		$this->view( 'apps/motion/settings' );
 	}
 
-	/**
-	* Method which will render the user settings for an App, displayed in profile
-	*
-	*/
-	public function user_settings(){
-		$this->view_portlet( 'apps/motion/user_settings' );
+	public function arm( $value, $cam = Null ){
+		$this->load->model('apps/MotionModel');
+		//@todo: read this from a motion app settings
+		$motion = 'http://blackbox:cleancut@10.1.10.52:8080/';
+		if( $cam == Null ){
+			$camera = '0/detection/';
+			$cam = 0;
+		} else {
+			$camera = $cam .'/detection/';
+		}
+		if( $value == 1){
+			$signal = 'start';
+		} elseif ( $value == 0) {
+			$signal = 'pause';
+		}
+		$command = $motion . $camera .  $signal;
+		$this->MotionModel->systemArm( $this->user['user_id'], $cam, $value, $command );
 	}
-
-	/**
-	* Method which will render the user settings for an App, displayed in profile
-	*
-	*/
-	public function user_settings_submit(){
-		redirect( 'profile' );
+	
+	private function view_cameras(){
+		//@todo read setting to allow offsite IPs to read cameras,
+		// and store a potential set of whitelisted IPs
+		$user_ip = getIP();
+		if( $user_ip[1] != 'local' ){
+		    //$this->setMessage('warning', 'Sorry we cant show you the live camera feed');
+		    return False;
+		} else {
+		  return True;
+		}
 	}
-
-	/**
-	* Method which will render the dashboard portlet
-	*
-	*/
-	public function portlet(){
-		$this->load->model('apps/WeatherModel');
-		$data = array(
-		);
-		$this->view_portlet( 'apps/motion/portlet', $data );
-	}
-
 }
 
 /* End of file motion.php */

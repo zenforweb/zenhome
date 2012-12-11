@@ -12,6 +12,7 @@ class MY_Controller extends CI_Controller{
   		$this->setMessage( 'error', 'Your session does not exist' );
 			redirect('/');
 		}
+	
 		$this->load_user();
   }
 
@@ -48,19 +49,41 @@ class MY_Controller extends CI_Controller{
 			$this->load->view('private/header_guest');
 		} else {
 			$header = array( 
-				'menu' => $this->main_menu(),
-				'user' => $this->user,
+				'menu'    => $this->main_menu(),
+				'user'    => $this->user,
+				'userACL' => new ACL(),
 			);
 			$this->load->view('private/header_private', $header );
 		}
 	}
 
-	public function view_portlet( $view, $data = Null ){
+	public function view_widget( $view, $data = Null ){
 		$this->load->view( $view, $data );
 	}
 
 	public function setMessage( $type, $message){
 		$_SESSION['message'] = array( 'type' => $type, 'msg' => $message );
+	}
+
+	public function admin_menu(){
+		$menu = array();
+		//$menu['General']['Status'] = '#';
+		$menu['General']['Basic Settings'] = 'admin/settings/basic';
+		$menu['General']['Advanced Settings'] = 'admin/settings/advanced';
+
+		$menu['User']['All Users']  = 'admin/users';
+		$menu['User']['User Roles'] = 'admin/users/roles';
+		//$menu['User']['User Stats'] = '#';
+
+		$menu['Apps']['App Control'] = 'admin/apps';
+
+		//$menu['Devices']['All Devices'] = '#';
+
+		if( $this->check_access( 'developer', False ) ){
+			$menu['Dev Tools']['App Control'] = 'admin/dev';
+		}
+
+		return $menu;
 	}
 
 	private function unsetMessage(){
@@ -69,12 +92,26 @@ class MY_Controller extends CI_Controller{
 
 	private function make_app_menu(){
 		$this->load->model('AppsModel');
-		$enabled_apps = $this->AppsModel->getEnabledApps();
+		$enabled_apps = $this->AppsModel->getEnabledAppsForUser( $this->user['user_id']);
 		$app_menu = array();
 		foreach ($enabled_apps as $app) {
 			$app_menu[] = array( $app->pretty_name, $app->slug_name, 0 );
 		}
 		return $app_menu;
+	}
+
+	public function check_access( $perm, $message = True ){
+		$ACL = new ACL();
+		if ( ! $ACL->hasPermission( $perm ) ){
+			if( $message ){
+				$this->setMessage('error', 'You do not have access to that.');	
+				redirect('/');
+			} else {
+				return True;
+			}
+		} else {
+			return False;
+		}
 	}
 
 }

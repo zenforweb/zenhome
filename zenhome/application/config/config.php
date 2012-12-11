@@ -15,6 +15,7 @@
 |
 */
 define( 'ALLOW_GUESTS', FALSE ) ;
+define( 'ZENHOME_DIR', '/var/www/~alix/zenhome/zenhome/' );
 
 /*
 |--------------------------------------------------------------------------
