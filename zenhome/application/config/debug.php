@@ -3,4 +3,4 @@
 
 	define( 'DEVELOPMENT', True ) ;
 
-	define( 'DEVELOPMENT_USER_PATH', 'http://zen.homedns.org/' );
+	define( 'DEVELOPMENT_USER_PATH', 'http://zen.homedns.org/~chris/zenhome/' );
