@@ -19,10 +19,12 @@ class Profile extends MY_Controller {
 
 	public function index(){
 		$this->load->model('AppsModel');
-		$extra_views = $this->get_app_user_settings_pages();		
+
+		$extra_views = $this->get_app_user_settings_pages();
 		$data = array(
 			'apps' => $this->AppsModel->getEnabledApps(),
 		);
+
 		$this->view_profile( 'private/profile', $data, $extra_views );
 	}
 

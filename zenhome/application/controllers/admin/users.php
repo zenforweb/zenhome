@@ -29,10 +29,11 @@ class Users extends MY_Controller {
 		$this->load->model('AccountModel');
 
 		$data = array(
-			'admin_menu' => $this->admin_menu(),
-			'logins'     => $this->AdminModel->getUserLogins( $user_id ),
-			'user'       => $this->AccountModel->userInfo( $user_id ),
-			'userACL'    => new ACL( $user_id ),
+			'admin_menu'  => $this->admin_menu(),
+			'logins'      => $this->AdminModel->getUserLogins( $user_id ),
+			'user'        => $this->AccountModel->userInfo( $user_id ),
+			'editUserACL' => new ACL( $user_id ),
+			'allPerms'    => $this->getFullUserAcl( $user_id ),
 		);
 		$this->view('admin/users/user_info', $data);
 	}
@@ -41,10 +42,16 @@ class Users extends MY_Controller {
 		$this->load->library('acl');
 		$user_roles = $this->acl->getAllRoles();
 
+		$role_perms = array();
+		foreach( $user_roles as $role_id ) {
+			$role_perms[ $this->acl->getRoleNameFromID( $role_id ) ] = $this->acl->getRolePerms( $role_id );
+		}
+
 		$data = array(
 			'admin_menu' => $this->admin_menu(),
-			'user_roles' => $user_roles,
+			'role_perms' => $role_perms,
 		);
+
 		$this->view('admin/users/roles', $data);
 	}
 
@@ -63,9 +70,27 @@ class Users extends MY_Controller {
 		redirect('admin/');
 	}
 
-	public function update_acl( $action, $user_id, $role_id ){
-		ACL::updateUserRole( $action, $user_id, $role_id );
-		$this->setMessage('success', 'Permissions updated!');
+	public function update_acl( $action, $area, $user_id, $role_or_perm_id, $inherited = null ){
+		if( $area == 'role' ){
+			$role_id = $role_or_perm_id;
+			ACL::updateUserRole( $action, $user_id, $role_id );
+			$type = 'success';
+			$message = 'Role Added';
+		} elseif ( $area == 'perm' ) {
+			$perm_id = $role_or_perm_id;
+			if( !empty( $inherited ) && $inherited = 1 ){
+				//@todo
+				//rebuild the role perms if its an inherited permission from a role
+			} else {
+				ACL::updateUserPerm( $action, $user_id, $perm_id );
+			}
+			$type = 'success';
+			$message = 'Permission was '. $action .'ed';
+		} else {
+			$type = 'error';
+			$message = 'There was an error';
+		}
+		$this->setMessage( $type, $message );
 		redirect( 'admin/users/info/' . $user_id );
 	}
 
@@ -74,6 +99,31 @@ class Users extends MY_Controller {
 		session_start();
 		$_SESSION['user_id'] = $user_id;
 		redirect('dashboard/');
+	}
+
+	/**
+	 *	This is a helper that could/should probably be dropped down to the ACL library, but for now it's here.
+	 */
+	private function getFullUserAcl( $user_id ){
+		$this->load->library('acl');
+		$user_ACL = new ACL( $user_id );
+		$all_perms = array();
+		foreach( $this->acl->getAllPerms() as $perm_id ) {
+			$all_perms[ $this->acl->getPermKeyFromID( $perm_id ) ] = array( 
+				'perm'	 => $this->acl->getPermKeyFromID( $perm_id ),
+				'name' => $this->acl->getPermNameFromID( $perm_id ),
+				'id'   => $perm_id,
+			);
+		}
+		$no_access_perms = array_diff_key(  $all_perms, $user_ACL->perms);
+		foreach ($all_perms as $perm => $info) {
+			if( array_key_exists( $perm, $no_access_perms ) ){
+				$all_perms[$perm]['user_access'] = 0;
+			} else {
+				$all_perms[$perm]['user_access'] = 1;
+			}
+		}
+		return $all_perms;
 	}
 
 }

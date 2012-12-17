@@ -67,20 +67,25 @@ class MY_Controller extends CI_Controller{
 
 	public function admin_menu(){
 		$menu = array();
-		//$menu['General']['Status'] = '#';
-		$menu['General']['Basic Settings'] = 'admin/settings/basic';
-		$menu['General']['Advanced Settings'] = 'admin/settings/advanced';
+		
+		// General
+		if( $this->check_access( 'dev_feats', False ) ){
+			$menu['General']['Basic Settings'] = 'admin/settings/basic';
+			$menu['General']['Advanced Settings'] = 'admin/settings/advanced';
+		}
 
+		// User
 		$menu['User']['All Users']  = 'admin/users';
-		$menu['User']['User Roles'] = 'admin/users/roles';
-		//$menu['User']['User Stats'] = '#';
+		if( $this->check_access( 'dev_feats', False ) ){
+			$menu['User']['User Roles'] = 'admin/users/roles';
+		}
 
+		// Apps
 		$menu['Apps']['App Control'] = 'admin/apps';
 
-		//$menu['Devices']['All Devices'] = '#';
-
-		if( $this->check_access( 'developer', False ) ){
-			$menu['Dev Tools']['App Control'] = 'admin/dev';
+		// Dev Tools
+		if( $this->check_access( 'dev_feats', False ) ){
+			//$menu['Dev Tools']['App Control'] = 'admin/dev';
 		}
 
 		return $menu;
@@ -100,17 +105,25 @@ class MY_Controller extends CI_Controller{
 		return $app_menu;
 	}
 
-	public function check_access( $perm, $message = True ){
+	public function check_access( $perm, $message = True, $redirect = Null ){
 		$ACL = new ACL();
 		if ( ! $ACL->hasPermission( $perm ) ){
 			if( $message ){
-				$this->setMessage('error', 'You do not have access to that.');	
-				redirect('/');
+				$this->setMessage('error', 'You do not have access to that.');
+				$_SESSION['sent_from'] = $_SERVER;
+
+					// Alix {debug}
+				//echo "<pre>"; print_r( $_SESSION['sent_from'] ); die();
+				if( $redirect ){
+					redirect( $redirect );
+				} else {
+					redirect('/');	
+				}
 			} else {
-				return True;
+				return False;
 			}
 		} else {
-			return False;
+			return True;
 		}
 	}
 
