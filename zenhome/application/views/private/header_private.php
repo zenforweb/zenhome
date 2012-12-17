@@ -8,7 +8,7 @@
 		<link href="<?php echo base_url() . FRONT_END; ?>css/helpers.css" rel="stylesheet">			
 		<link href="<?php echo base_url() . FRONT_END; ?>css/layout.css" rel="stylesheet">	
 				<!-- @todo dynamically load media files ie desktop, tablet, mobile-->
-		<link href="<?php echo base_url() . FRONT_END; ?>css/media/phone.css" rel="stylesheet">
+		<!-- <link href="<?php echo base_url() . FRONT_END; ?>css/media/phone.css" rel="stylesheet"> -->
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="<?php echo base_url() . FRONT_END; ?>bootstrap/js/bootstrap.js"></script>
 

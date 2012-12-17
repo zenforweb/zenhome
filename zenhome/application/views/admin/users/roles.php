@@ -49,7 +49,8 @@
 				<h2>Roles</h2>
 			</div>
 			<div class="box-body">
-				here goes the rolls
+				<? 	// Alix {debug}
+				//echo "<pre>"; print_r( debug ); die(); ?>
 			</div>
 		</div>
 	</div>

@@ -23,7 +23,6 @@
 			}
     });
 
-
     // Motion Cam
 		$('.motion_cam').click( function( ){
 			var cam 				= $(this),
@@ -43,8 +42,6 @@
 		});
 
 	});
-
-
 </script>
 
 <style type="text/css">
@@ -61,17 +58,18 @@
 			<h3>Motion</h3>
 		</div>
 		<div class="span2 pull-right">
-			<div class="dropdown pull-right">
-	  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-	  			<i class="icon-white icon-chevron-down"></i> Options
-	  		</a>
-	  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    		<li><a href="<? echo base_url(); ?>apps/motion/settings">Settings</a></li>
-	  		</ul>
-			</div>
+			<? if( $userACL->hasPermission( 'edit_apps' ) ){ ?>
+				<div class="dropdown pull-right">
+		  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+		  			<i class="icon-white icon-chevron-down"></i> Options
+		  		</a>
+		  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		    		<li><a href="<? echo base_url(); ?>apps/motion/settings">Settings</a></li>
+		  		</ul>
+				</div>
+			<? } ?>
 		</div>
 	</div>
-
 
 	<div class="row-fluid">
 		<div class="span3">
@@ -124,22 +122,22 @@
 		</div>
 		
 		<? if ( isset( $cameras ) ){ ?>
-		<div class="span3">		
-			<div class="">
-				<div class="motion_placeholder" style="display:none;">
-					<button class="btn btn-primary" data-cam="1" data-src="http://10.1.10.52:8081/" data-height="" data-width="">Show Cam 1</button>
+			<div class="span3">		
+				<div class="">
+					<div class="motion_placeholder" style="display:none;">
+						<button class="btn btn-primary" data-cam="1" data-src="http://10.1.10.52:8081/" data-height="" data-width="">Show Cam 1</button>
+					</div>
+					<img id="cam_1" class="motion_cam" style="-webkit-user-select: none" src="http://10.1.10.52:8081/">	
 				</div>
-				<img id="cam_1" class="motion_cam" style="-webkit-user-select: none" src="http://10.1.10.52:8081/">	
+				<div class="">
+					<div class="motion_placeholder" style="display:none;">
+						<button class="btn btn-primary">Show Cam 2</button>
+					</div>
+					<div class="motion_placeholder hidden" src="#">
+						stuff
+					</div>
+					<img id="cam_2" class="motion_cam" style="-webkit-user-select: none" src="http://10.1.10.52:8082/">
 			</div>
-			<div class="">
-				<div class="motion_placeholder" style="display:none;">
-					<button class="btn btn-primary">Show Cam 2</button>
-				</div>
-				<div class="motion_placeholder hidden" src="#">
-					stuff
-				</div>
-				<img id="cam_2" class="motion_cam" style="-webkit-user-select: none" src="http://10.1.10.52:8082/">
-		</div>
 		<? } ?>
 
 	</div>

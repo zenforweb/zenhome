@@ -41,5 +41,42 @@ if ( ! function_exists('format_time')){
 		}
 	}
 }
+
+if ( ! function_exists('slug_out')){
+	function slug_out(  $butterfly ){
+		$slug = str_replace( '~', '', 	 $butterfly );
+		$slug = str_replace( '!', '', 	 $slug );
+		$slug = str_replace( '@', '', 	 $slug );
+		$slug = str_replace( '#', '', 	 $slug );
+		$slug = str_replace( '$', '', 	 $slug );
+		$slug = str_replace( '%', '', 	 $slug );
+		$slug = str_replace( '^', '', 	 $slug );
+		$slug = str_replace( '&', 'and', $slug );
+		$slug = str_replace( '+', 'and', $slug );
+		$slug = str_replace( '*', '', 	 $slug );
+		$slug = str_replace( '(', '', 	 $slug );
+		$slug = str_replace( ')', '', 	 $slug );
+		$slug = str_replace( '=', '', 	 $slug );
+		$slug = str_replace( '=', '', 	 $slug );
+		$slug = str_replace( '[', '', 	 $slug );
+		$slug = str_replace( ']', '', 	 $slug );
+		$slug = str_replace( '{', '', 	 $slug );
+		$slug = str_replace( '}', '', 	 $slug );
+		$slug = str_replace( '`', '', 	 $slug );
+		$slug = str_replace( '|', '', 	 $slug );
+		$slug = str_replace( '\\', '', 	 $slug );
+		$slug = str_replace( '/', '', 	 $slug );
+		$slug = str_replace( ':', '', 	 $slug );
+		$slug = str_replace( ';', '', 	 $slug );
+		$slug = str_replace( '<', '', 	 $slug );
+		$slug = str_replace( '>', '', 	 $slug );
+		$slug = str_replace( '.', '', 	 $slug );
+		$slug = str_replace( '"', '', 	 $slug );
+		$slug = str_replace( "'", '', 	 $slug );
+		$slug = str_replace( ' ', '-', $slug );
+		return $slug;
+	}
+}
+
 ?>
 
