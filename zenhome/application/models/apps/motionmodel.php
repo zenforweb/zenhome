@@ -69,11 +69,20 @@ class MotionModel extends CI_Model {
 
 	public function getAppSettings(){
 		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`app_settings` WHERE `app_id` = " .$this->app_id. " AND `setting_name` != 'widget'" );
-		$resutls = array();
+		$settings = array();
 		foreach ($query->result() as $row ){
-			$results[$row->setting_name] = $row->setting_value;
+			$settings[$row->setting_name] = $row->setting_value;
 		}
-		return $results;
+		if( isset( $settings['motion_config_user'] ) && isset( $settings['motion_config_pass'] ) && isset( $settings['motion_cam_1'] ) ){
+			$settings['cameras'] = array( 'http://' . $settings['motion_config_user'] . ':' . $settings['motion_config_pass'] .'@' . $settings['motion_cam_1'] );
+
+			//@todo: figur eout out to run this better for any ammount of cameras
+			if( isset( $settings['motion_cam_2'] ) ){
+				$settings['cameras'][] =  'http://' . $settings['motion_config_user'] . ':' . $settings['motion_config_pass'] .'@' . $settings['motion_cam_2'];
+			}
+		}
+
+		return $settings;
 	}
 
 	public function settingsSave( $settings ){
@@ -81,8 +90,15 @@ class MotionModel extends CI_Model {
 		$updates['motion_config_url']          = isset( $settings['motion_config_url'] )           ? $settings['motion_config_url']           : '';
 		$updates['motion_config_user']         = isset( $settings['motion_config_user'] )          ? $settings['motion_config_user']          : '';
 		$updates['motion_config_pass']         = isset( $settings['motion_config_pass'] )          ? $settings['motion_config_pass']          : '';
-		$updates['motion_config_archive_path'] = isset( $settings['motion_config_archive_path'] )  ? $settings['motion_config_archive_path']  : '';
-
+		$updates['motion_security_path']       = isset( $settings['motion_security_path'] )        ? $settings['motion_security_path']        : '';
+		$updates['motion_cam_1']               = isset( $settings['motion_cam_1'] )                ? $settings['motion_cam_1']                : '';
+		$updates['motion_cam_2']               = isset( $settings['motion_cam_2'] )                ? $settings['motion_cam_2']                : '';
+		$updates['motion_cam_3']               = isset( $settings['motion_cam_3'] )                ? $settings['motion_cam_3']                : '';
+		$updates['motion_cam_4']               = isset( $settings['motion_cam_4'] )                ? $settings['motion_cam_4']                : '';
+		$updates['motion_cam_5']               = isset( $settings['motion_cam_5'] )                ? $settings['motion_cam_5']                : '';
+		$updates['motion_cam_6']               = isset( $settings['motion_cam_6'] )                ? $settings['motion_cam_6']                : '';
+		$updates['motion_cam_7']               = isset( $settings['motion_cam_7'] )                ? $settings['motion_cam_7']                : '';
+		$updates['motion_cam_8']               = isset( $settings['motion_cam_8'] )                ? $settings['motion_cam_8']                : '';		
 		foreach ($updates as $key => $value) {
 			if( !empty( $value ) ){
 				$sql = "SELECT * FROM `". DB_NAME ."`.`app_settings` WHERE `app_id` = " .$this->app_id. " AND `setting_name` = '" .$key. "'";

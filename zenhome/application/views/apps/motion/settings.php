@@ -48,10 +48,10 @@
 						    value="<? if( isset( $app_settings['motion_config_user'] ) ) { echo $app_settings['motion_config_user']; } ?>">
 						</div>
 
-						<label class="control-label" for="motion_config_password">Motion Config Password</label>
+						<label class="control-label" for="motion_config_pass">Motion Config Password</label>
 						<div class="controls">
-						    <input name="motion_config_password" class="input-xlarge " id="motion_config_password" type="password" 
-						    	value="<? if( isset( $app_settings['motion_config_password'] ) ) { echo $app_settings['motion_config_password']; } ?>">
+						    <input name="motion_config_pass" class="input-xlarge " id="motion_config_pass" type="password" 
+						    	value="<? if( isset( $app_settings['motion_config_pass'] ) ) { echo $app_settings['motion_config_pass']; } ?>">
 						</div>
 
 						<label class="control-label" for="motion_security_path">Motion Archive Path</label>
@@ -69,6 +69,11 @@
 								<input name="motion_cam_1" class="input-xlarge span3" id="motion_cam_1" type="text" 
 								value="<? if( isset( $app_settings['motion_cam_1'] ) ) { echo $app_settings['motion_cam_1']; } ?>">
 							</div>
+							<div class="controls row-fluid">
+								<label class="control-label span2" for="motion_cam_2">Camera 2</label>
+								<input name="motion_cam_2" class="input-xlarge span3" id="motion_cam_2" type="text" 
+								value="<? if( isset( $app_settings['motion_cam_2'] ) ) { echo $app_settings['motion_cam_2']; } ?>">
+							</div>							
 						</div>
 					</div>
 

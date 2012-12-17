@@ -43,49 +43,54 @@
       </div>
 		</div>
 
-		<div class="span9">
-			<table class="table table-striped table-edit">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>User Name</th>
-						<th>Last IP</th>
-						<th>Last Login</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<?
-					foreach ($users as $user) {
-						?>
+		<div class="span9 box">
+			<div class="box-header header-gradient">
+				<h2>Users</h2>
+			</div>
+			<div class="box-body">
+				<table class="table table-striped table-edit">
+					<thead>
 						<tr>
-							<td><? echo $user['info']->user_id; ?></td>
-							<td>
-								<a href="<? echo base_url(); ?>admin/users/info/<? echo $user['info']->user_id; ?>">
-									<? echo $user['info']->user_name; ?>
-								</a>
-							</td>
-							<?
-							if( isset($user['access']) ){
-								?>
-								<td><? echo $user['access']->ip; ?></td>
-								<td><? echo $user['access']->login_ts; ?></td>
-								<?
-							} else {
-								?>
-								<td colspan="2">never logged in</td>
-								<?
-							}
-							?>
-							<td class="table-hover">
-								<!-- <button class="btn btn-small btn-primary">edit</button> -->
-							</td>
+							<th>ID</th>
+							<th>User Name</th>
+							<th>Last IP</th>
+							<th>Last Login</th>
+							<th></th>
 						</tr>
+					</thead>
+					<tbody>
 						<?
-					}
-					?>
-				</tbody>
-			</table>
+						foreach ($users as $user) {
+							?>
+							<tr>
+								<td><? echo $user['info']->user_id; ?></td>
+								<td>
+									<a href="<? echo base_url(); ?>admin/users/info/<? echo $user['info']->user_id; ?>">
+										<? echo $user['info']->user_name; ?>
+									</a>
+								</td>
+								<?
+								if( isset($user['access']) ){
+									?>
+									<td><? echo $user['access']->ip; ?></td>
+									<td><? echo $user['access']->login_ts; ?></td>
+									<?
+								} else {
+									?>
+									<td colspan="2">never logged in</td>
+									<?
+								}
+								?>
+								<td class="table-hover">
+									<!-- <button class="btn btn-small btn-primary">edit</button> -->
+								</td>
+							</tr>
+							<?
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
