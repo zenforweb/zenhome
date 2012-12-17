@@ -8,14 +8,14 @@ class BooksModel extends CI_Model {
 	}
 
 	public function saveBook( $book, $book_id = Null ){
-		$title     = ( isset( $book['book_title'] )			? $this->db->escape( $book['book_title'] )  			: "" );
-		$author    = ( isset( $book['book_author'] )		? $this->db->escape( $book['book_author'] ) 			: "" );
-		$desc      = ( isset( $book['book_desc'] ) 			? $this->db->escape( $book['book_desc'] )				: "" );
-		$genre     = ( isset( $book['book_genre'] ) 		? $this->db->escape( $book['book_genre'] )				: "" );
-		$published = ( isset( $book['book_published'] )		? $this->db->escape( $book['book_published'] )			: "" );
+		$title     = isset( $book['book_title'] )     ? $this->db->escape( $book['book_title'] )  	  : '';
+		$author    = isset( $book['book_author'] )    ? $this->db->escape( $book['book_author'] ) 	  : '';
+		$desc      = isset( $book['book_desc'] )      ? $this->db->escape( $book['book_desc'] )				: '';
+		$genre     = isset( $book['book_genre'] )     ? $this->db->escape( $book['book_genre'] )			: '';
+		$published = isset( $book['book_published'] ) ? $this->db->escape( $book['book_published'] )	: '';
 		$added     = $this->db->escape( date( 'Y-m-d H:i:s' ) );
-		$cover     = ( isset( $book['book_cover'] ) 		? $this->db->escape( $book['book_cover'] )				: "" );
-		$file      = ( isset( $book['book_file'] ) 			? $this->db->escape( $book['book_file'] )				: "" );
+		$cover     = isset( $book['book_cover'] )     ? $this->db->escape( $book['book_cover'] )      : '';
+		$file      = isset( $book['book_file'] )      ? $this->db->escape( $book['book_file'] )       : '';
 
 		if( empty( $book_id ) ){
 			$sql = "INSERT INTO `". DB_NAME ."`.`app_books` ( `title`, `author`, `desc`, `genre`, `published`, `added`, `cover`, `file`  ) 
@@ -48,9 +48,6 @@ class BooksModel extends CI_Model {
 			$books[$i]['author']    = $this->getAuthor( $row->author );
 			$i++;
 		}
-		// 		echo "<pre";
-		// print_r($books);
-		// die();
 		return $books;		
 	}
 
@@ -140,6 +137,4 @@ class BooksModel extends CI_Model {
 		$author['wikipedia']  = $result[0]->full_name;
 		return $author;
 	}
-
-
 }

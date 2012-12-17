@@ -57,32 +57,48 @@
 		<div class="span4">
 			<h3>Motion</h3>
 		</div>
-		<div class="span2 pull-right">
-			<? if( $userACL->hasPermission( 'edit_apps' ) ){ ?>
+
+		<? if( $userACL->hasPermission( 'arm_motion' ) ){ ?>
+			<div class="span3">
+				<div class="btn-group app-ajax" data-toggle="buttons-radio" data-uri="motion/arm/">
+					<button type="button" value="1" class="btn btn-danger <? if( $status['armed'] == 1){ echo "active"; } ?>">Arm</button>
+					<button type="button" value="0" class="btn btn<? if( $status['armed'] == 0){ echo "active"; } ?>">Disarm</button>
+				</div>	
+			</div>
+		<? } ?>
+
+		<? if( $userACL->hasPermission( 'edit_apps' ) ){ ?>
+			<div class="span2 pull-right hidden-phone">
 				<div class="dropdown pull-right">
-		  		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-		  			<i class="icon-white icon-chevron-down"></i> Options
-		  		</a>
-		  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-		    		<li><a href="<? echo base_url(); ?>apps/motion/settings">Settings</a></li>
-		  		</ul>
+					<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="icon-white icon-chevron-down"></i> Options
+					</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li><a href="<? echo base_url(); ?>apps/motion/settings">Settings</a></li>
+					</ul>
 				</div>
-			<? } ?>
-		</div>
+			</div>
+		<? } ?>
+	</div>
+	
+	<!-- Show live cameras -->
+	<div class="row-fluid">
+		<? if ( isset( $app['cameras'] ) ){ ?>
+			<div class="span12" style="text-align:center;">	
+				<? foreach( $app['cameras'] as $cam_num => $camera ){ ?>
+						<img id="cam_<? echo $cam_num; ?>" class="<? if($cam_num == 0){echo 'offset1';}?> span5 motion_cam" style="-webkit-user-select: none" src="<? echo $camera; ?>">
+				<? } ?>
+			</div>
+		<? } ?>
 	</div>
 
-	<div class="row-fluid">
-		<div class="span3">
-			<div class="btn-group app-ajax" data-toggle="buttons-radio" data-uri="motion/arm/">
-				<button type="button" value="1" class="btn btn-danger btn-large <? if( $status['armed'] == 1){ echo "active"; } ?>">Arm</button>
-				<button type="button" value="0" class="btn btn-large <? if( $status['armed'] == 0){ echo "active"; } ?>">Disarm</button>
-			</div>	
-		</div>
-	
-		<div class="span3">
+
+	<!-- Show Recent Images -->
+	<div class="row-fluid">	
+		<div class="span">
 			<div id="myCarousel" class="carousel slide">
 			  <!-- Carousel items -->
-			  <div class="carousel-inner" style="height:250px;">
+			  <div class="carousel-inner" style="">
 			    <?
 			    if( isset( $images ) && is_array( $images ) && count( $images ) != 0 ){
 						?>
@@ -120,25 +136,8 @@
 			  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 			</div>
 		</div>
-		
-		<? if ( isset( $cameras ) ){ ?>
-			<div class="span3">		
-				<div class="">
-					<div class="motion_placeholder" style="display:none;">
-						<button class="btn btn-primary" data-cam="1" data-src="http://10.1.10.52:8081/" data-height="" data-width="">Show Cam 1</button>
-					</div>
-					<img id="cam_1" class="motion_cam" style="-webkit-user-select: none" src="http://10.1.10.52:8081/">	
-				</div>
-				<div class="">
-					<div class="motion_placeholder" style="display:none;">
-						<button class="btn btn-primary">Show Cam 2</button>
-					</div>
-					<div class="motion_placeholder hidden" src="#">
-						stuff
-					</div>
-					<img id="cam_2" class="motion_cam" style="-webkit-user-select: none" src="http://10.1.10.52:8082/">
-			</div>
-		<? } ?>
-
 	</div>
+
+
+
 </div>

@@ -80,6 +80,11 @@ class MY_Controller extends CI_Controller{
 			$menu['User']['User Roles'] = 'admin/users/roles';
 		}
 
+		// Devices 
+		if( $this->check_access( 'dev_feats', False ) ){
+			$menu['Devices']['All Devices'] = '#';
+		}
+
 		// Apps
 		$menu['Apps']['App Control'] = 'admin/apps';
 
