@@ -5,6 +5,8 @@ class MotionModel extends CI_Model {
 	function __construct() {
 		parent::__construct();
 		$this->load->database();
+		$this->app_name = 'motion';
+		$this->app_id   = $this->getAppID();
 	}
 
 	public function systemArm( $user_id, $cam, $value, $url ){
@@ -23,9 +25,9 @@ class MotionModel extends CI_Model {
 	}
 
 	public function readRecentImages(){
-			//@todo: set this from app settings
+		//@todo: set this from app settings
 		$security_dir = '/media/colfax/Security/' . date( 'Y/m/d' );
-			//@todo: set this from app settings
+		//@todo: set this from app settings
 		$public_dir   = 'security/' . date( 'Y/m/d/' );
 		$images = array();
 		if( is_dir( $security_dir ) ){
@@ -41,7 +43,7 @@ class MotionModel extends CI_Model {
 		return false;
 	}
 
-		//@note: 
+		//@note:
 	public function readMotion( $timespan = Null ){
 		if( $timespan == Null){
 			$timeback = date ( 'Y-m-d G:i:s', time() - 86400 );	
@@ -65,6 +67,41 @@ class MotionModel extends CI_Model {
 		return $recording;
 	}
 
+	public function getAppSettings(){
+		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`app_settings` WHERE `app_id` = " .$this->app_id. " AND `setting_name` != 'widget'" );
+		$resutls = array();
+		foreach ($query->result() as $row ){
+			$results[$row->setting_name] = $row->setting_value;
+		}
+		return $results;
+	}
+
+	public function settingsSave( $settings ){
+		$updates = array();
+		$updates['motion_config_url']          = isset( $settings['motion_config_url'] )           ? $settings['motion_config_url']           : '';
+		$updates['motion_config_user']         = isset( $settings['motion_config_user'] )          ? $settings['motion_config_user']          : '';
+		$updates['motion_config_pass']         = isset( $settings['motion_config_pass'] )          ? $settings['motion_config_pass']          : '';
+		$updates['motion_config_archive_path'] = isset( $settings['motion_config_archive_path'] )  ? $settings['motion_config_archive_path']  : '';
+
+		foreach ($updates as $key => $value) {
+			if( !empty( $value ) ){
+				$sql = "SELECT * FROM `". DB_NAME ."`.`app_settings` WHERE `app_id` = " .$this->app_id. " AND `setting_name` = '" .$key. "'";
+				$result = $this->db->query( $sql );
+				if( $result->num_rows == 0 ){
+					$this->db->query( "INSERT INTO `". DB_NAME ."`.`app_settings` ( `setting_name`, `setting_value`, `app_id` ) VALUES( '$key', '$value', $this->app_id )" );
+				} else {
+					$this->db->query( "UPDATE `". DB_NAME ."`.`app_settings` SET `setting_value` = '$value' WHERE `app_id` = $this->app_id AND `setting_name` = '$key'" );
+				}
+			}
+		}
+	}
+
+	private function getAppID(){
+		$sql = "SELECT * FROM `". DB_NAME ."`.`apps_info` WHERE `slug_name`= '". $this->app_name ."'";
+		$row = $this->db->query( $sql )->result();
+		return $row[0]->row_id;
+	}
+
 	private function sendCurl( $url ){
 		$ch = curl_init();
 		curl_setopt( $ch, CURLOPT_URL, $url );
@@ -79,4 +116,5 @@ class MotionModel extends CI_Model {
 		$ci->load->model('AccountModel');
 		return $ci->AccountModel->userInfo( $user_id ); 
 	}
+
 }

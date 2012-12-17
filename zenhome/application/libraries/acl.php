@@ -83,13 +83,11 @@ class ACL {
 	}
 
 	function userHasRole($roleID){  
-		foreach($this->userRoles as $k => $v)  
-		{  
-			if (floatval($v) === floatval($roleID))  
-			{  
+		foreach( $this->userRoles as $k => $v ){
+			if (floatval($v) === floatval($roleID)){  
 				return true;  
-			}  
-		}  
+			}
+		}
 		return false;  
 	}
 
@@ -168,9 +166,18 @@ class ACL {
 		} elseif ( $action == 'delete') {
 			$sql = 'DELETE FROM `' . DB_NAME . '`.`acl_user_roles` WHERE `userID` = '.$user_id. ' AND `roleID` = ' . $role_id;
 		}
+			// Alix {debug}
+		echo "<pre>"; print_r( $sql ); die();
 		mysql_query( $sql );
 	}
 
-
-
+	function updateUserPerm( $action, $user_id, $perm_id ){
+		if( $action == 'add'){
+			$sql = 'INSERT INTO `' . DB_NAME . '`.`acl_user_perms` ( `userID`, `permID`, `value`, `addDate` ) 
+				VALUES( "' . $user_id . '", "' . $perm_id . '", 1, "' . date('Y-m-d H:i:s') . '" )';
+		} elseif ( $action == 'delete') {
+			$sql = 'DELETE FROM `' . DB_NAME . '`.`acl_user_perms` WHERE `userID` = '.$user_id. ' AND `permID` = ' . $perm_id;
+		}
+		mysql_query( $sql );
+	}
 }

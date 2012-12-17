@@ -35,7 +35,7 @@ class Motion extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('AppsModel');
+		$this->load->model( 'AppsModel' );
 		$this->app_id 			 = $this->AppsModel->getAppID('motion');
 		$this->app_motion_fp = 'security';
 	}
@@ -45,6 +45,7 @@ class Motion extends MY_Controller {
 	*
 	*/
 	public function index(){
+		$this->check_access( 'access_motion', True, 'errors' );
 		$this->load->model('apps/MotionModel');
 		$data = array(
 			'status' => $this->MotionModel->systemStatus(),
@@ -63,6 +64,7 @@ class Motion extends MY_Controller {
 	*
 	*/
 	public function widget_cams(){
+		$this->check_access( 'access_motion', True, 'errors' );
 		$data = array();
 		if( $this->view_cameras() ){
 		    $data['cameras'] = array();
@@ -75,6 +77,7 @@ class Motion extends MY_Controller {
 	*
 	*/
 	public function widget_carosel(){
+		$this->check_access( 'access_motion', True, 'errors' );
 		$this->load->model('apps/MotionModel');
 		$data = array(
 			'images' => $this->MotionModel->readRecentImages(),
@@ -87,10 +90,25 @@ class Motion extends MY_Controller {
 	*
 	*/
 	public function settings(){
-		$this->view( 'apps/motion/settings' );
+		$this->load->model('apps/MotionModel');
+		$data = array(
+			'app_settings' => $this->MotionModel->getAppSettings(),
+		);
+		$this->view( 'apps/motion/settings', $data );
 	}
 
+	public function settings_save(){
+		$this->load->model('apps/MotionModel');
+		$this->MotionModel->settingsSave( $_REQUEST );
+		$this->setMessage('success', 'Settings saved successfully');
+		redirect( 'apps/motion/settings' );
+	}
+
+	/**
+	 *	Allows the Arming and disarming of a particular camera of all cameras
+	 */
 	public function arm( $value, $cam = Null ){
+		$this->check_access( 'access_motion', True, 'errors' );
 		$this->load->model('apps/MotionModel');
 		//@todo: read this from a motion app settings
 		$motion = 'http://blackbox:cleancut@10.1.10.52:8080/';
@@ -107,6 +125,7 @@ class Motion extends MY_Controller {
 		}
 		$command = $motion . $camera .  $signal;
 		$this->MotionModel->systemArm( $this->user['user_id'], $cam, $value, $command );
+
 	}
 	
 	private function view_cameras(){

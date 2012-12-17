@@ -114,8 +114,11 @@ class Books extends MY_Controller {
 		$book = $this->BooksModel->getBook( $book_id );
 		$book_file = base_url() . FRONT_END .'uploads/books/'. $book['file'];
 		$this->BooksModel->recordDownload( $book_id, $_SESSION['user_id'] );
-		header('Content-type: application/epub');
-		header( 'Content-Disposition: attachment; filename="'. $book['title'] . '.epub"' );
+
+
+
+		header( 'Content-type: "application/epub+zip"' );		
+		header( 'Content-Disposition: attachment; filename="'. slug_out( $book['title'] ) . '.epub"' );
 		readfile( $book_file );		
 	}
 
