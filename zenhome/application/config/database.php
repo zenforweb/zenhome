@@ -48,11 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-define('DB_NAME', 'zenhome');
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'dbadmin';
 $db['default']['password'] = 'Z3n4W38';
-$db['default']['database'] = '';
+$db['default']['database'] = DB_NAME;
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

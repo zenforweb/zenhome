@@ -14,8 +14,8 @@ class BooksModel extends CI_Model {
 		$genre     = isset( $book['book_genre'] )     ? $this->db->escape( $book['book_genre'] )			: '';
 		$published = isset( $book['book_published'] ) ? $this->db->escape( $book['book_published'] )	: '';
 		$added     = $this->db->escape( date( 'Y-m-d H:i:s' ) );
-		$cover     = isset( $book['book_cover'] )     ? $this->db->escape( $book['book_cover'] )      : '';
-		$file      = isset( $book['book_file'] )      ? $this->db->escape( $book['book_file'] )       : '';
+		$cover     = isset( $book['book_cover'] )     ? $this->db->escape( $book['book_cover'] )      : '""';
+		$file      = isset( $book['book_file'] )      ? $this->db->escape( $book['book_file'] )       : '""';
 
 		if( empty( $book_id ) ){
 			$sql = "INSERT INTO `". DB_NAME ."`.`app_books` ( `title`, `author`, `desc`, `genre`, `published`, `added`, `cover`, `file`  ) 
@@ -32,8 +32,14 @@ class BooksModel extends CI_Model {
 		return $this->getBook( $this->db->query( $sql ) );
 	}
 
-	public function getBooks(){
-		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`app_books` ORDER BY `published` DESC" );
+	public function getBooks( $by = Null ){
+		$sql = "SELECT * FROM `". DB_NAME ."`.`app_books` ORDER BY ";
+		if( $by == Null ){
+			$sql .= "`published` DESC";
+		} else {
+			$sql .= "`".$by."` DESC LIMIT 5";
+		}
+		$query = $this->db->query( $sql );
 		$books = array();
 		$i  	 = 0;
 		foreach( $query->result() as $row ){
@@ -74,25 +80,26 @@ class BooksModel extends CI_Model {
 		return $web_path_to_file;
 	}
 
-	private function getDefaultBooksDir(){
+		//@todo make this private in the new working of this shit
+			// this should probably be brought down into CI_Controller or something, lower down, then made available to Apps
+	public function getDefaultBooksDir(){
 		$current_dirs = explode( '/', __DIR__ );
 		$dir_count = count( $current_dirs );
 
 		$upload_dir = '';
 		foreach ($current_dirs as $key => $dir) {
 			if( $key < $dir_count - 3){
-				$upload_dir .= '/' . $dir;
+				$upload_dir .= '/' . $dir ;
 			}
 		}
-		$upload_dir = $upload_dir . 'public_html/uploads/books';
+		$upload_dir = $upload_dir . '/public_html/uploads/books';
 		$upload_dir = substr($upload_dir, 1);
-
 		if( ! is_dir( $upload_dir ) ){
-			if( ! mkdir( $upload_dir, 0700, true ) ){		//@todo permission errors are breaking this
-
+			if( ! mkdir( $upload_dir, 0777, true ) ){
+				//
 			}
 		}
-		return $upload_dir;
+		return $upload_dir . '/';
 	}
 
 	public function recordDownload( $book_id, $user_id ){

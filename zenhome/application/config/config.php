@@ -2,6 +2,25 @@
 
 /*
 |--------------------------------------------------------------------------
+| ZENHOME CONFIG
+|--------------------------------------------------------------------------
+|
+| Base Config options for the Zenhome Platform,
+| if you cant find what you're looking for here, we did something wrong
+| or you're wrong 
+|
+*/
+
+	// ** sets the base url, however, this will be overridden by the database if set
+$config['base_url'] = 'http://zen.homedns.org/';
+	// ** where the front end files can be accessed ie .css .js imgs / path relative from base_url
+define('FRONT_END', 'zenhome/public_html/');
+	// ** where zenhome is installed on the server, must be absolute path
+define( 'ZENHOME_DIR', '/var/www/' );
+
+define('DB_NAME', 'zenhome');
+/*
+|--------------------------------------------------------------------------
 | APP CONSTANTS
 |--------------------------------------------------------------------------
 |
@@ -14,43 +33,10 @@
 | path to your installation.
 |
 */
-define( 'ALLOW_GUESTS', FALSE ) ;
-define( 'ZENHOME_DIR', '/var/www/~alix/zenhome/zenhome/' );
 
-/*
-|--------------------------------------------------------------------------
-| Base Site URL
-|--------------------------------------------------------------------------
-|
-| URL to your CodeIgniter root. Typically this will be your base URL,
-| WITH a trailing slash:
-|
-|	http://example.com/
-|
-| If this is not set then CodeIgniter will guess the protocol, domain and
-| path to your installation.
-|
-*/
-
-require_once('debug.php');
-
-if( DEVELOPMENT ){
-	//$config['base_url'] = DEVELOPMENT_USER_PATH . 'zenhome/';
-	$config['base_url'] = 'http://zen.homedns.org/~alix/zenhome/';
-	define('FRONT_END', 'zenhome/public_html/');
-} else {
-	define('FRONT_END', 'production/zenhome/public_html/');
-	$config['base_url'] = 'http://zen.homedns.org/';
-	//$config['base_url']  = 'http://10.1.10.52/';
-}
+define( 'ALLOW_GUESTS', FALSE ) ; //@todo remove this or expand on the guest idea, either wait a hardcoded def aint helping
 
 
-
-// if( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) && strstr( $_SERVER['HTTP_X_FORWARDED_HOST'], 'blackbox' ) ){
-//   $config['base_url']  = 'http://' .  $_SERVER['HTTP_X_FORWARDED_HOST'] . '/dev/';
-// } else {
-//   $config['base_url']  = 'http://10.1.10.52/';
-// }
 
 /*
 |--------------------------------------------------------------------------

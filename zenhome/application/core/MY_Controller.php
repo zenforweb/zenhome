@@ -12,8 +12,12 @@ class MY_Controller extends CI_Controller{
   		$this->setMessage( 'error', 'Your session does not exist' );
 			redirect('/');
 		}
-	
 		$this->load_user();
+
+		$zenHome_settings = $this->AppsModel->getZenHomeSettings();
+		if ( isset( $zenHome_settings['site_url'] ) && ! empty( $zenHome_settings['site_url'] ) ) {
+			$this->config->set_item('base_url', $zenHome_settings['site_url'] );
+		}
   }
 
   private function load_user(){
@@ -69,9 +73,9 @@ class MY_Controller extends CI_Controller{
 		$menu = array();
 		
 		// General
+		$menu['General']['Basic Settings'] = 'admin/settings/basic';
 		if( $this->check_access( 'dev_feats', False ) ){
-			$menu['General']['Basic Settings'] = 'admin/settings/basic';
-			$menu['General']['Advanced Settings'] = 'admin/settings/advanced';
+    	$menu['General']['Advanced Settings'] = 'admin/settings/advanced';
 		}
 
 		// User
@@ -133,7 +137,7 @@ class MY_Controller extends CI_Controller{
 	}
 
 }
-// END Controller class
+// END Core class
 
 /* End of file MY_Controller.php */
 /* Location: ./application/core/MY_Controller.php */

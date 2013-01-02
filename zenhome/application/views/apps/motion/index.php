@@ -27,13 +27,12 @@
 		$('.motion_cam').click( function( ){
 			var cam 				= $(this),
 					container 	= cam.parent(),
-					btn         = container.find('.motion_placeholder');
+					cam_box     = $('#cam_box');
 			container.height( cam.height() );
 			container.width( cam.width()  );	
 			cam.remove();
-			btn.show();
-			var boogers = 'stuff';
-			cam.append(boogers);
+			var boogers = '<div class="span5">button</div>';
+			cam_box.append(boogers);
 		});
 
 		$('.motion_placeholder btn').click( function(){
@@ -84,14 +83,14 @@
 	<!-- Show live cameras -->
 	<div class="row-fluid">
 		<? if ( isset( $app['cameras'] ) ){ ?>
-			<div class="span12" style="text-align:center;">	
+			<div id="cam_box" class="span12" style="text-align:center;">	
 				<? foreach( $app['cameras'] as $cam_num => $camera ){ ?>
-						<img id="cam_<? echo $cam_num; ?>" class="<? if($cam_num == 0){echo 'offset1';}?> span5 motion_cam" style="-webkit-user-select: none" src="<? echo $camera; ?>">
+						<img id="cam_<? echo $cam_num; ?>" class="<? if($cam_num == 0){echo 'offset1';}?> span5 motion_cam" 
+						style="-webkit-user-select: none" src="<? echo $camera; ?>">
 				<? } ?>
 			</div>
 		<? } ?>
 	</div>
-
 
 	<!-- Show Recent Images -->
 	<div class="row-fluid">	

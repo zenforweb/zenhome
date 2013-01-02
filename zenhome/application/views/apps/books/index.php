@@ -41,7 +41,7 @@
 			</div>
 			<div class="box-body">
 				<?
-				foreach ( $books as $book ) {
+				foreach ( $books_published as $book ) {
 					?>
 					<div class="row-fluid">
 						<div class="span2">
@@ -92,6 +92,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="span6 box shadow">
 			<div class="box-header header-gradient">
 				<h2>Recently Added Books</h2>
@@ -100,7 +101,43 @@
 				</div>
 			</div>
 			<div class="box-body">
-				Recently Added Books
+				<?
+				foreach ( $books_recent as $book ) {
+					?>
+					<div class="row-fluid">
+						<div class="span2">
+							<?
+								if( $book['cover'] != '' ){
+									?>
+									<a href="<? echo base_url() . 'apps/books/info/' . $book['id']; ?>">
+										<img src="<? echo base_url() . FRONT_END . $book_path . $book['cover']; ?>" />
+									</a>
+									<?
+								}
+							?>
+						</div>
+						<div class="span8">
+							<a href="<? echo base_url() . 'apps/books/info/' . $book['id']; ?>">
+								<h2><? echo $book['title']; ?></h2> 
+							</a>
+							- <? echo $book['author']['full_name']; ?>
+							<br />
+							Published <? echo $book['published']; ?>
+							<p><? echo $book['desc']; ?></p>
+							<?
+							if( ! empty( $book['file'] ) ){
+								?>
+								<a href="<? echo base_url() . 'apps/books/download/' . $book['id']; ?>">
+									<button class="btn btn-success btn-small">Download</button>
+								</a>
+								<?
+							}
+							?>
+						</div>
+					</div>
+					<?
+				}
+				?>
 			</div>
 		</div>		
 	</div>

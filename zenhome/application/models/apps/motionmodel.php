@@ -87,18 +87,18 @@ class MotionModel extends CI_Model {
 
 	public function settingsSave( $settings ){
 		$updates = array();
-		$updates['motion_config_url']          = isset( $settings['motion_config_url'] )           ? $settings['motion_config_url']           : '';
-		$updates['motion_config_user']         = isset( $settings['motion_config_user'] )          ? $settings['motion_config_user']          : '';
-		$updates['motion_config_pass']         = isset( $settings['motion_config_pass'] )          ? $settings['motion_config_pass']          : '';
-		$updates['motion_security_path']       = isset( $settings['motion_security_path'] )        ? $settings['motion_security_path']        : '';
-		$updates['motion_cam_1']               = isset( $settings['motion_cam_1'] )                ? $settings['motion_cam_1']                : '';
-		$updates['motion_cam_2']               = isset( $settings['motion_cam_2'] )                ? $settings['motion_cam_2']                : '';
-		$updates['motion_cam_3']               = isset( $settings['motion_cam_3'] )                ? $settings['motion_cam_3']                : '';
-		$updates['motion_cam_4']               = isset( $settings['motion_cam_4'] )                ? $settings['motion_cam_4']                : '';
-		$updates['motion_cam_5']               = isset( $settings['motion_cam_5'] )                ? $settings['motion_cam_5']                : '';
-		$updates['motion_cam_6']               = isset( $settings['motion_cam_6'] )                ? $settings['motion_cam_6']                : '';
-		$updates['motion_cam_7']               = isset( $settings['motion_cam_7'] )                ? $settings['motion_cam_7']                : '';
-		$updates['motion_cam_8']               = isset( $settings['motion_cam_8'] )                ? $settings['motion_cam_8']                : '';		
+		$updates['motion_config_url']          = isset( $settings['motion_config_url'] )           ? $this->db->escape( $settings['motion_config_url'] )      : '';
+		$updates['motion_config_user']         = isset( $settings['motion_config_user'] )          ? $this->db->escape( $settings['motion_config_user'] )     : '';
+		$updates['motion_config_pass']         = isset( $settings['motion_config_pass'] )          ? $this->db->escape( $settings['motion_config_pass'] )     : '';
+		$updates['motion_security_path']       = isset( $settings['motion_security_path'] )        ? $this->db->escape( $settings['motion_security_path'] )   : '';
+		$updates['motion_cam_1']               = isset( $settings['motion_cam_1'] )                ? $this->db->escape( $settings['motion_cam_1'] )           : '';
+		$updates['motion_cam_2']               = isset( $settings['motion_cam_2'] )                ? $this->db->escape( $settings['motion_cam_2'] )           : '';
+		$updates['motion_cam_3']               = isset( $settings['motion_cam_3'] )                ? $this->db->escape( $settings['motion_cam_3'] )           : '';
+		$updates['motion_cam_4']               = isset( $settings['motion_cam_4'] )                ? $this->db->escape( $settings['motion_cam_4'] )           : '';
+		$updates['motion_cam_5']               = isset( $settings['motion_cam_5'] )                ? $this->db->escape( $settings['motion_cam_5'] )           : '';
+		$updates['motion_cam_6']               = isset( $settings['motion_cam_6'] )                ? $this->db->escape( $settings['motion_cam_6'] )           : '';
+		$updates['motion_cam_7']               = isset( $settings['motion_cam_7'] )                ? $this->db->escape( $settings['motion_cam_7'] )           : '';
+		$updates['motion_cam_8']               = isset( $settings['motion_cam_8'] )                ? $this->db->escape( $settings['motion_cam_8'] )           : '';		
 		foreach ($updates as $key => $value) {
 			if( !empty( $value ) ){
 				$sql = "SELECT * FROM `". DB_NAME ."`.`app_settings` WHERE `app_id` = " .$this->app_id. " AND `setting_name` = '" .$key. "'";
@@ -106,10 +106,33 @@ class MotionModel extends CI_Model {
 				if( $result->num_rows == 0 ){
 					$this->db->query( "INSERT INTO `". DB_NAME ."`.`app_settings` ( `setting_name`, `setting_value`, `app_id` ) VALUES( '$key', '$value', $this->app_id )" );
 				} else {
-					$this->db->query( "UPDATE `". DB_NAME ."`.`app_settings` SET `setting_value` = '$value' WHERE `app_id` = $this->app_id AND `setting_name` = '$key'" );
+					$this->db->query( "UPDATE `". DB_NAME ."`.`app_settings` SET `setting_value` = $value WHERE `app_id` = $this->app_id AND `setting_name` = '$key'" );
 				}
 			}
 		}
+	}
+
+	public function install(){
+		//Create the Tables
+		$app_motion_sql = "CREATE TABLE IF NOT EXISTS `". DB_NAME ."`.`apps_motion` (
+  		`row_id` int(11) NOT NULL AUTO_INCREMENT,
+			`camera` int(11) DEFAULT NULL,
+			`filename` varchar(60) DEFAULT NULL,
+			`frame` int(11) DEFAULT NULL,
+			`file_type` int(11) DEFAULT NULL,
+			`input_ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`event_id` int(11) DEFAULT NULL,
+			PRIMARY KEY (`row_id`)
+			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1";
+
+		$app_motion_arm_sql = "CREATE TABLE IF NOT EXISTS `". DB_NAME ."`.`apps_motion_arm` (
+  		`id` int(11) NOT NULL AUTO_INCREMENT,
+  		`user_id` int(10) DEFAULT '0',
+  		`cam` int(10) DEFAULT '0',
+  		`value` int(1) DEFAULT '0',
+  		`date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  		PRIMARY KEY (`id`)
+			) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8";
 	}
 
 	private function getAppID(){

@@ -15,14 +15,18 @@ class Motion extends MY_Controller {
 	 *	|		/application/controllers/apps/motion.php 									CONTROLLER 	
 	 *	|		/application/views/apps/motion/index.php  								VIEW        
 	 *	|		/application/views/apps/motion/settings.php								VIEW	 		 	
-	 *	|		/application/views/apps/motion/widget.php	 								VIEW 				
+	 *	|		/application/views/apps/motion/widget_cams.php	 					VIEW 				
+	 *	|		/application/views/apps/motion/widget_carosel.php	 				VIEW
 	 *	|
-	 *	
 	 *		
 	 *	 ____APPP SETTINGS______________________________
 	 *	|		enabled 		@bool
-	 *	|
-	 *
+	 *	|		$this->app_settings['motion_config_url']
+	 *	|		$this->app_settings['motion_config_user']
+	 *	|   $this->app_settings['motion_config_pass']
+	 *	|   $this->app_settings['motion_security_path']
+	 *	|   $this->app_settings['cameras'][0]
+	 *	|	 	 	 
 	 *
 	 *	 ____APPP USER SETTINGS_________________________
 	 *	|		enabled 				@bool
@@ -30,7 +34,18 @@ class Motion extends MY_Controller {
 	 *	|		widget_carosel  @bool
 	 *	|
 	 * 
-	 *	sudo apt-get install php5-curl
+	 *
+	 *	 ____APP PERMS__________________________________
+	 *	|		access_motion
+	 *	|		arm_motion
+	 *	|
+	 *	 
+	 *
+	 *	 ____APPP INSTALL_______________________________
+	 *	|		sudo apt-get install php5-curl
+	 *	|	 
+	 *	
+	 *
 	 */
 
 	public function __construct(){
@@ -122,6 +137,14 @@ class Motion extends MY_Controller {
 		}
 		$command = $motion . $camera .  $signal;
 		$this->MotionModel->systemArm( $this->user['user_id'], $cam, $value, $command );
+	}
+
+	/**
+	 *	Install the Motion app!
+	 */
+	public function install(){
+		$this->MotionModel->install();
+		redirect( 'apps/motion/settings' );
 	}
 }
 

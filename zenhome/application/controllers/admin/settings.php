@@ -19,8 +19,10 @@ class Settings extends MY_Controller {
 	public function index(){}
 
 	public function basic(){
+		$zenHome = $this->AppsModel->getZenHomeSettings();
 		$data = array(
 			'admin_menu' => $this->admin_menu(),
+			'site_url'   => $zenHome['site_url'],
 		);
 		$this->view('admin/settings-basic', $data);
 	}

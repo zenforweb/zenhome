@@ -60,7 +60,7 @@ class AppsModel extends CI_Model {
 	* 	desc: gets an App ID by the slug title in app_info
 	*/
 	public function getAppID( $app_slug ){
-		$query  = $this->db->query( "SELECT * FROM `". DB_NAME . "`.apps_info WHERE `slug_name` = '" . $app_slug . "' LIMIT 1"  );
+		$query  = $this->db->query( "SELECT * FROM `". DB_NAME . "`.`apps_info` WHERE `slug_name` = '" . $app_slug . "' LIMIT 1"  );
 		$return = $query->result();
 		return $return[0]->row_id;
 	}
@@ -133,6 +133,19 @@ class AppsModel extends CI_Model {
 			}
 		}
 		return $widgets_to_load;
+	}
+
+	/*
+	*		@return array() of app_id and widget_uris
+	* 	desc: gets an array of Zen Home Settings ( ie. site_url )
+	*/
+	public function getZenHomeSettings( ){
+		$query = $this->db->query( "SELECT * FROM `". DB_NAME ."`.`app_settings` WHERE `app_id` = 0" );
+		$settings = array();
+		foreach ($query->result() as $row){
+			$settings[$row->setting_name] = $row->setting_value;
+		}
+		return $settings;
 	}
 
 	private function getAllDashboardWidgets( $user_id ){

@@ -18,8 +18,8 @@
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li><a href="<? echo base_url(); ?>apps/books">Books</a></li>
-					<? if( $this->user['user_id'] == 2 ){ ?><li><a href="#edit_book" data-toggle="modal">Edit Book</a></li><? } ?>
-					<li><a href="<? echo base_url(); ?>apps/books/settings">Settings</a></li>
+					<? if( $userACL->hasPermission( 'edit_books' ) ){ ?><li><a href="#edit_book" data-toggle="modal">Edit Book</a></li><? } ?>
+					<? if( $userACL->hasPermission( 'edit_apps' ) ){ ?><li><a href="<? echo base_url(); ?>apps/books/settings">Settings</a></li><? } ?>
 				</ul>
 			</div>
 		</div>
@@ -110,13 +110,13 @@
 				<div class="control-group">
 					<label for="book_cover">Book Cover:</label>
 					<div class="controls">
-						<input name="book_cover" value="<? echo $book['cover']; ?>">
+						!<input type="file" name="book_cover" value="<? echo $book['cover']; ?>">
 					</div>
 				</div>	
 				<div class="control-group">
 					<label for="book_file">Book File:</label>
 					<div class="controls">
-						<input name="book_file" value="<? echo $book['file']; ?>">
+						<input type="file" name="book_file" value="<? echo $book['file']; ?>">
 					</div>
 				</div>
 				<input type="hidden" name="book_added" value="<? echo $book['added']; ?>"/>
