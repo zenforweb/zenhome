@@ -5,6 +5,37 @@
 */
 ?>
 
+<script type="text/javascript">
+	jQuery('document').ready(function($){ 
+		$('.multiselect-select').change( function(){
+			//@todo: remove selected item from multi-select
+			var select_form    = $(this),
+					select_box     = select_form.parent('.multiselect-box'),
+					select_inputs  = select_box.find('.multiselect-inputs'),
+					select_display = select_box.find('.multiselect-display');
+
+			var input_to_add = '<input type="" id="book_genre_input_id_'+ select_form.val() +'" name="book_genre[]" value="' + select_form.val() + '" >',		
+			    text_to_add  = '<li id="book_genre_text_id_'+ select_form.val()  +'"><span class="pull-left">' + select_form.find("option:selected").text() + '</span><span class="pull-right btn btn-danger btn-mini remove-select">x</span></li>';    
+			$('.multiselect-inputs').append( input_to_add );
+			$('.multiselect-display').append( text_to_add );
+		});
+
+		$('.remove-select').click( function(){
+			//@todo: this does not remove js added input forms or text yet!
+			var btn           = $(this),
+					select_id     = $(this).parent('li').attr('id').split( 'book_genre_text_id_').pop();
+			console.log( select_id );
+			$('#book_genre_input_id_' + select_id  ).remove();
+			btn.parent('li').remove();
+		});
+	});
+</script>
+
+<style type="text/css">
+	.multiselect-display{
+		list-style-image: none;
+	}
+</style>
 <div id="wrap" class="container-fluid">
 	<!-- Page Title -->
 	<div class="row-fluid">
@@ -38,7 +69,16 @@
 				</div>
 				<div class="span6">
 					<h3><? echo $book['title']; ?></h3>
-					<h4><? echo $book['author']['full_name']; ?></h4>
+					<h4><a href="<? echo base_url() . 'apps/books/search/author/' . $book['author']['id']; ?>"><? echo $book['author']['full_name']; ?></a></h4>
+					<?
+					if( count( $book['genres'] ) > 0 ){
+						foreach( $book['genres'] as $genre ){
+							echo '<a style="margin:3px;" class="btn btn-inverse btn-mini" href="' . base_url() . 'apps/books/search/genre/' . $genre['id'] . '"> ' . $genre['name'] . '</a>';
+						}						
+					}
+					?>
+
+					<br />
 					Published <? echo $book['published']; ?>					
 					<p><? echo $book['desc']; ?></p>
 				</div>
@@ -81,7 +121,7 @@
 							<?
 							foreach ( $authors as $author ) {
 								?>
-									<option value="<? echo $author->id; ?>"><? echo $author->full_name; ?></option>
+								<option value="<? echo $author->id; ?>"><? echo $author->full_name; ?></option>
 								<?
 							}
 							?>
@@ -94,13 +134,54 @@
 						<input name="book_published" value="<? echo $book['published']; ?>">
 					</div>
 				</div>
+
 				<div class="control-group">
 					<label class="control-label" for="book_genre">Genre</label>
-					<div class="controls">
-						<input name="book_genre" class="input-xlarge focused" id="book_title" type="text" value="<? echo $book['genre']; ?>">
-						<span class="help-block">Comma separated</span>
+					<div class="controls" class="multiselect-box span6">
+						
+						<select name="book_genre_list" class="multiselect-select">
+							<option value=""></option>
+							<?
+							foreach( $genres as $genre ){
+								$show_genre = True;
+								foreach( $book['genres'] as $book_genre){
+									if($book_genre['id'] == $genre->id ){
+										$show_genre = False;
+									}
+								}
+								if( $show_genre ){
+									echo '<option id="book_genre_id_' . $genre->id . '" value="'. $genre->id .'">' . $genre->name . '</option>';								
+								}
+							}
+							?>
+						</select>
+
+						<div class="multiselect-inputs">
+							<?
+							if( count( $book['genres'] ) > 0 ){
+								foreach ( $book['genres'] as $genre ) {
+									echo '<input type="" id="book_genre_input_id_'. $genre['id'] .'" name="book_genre[]" value="'. $genre['id'] .'">';	
+								}
+							} else {
+								echo '<input type="text" name="book_genre" value="">';
+							}
+							?>
+						</div>
+
+						<ul class="multiselect-display">
+							<?
+							if( count( $book['genres'] ) > 0 ){
+								foreach ( $book['genres'] as $genre ) {
+									echo '<li id="book_genre_text_id_'. $genre['id'].'"><span class="pull-left">'. $genre['name'].'</span>
+										<span class="pull-right btn btn-danger btn-mini remove-select">x</span></li>';	
+								}
+							}
+							?>
+						</ul>
+
 					</div>
 				</div>
+
 				<div class="control-group">
 					<label class="control-label" for="book_desc">Description</label>
 					<div class="controls">
@@ -110,7 +191,7 @@
 				<div class="control-group">
 					<label for="book_cover">Book Cover:</label>
 					<div class="controls">
-						!<input type="file" name="book_cover" value="<? echo $book['cover']; ?>">
+						<input type="file" name="book_cover" value="<? echo $book['cover']; ?>">
 					</div>
 				</div>	
 				<div class="control-group">
